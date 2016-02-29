@@ -317,7 +317,7 @@
 										</div>
 										<div class="hover-overlay"></div>
 										<div class="product-add-to-cart">
-											<a href="#" class="btn btn-dark btn-md">Add to Cart</a>
+											<a href="cart?add=productID" class="btn btn-dark btn-md">Add to Cart</a>
 										</div>
 										<div class="product-add-to-wishlist">
 											<a href="#"><i class="fa fa-heart"></i></a>
@@ -342,7 +342,7 @@
 											<a href="#">3 Reviews</a>
 										</span>
 									</span>
-									<a href="#" class="btn btn-dark btn-md left">Add to Cart</a>
+										<a href="cart?add=productID" class="btn btn-dark btn-md">Add to Cart</a>
 									<div class="icon-add-to-wishlist">
 										<a href="#"><i class="fa fa-heart"></i></a>
 									</div>
@@ -361,7 +361,7 @@
 										</div>
 										<div class="hover-overlay"></div>
 										<div class="product-add-to-cart">
-											<a href="#" class="btn btn-dark btn-md">Add to Cart</a>
+											<a href="cart?add=productID" class="btn btn-dark btn-md">Add to Cart</a>
 										</div>
 										<div class="product-add-to-wishlist">
 											<a href="#"><i class="fa fa-heart"></i></a>
@@ -386,7 +386,7 @@
 											<a href="#">3 Reviews</a>
 										</span>
 									</span>
-									<a href="#" class="btn btn-dark btn-md left">Add to Cart</a>
+										<a href="cart?add=productID" class="btn btn-dark btn-md">Add to Cart</a>
 									<div class="icon-add-to-wishlist">
 										<a href="#"><i class="fa fa-heart"></i></a>
 									</div>
@@ -424,7 +424,7 @@
 											<a href="#">3 Reviews</a>
 										</span>
 									</span>
-									<a href="#" class="btn btn-dark btn-md left">Add to Cart</a>
+										<a href="cart?add=productID" class="btn btn-dark btn-md">Add to Cart</a>
 									<div class="icon-add-to-wishlist">
 										<a href="#"><i class="fa fa-heart"></i></a>
 									</div>
@@ -443,7 +443,7 @@
 										</div>
 										<div class="hover-overlay"></div>
 										<div class="product-add-to-cart">
-											<a href="#" class="btn btn-dark btn-md">Add to Cart</a>
+											<a href="cart?add=productID" class="btn btn-dark btn-md">Add to Cart</a>
 										</div>
 										<div class="product-add-to-wishlist">
 											<a href="#"><i class="fa fa-heart"></i></a>
@@ -465,7 +465,7 @@
 											<a href="#">3 Reviews</a>
 										</span>
 									</span>
-									<a href="#" class="btn btn-dark btn-md left">Add to Cart</a>
+										<a href="cart?add=productID" class="btn btn-dark btn-md">Add to Cart</a>
 									<div class="icon-add-to-wishlist">
 										<a href="#"><i class="fa fa-heart"></i></a>
 									</div>
@@ -481,7 +481,7 @@
 										</a>
 										<div class="hover-overlay"></div>
 										<div class="product-add-to-cart">
-											<a href="#" class="btn btn-dark btn-md">Add to Cart</a>
+											<a href="cart?add=productID" class="btn btn-dark btn-md">Add to Cart</a>
 										</div>
 										<div class="product-add-to-wishlist">
 											<a href="#"><i class="fa fa-heart"></i></a>
@@ -503,7 +503,7 @@
 											<a href="#">3 Reviews</a>
 										</span>
 									</span>
-									<a href="#" class="btn btn-dark btn-md left">Add to Cart</a>
+										<a href="cart?add=productID" class="btn btn-dark btn-md">Add to Cart</a>
 									<div class="icon-add-to-wishlist">
 										<a href="#"><i class="fa fa-heart"></i></a>
 									</div>
@@ -522,7 +522,7 @@
 										</div>
 										<div class="hover-overlay"></div>
 										<div class="product-add-to-cart">
-											<a href="#" class="btn btn-dark btn-md">Add to Cart</a>
+											<a href="cart?add=productID" class="btn btn-dark btn-md">Add to Cart</a>
 										</div>
 										<div class="product-add-to-wishlist">
 											<a href="#"><i class="fa fa-heart"></i></a>
@@ -547,7 +547,7 @@
 											<a href="#">3 Reviews</a>
 										</span>
 									</span>
-									<a href="#" class="btn btn-dark btn-md left">Add to Cart</a>
+										<a href="cart?add=productID" class="btn btn-dark btn-md">Add to Cart</a>
 									<div class="icon-add-to-wishlist">
 										<a href="#"><i class="fa fa-heart"></i></a>
 									</div>
@@ -588,7 +588,7 @@
 											<a href="#">3 Reviews</a>
 										</span>
 									</span>
-									<a href="#" class="btn btn-dark btn-md left">Add to Cart</a>
+										<a href="cart?add=productID" class="btn btn-dark btn-md">Add to Cart</a>
 									<div class="icon-add-to-wishlist">
 										<a href="#"><i class="fa fa-heart"></i></a>
 									</div>
@@ -626,7 +626,7 @@
 											<a href="#">3 Reviews</a>
 										</span>
 									</span>
-									<a href="#" class="btn btn-dark btn-md left">Add to Cart</a>
+										<a href="cart?add=productID" class="btn btn-dark btn-md">Add to Cart</a>
 									<div class="icon-add-to-wishlist">
 										<a href="#"><i class="fa fa-heart"></i></a>
 									</div>
@@ -667,7 +667,7 @@
 											<a href="#">3 Reviews</a>
 										</span>
 									</span>
-									<a href="#" class="btn btn-dark btn-md left">Add to Cart</a>
+										<a href="cart?add=productID" class="btn btn-dark btn-md">Add to Cart</a>
 									<div class="icon-add-to-wishlist">
 										<a href="#"><i class="fa fa-heart"></i></a>
 									</div>
@@ -683,7 +683,7 @@
 										</a>
 										<div class="hover-overlay"></div>
 										<div class="product-add-to-cart">
-											<a href="#" class="btn btn-dark btn-md">Add to Cart</a>
+											<a href="cart?add=productID" class="btn btn-dark btn-md">Add to Cart</a>
 										</div>
 										<div class="product-add-to-wishlist">
 											<a href="#"><i class="fa fa-heart"></i></a>
@@ -724,7 +724,7 @@
 										</a>
 										<div class="hover-overlay"></div>
 										<div class="product-add-to-cart">
-											<a href="#" class="btn btn-dark btn-md">Add to Cart</a>
+											<a href="cart?add=productID" class="btn btn-dark btn-md">Add to Cart</a>
 										</div>
 										<div class="product-add-to-wishlist">
 											<a href="#"><i class="fa fa-heart"></i></a>
@@ -746,7 +746,7 @@
 											<a href="#">3 Reviews</a>
 										</span>
 									</span>
-									<a href="#" class="btn btn-dark btn-md left">Add to Cart</a>
+										<a href="cart?add=productID" class="btn btn-dark btn-md">Add to Cart</a>
 									<div class="icon-add-to-wishlist">
 										<a href="#"><i class="fa fa-heart"></i></a>
 									</div>
@@ -762,7 +762,7 @@
 										</a>
 										<div class="hover-overlay"></div>
 										<div class="product-add-to-cart">
-											<a href="#" class="btn btn-dark btn-md">Add to Cart</a>
+											<a href="cart?add=productID" class="btn btn-dark btn-md">Add to Cart</a>
 										</div>
 										<div class="product-add-to-wishlist">
 											<a href="#"><i class="fa fa-heart"></i></a>
@@ -784,7 +784,7 @@
 											<a href="#">3 Reviews</a>
 										</span>
 									</span>
-									<a href="#" class="btn btn-dark btn-md left">Add to Cart</a>
+										<a href="cart?add=productID" class="btn btn-dark btn-md">Add to Cart</a>
 									<div class="icon-add-to-wishlist">
 										<a href="#"><i class="fa fa-heart"></i></a>
 									</div>
@@ -969,7 +969,7 @@
 								<h5>Information</h5>
 								<ul class="footer-links">
 									<li><a href="#">Our stores</a></li>
-									<li><a href="#">About us</a></li>
+									<li><a href="about.jsp">About us</a></li>
 									<li><a href="#">Business with us</a></li>
 									<li><a href="#">Delivery information</a></li>
 									<li><a href="#">Terms &amp; Conditions</a></li>
@@ -981,7 +981,7 @@
 							<div class="footer-help">
 								<h5>Help</h5>
 								<ul class="footer-links">
-									<li><a href="#">Contact us</a></li>
+									<li><a href="contact.jsp">Contact us</a></li>
 									<li><a href="#">Track order</a></li>
 									<li><a href="#">F.A.Q</a></li>
 									<li><a href="#">Privacy policy</a></li>
