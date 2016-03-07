@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/EmailWS/emailWS?wsdl" uri="wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/EmailWS/emailWS.wsdl"/>
+    <system systemId="http://ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com:80/EmailWS/emailWS?xsd=1" uri="wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com_80/EmailWS/emailWS.xsd_1.xsd"/>
+    <system systemId="http://ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/CustomerSupportWS/CustomerSupportWS?wsdl" uri="wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/CustomerSupportWS/CustomerSupportWS.wsdl"/>
+    <system systemId="http://ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com:80/CustomerSupportWS/CustomerSupportWS?xsd=1" uri="wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com_80/CustomerSupportWS/CustomerSupportWS.xsd_1.xsd"/>
+    <system systemId="http://ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/AccountManagementWS/AccountManagementWS?wsdl" uri="wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/AccountManagementWS/AccountManagementWS.wsdl"/>
+    <system systemId="http://ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com:80/AccountManagementWS/AccountManagementWS?xsd=1" uri="wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com_80/AccountManagementWS/AccountManagementWS.xsd_1.xsd"/>
+    <system systemId="http://ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/Geocode_WS/geocode?wsdl" uri="wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/Geocode_WS/geocode.wsdl"/>
+    <system systemId="http://ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com:80/Geocode_WS/geocode?xsd=1" uri="wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com_80/Geocode_WS/geocode.xsd_1.xsd"/>
+    <system systemId="http://ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/ProcessWS/ProcessWS?wsdl" uri="wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/ProcessWS/ProcessWS.wsdl"/>
+    <system systemId="http://ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com:80/ProcessWS/ProcessWS?xsd=1" uri="wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com_80/ProcessWS/ProcessWS.xsd_1.xsd"/>
+    <system systemId="http://ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/PurchaseManagementWS/PurchaseManagementWS?wsdl" uri="wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/PurchaseManagementWS/PurchaseManagementWS.wsdl"/>
+    <system systemId="http://ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com:80/PurchaseManagementWS/PurchaseManagementWS?xsd=1" uri="wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com_80/PurchaseManagementWS/PurchaseManagementWS.xsd_1.xsd"/>
+    <system systemId="http://ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com:80/PurchaseManagementWS/PurchaseManagementWS?xsd=2" uri="wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com_80/PurchaseManagementWS/PurchaseManagementWS.xsd_2.xsd"/>
+    <system systemId="http://ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/ShippingChargeWS/ShippingCharge?wsdl" uri="wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/ShippingChargeWS/ShippingCharge.wsdl"/>
+    <system systemId="http://ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com:80/ShippingChargeWS/ShippingCharge?xsd=1" uri="wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com_80/ShippingChargeWS/ShippingCharge.xsd_1.xsd"/>
+    <system systemId="http://ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/ShippingChargeWS/ShippingChargeWS?wsdl" uri="wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/ShippingChargeWS/ShippingChargeWS.wsdl"/>
+    <system systemId="http://ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com:80/ShippingChargeWS/ShippingChargeWS?xsd=1" uri="wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com_80/ShippingChargeWS/ShippingChargeWS.xsd_1.xsd"/>
+    <system systemId="http://ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com:80/ShippingChargeWS/ShippingChargeWS?xsd=2" uri="wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com_80/ShippingChargeWS/ShippingChargeWS.xsd_2.xsd"/>
+    <system systemId="http://localhost:8080/AccountManagementWS/AccountManagementWS?wsdl" uri="wsdl/localhost_8080/AccountManagementWS/AccountManagementWS.wsdl"/>
+    <system systemId="http://localhost:8080/AccountManagementWS/AccountManagementWS?xsd=1" uri="wsdl/localhost_8080/AccountManagementWS/AccountManagementWS.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/ProcessWS/ProcessWS?wsdl" uri="wsdl/localhost_8080/ProcessWS/ProcessWS.wsdl"/>
+    <system systemId="http://localhost:8080/ProcessWS/ProcessWS?xsd=1" uri="wsdl/localhost_8080/ProcessWS/ProcessWS.xsd_1.xsd"/>
+</catalog>

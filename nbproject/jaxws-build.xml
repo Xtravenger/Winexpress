@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+        *** GENERATED FROM jax-ws.xml - DO NOT EDIT !                             ***
+        *** TO MODIFY wsimport options USE Web Service node -> Edit WS Attributes ***
+        *** TO CHANGE TARGETS GENERATED TO jaxws-build.xml COPY THOSE             ***
+        *** TARGETS TO ../build.xml AND MODIFY THAT FILE INSTEAD                  ***
+
+        --><project xmlns:xalan="http://xml.apache.org/xslt" xmlns:webproject2="http://www.netbeans.org/ns/web-project/2" xmlns:jaxws="http://www.netbeans.org/ns/jax-ws/1">
+    <!--
+                ===================
+                JAX-WS WSGEN SECTION
+                ===================
+            -->
+    <!--
+                ===================
+                JAX-WS WSIMPORT SECTION
+                ===================
+            -->
+    <target name="wsimport-init" depends="init">
+        <fail if="${wsimport.bad.version}" message="WsImport ant task defined in the classpath ${j2ee.platform.wsimport.classpath} has a serious bug. See http://wiki.netbeans.org/MetroIssue for details."/>
+        <mkdir dir="${build.generated.sources.dir}/jax-ws"/>
+        <property name="j2ee.platform.wsimport.classpath" value="${libs.jaxws21.classpath}"/>
+        <taskdef name="wsimport" classname="com.sun.tools.ws.ant.WsImport">
+            <classpath path="${java.home}/../lib/tools.jar:${j2ee.platform.wsimport.classpath}:${javac.classpath}"/>
+        </taskdef>
+        <condition property="conf-dir" value="${conf.dir}/" else="">
+            <isset property="conf.dir"/>
+        </condition>
+    </target>
+    <target name="wsimport-client-CustomerSupportWS" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/CustomerSupportWS"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/CustomerSupportWS" destdir="${build.generated.dir}/jax-wsCache/CustomerSupportWS" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/CustomerSupportWS/wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/CustomerSupportWS/CustomerSupportWS.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/CustomerSupportWS/CustomerSupportWS?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/CustomerSupportWS/wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/CustomerSupportWS/CustomerSupportWS.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/CustomerSupportWS"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/CustomerSupportWS">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-CustomerSupportWS" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/org/customersupport"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/CustomerSupportWS"/>
+    </target>
+    <target name="wsimport-client-geocode" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/geocode"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/geocode" destdir="${build.generated.dir}/jax-wsCache/geocode" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/geocode/wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/Geocode_WS/geocode.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/Geocode_WS/geocode?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/geocode/wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/Geocode_WS/geocode.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/geocode"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/geocode">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-geocode" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/org/geocodews"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/geocode"/>
+    </target>
+    <target name="wsimport-client-PurchaseManagementWS" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/PurchaseManagementWS"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/PurchaseManagementWS" destdir="${build.generated.dir}/jax-wsCache/PurchaseManagementWS" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/PurchaseManagementWS/wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/PurchaseManagementWS/PurchaseManagementWS.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/PurchaseManagementWS/PurchaseManagementWS?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/PurchaseManagementWS/wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/PurchaseManagementWS/PurchaseManagementWS.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/PurchaseManagementWS"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/PurchaseManagementWS">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-PurchaseManagementWS" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/org/purchasemanagement"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/PurchaseManagementWS"/>
+    </target>
+    <target name="wsimport-client-ShippingChargeWS" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/ShippingChargeWS"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/ShippingChargeWS" destdir="${build.generated.dir}/jax-wsCache/ShippingChargeWS" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/ShippingChargeWS/wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/ShippingChargeWS/ShippingChargeWS.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/ShippingChargeWS/ShippingChargeWS?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/ShippingChargeWS/wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/ShippingChargeWS/ShippingChargeWS.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/ShippingChargeWS"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/ShippingChargeWS">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-ShippingChargeWS" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/org/shippingchargews"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/ShippingChargeWS"/>
+    </target>
+    <target name="wsimport-client-AccountManagementWS" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/AccountManagementWS"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/AccountManagementWS" destdir="${build.generated.dir}/jax-wsCache/AccountManagementWS" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/AccountManagementWS/wsdl/localhost_8080/AccountManagementWS/AccountManagementWS.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/AccountManagementWS/AccountManagementWS?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/AccountManagementWS/wsdl/localhost_8080/AccountManagementWS/AccountManagementWS.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/AccountManagementWS"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/AccountManagementWS">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-AccountManagementWS" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/org/accountmanagementws"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/AccountManagementWS"/>
+    </target>
+    <target name="wsimport-client-ProcessWS" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/ProcessWS"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/ProcessWS" destdir="${build.generated.dir}/jax-wsCache/ProcessWS" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/ProcessWS/wsdl/localhost_8080/ProcessWS/ProcessWS.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/ProcessWS/ProcessWS?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/ProcessWS/wsdl/localhost_8080/ProcessWS/ProcessWS.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/ProcessWS"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/ProcessWS">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-ProcessWS" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/org/processws"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/ProcessWS"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-CustomerSupportWS, wsimport-client-geocode, wsimport-client-PurchaseManagementWS, wsimport-client-ShippingChargeWS, wsimport-client-AccountManagementWS, wsimport-client-ProcessWS"/>
+</project>

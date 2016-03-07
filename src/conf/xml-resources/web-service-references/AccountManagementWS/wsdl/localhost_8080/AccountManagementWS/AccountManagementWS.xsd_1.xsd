@@ -1,0 +1,291 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.1-b419 (branches/2.3.1.x-7937; 2014-08-04T08:11:03+0000) JAXWS-RI/2.2.10-b140803.1500 JAXWS-API/2.2.11 JAXB-RI/2.2.10-b140802.1033 JAXB-API/2.2.12-b140109.1041 svn-revision#unknown. --><xs:schema xmlns:tns="http://accountmanagementws.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://accountmanagementws.org/">
+
+<xs:element name="account_activation" type="tns:account_activation"/>
+
+<xs:element name="account_activationResponse" type="tns:account_activationResponse"/>
+
+<xs:element name="create_account" type="tns:create_account"/>
+
+<xs:element name="create_accountResponse" type="tns:create_accountResponse"/>
+
+<xs:element name="deactivate_account" type="tns:deactivate_account"/>
+
+<xs:element name="deactivate_accountResponse" type="tns:deactivate_accountResponse"/>
+
+<xs:element name="retrieve_account" type="tns:retrieve_account"/>
+
+<xs:element name="retrieve_accountResponse" type="tns:retrieve_accountResponse"/>
+
+<xs:element name="retrieve_all_account" type="tns:retrieve_all_account"/>
+
+<xs:element name="retrieve_all_accountResponse" type="tns:retrieve_all_accountResponse"/>
+
+<xs:element name="retrieve_billing" type="tns:retrieve_billing"/>
+
+<xs:element name="retrieve_billingResponse" type="tns:retrieve_billingResponse"/>
+
+<xs:element name="retrieve_credit" type="tns:retrieve_credit"/>
+
+<xs:element name="retrieve_creditResponse" type="tns:retrieve_creditResponse"/>
+
+<xs:element name="retrieve_shipping" type="tns:retrieve_shipping"/>
+
+<xs:element name="retrieve_shippingResponse" type="tns:retrieve_shippingResponse"/>
+
+<xs:element name="social_login" type="tns:social_login"/>
+
+<xs:element name="social_loginResponse" type="tns:social_loginResponse"/>
+
+<xs:element name="updateMemberAddress" type="tns:updateMemberAddress"/>
+
+<xs:element name="updateMemberAddressResponse" type="tns:updateMemberAddressResponse"/>
+
+<xs:element name="update_account" type="tns:update_account"/>
+
+<xs:element name="update_accountResponse" type="tns:update_accountResponse"/>
+
+<xs:element name="update_billing" type="tns:update_billing"/>
+
+<xs:element name="update_billingResponse" type="tns:update_billingResponse"/>
+
+<xs:element name="update_credit_card" type="tns:update_credit_card"/>
+
+<xs:element name="update_credit_cardResponse" type="tns:update_credit_cardResponse"/>
+
+<xs:element name="update_password" type="tns:update_password"/>
+
+<xs:element name="update_passwordResponse" type="tns:update_passwordResponse"/>
+
+<xs:element name="update_shipping" type="tns:update_shipping"/>
+
+<xs:element name="update_shippingResponse" type="tns:update_shippingResponse"/>
+
+<xs:element name="update_status" type="tns:update_status"/>
+
+<xs:element name="update_statusResponse" type="tns:update_statusResponse"/>
+
+<xs:element name="verify_password" type="tns:verify_password"/>
+
+<xs:element name="verify_passwordResponse" type="tns:verify_passwordResponse"/>
+
+<xs:complexType name="update_shipping">
+<xs:sequence>
+<xs:element name="shippingAddress" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="update_shippingResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="retrieve_shipping">
+<xs:sequence>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="retrieve_shippingResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="retrieve_billing">
+<xs:sequence>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="retrieve_billingResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="update_password">
+<xs:sequence>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+<xs:element name="password" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="update_passwordResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="retrieve_all_account">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="retrieve_all_accountResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateMemberAddress">
+<xs:sequence>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateMemberAddressResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="update_billing">
+<xs:sequence>
+<xs:element name="billingAddress" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="update_billingResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="account_activation">
+<xs:sequence>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="account_activationResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="verify_password">
+<xs:sequence>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+<xs:element name="password" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="verify_passwordResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="update_credit_card">
+<xs:sequence>
+<xs:element name="creditCardDetails" type="xs:string" minOccurs="0"/>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="update_credit_cardResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="create_account">
+<xs:sequence>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+<xs:element name="password" type="xs:string" minOccurs="0"/>
+<xs:element name="birthday" type="xs:string" minOccurs="0"/>
+<xs:element name="gender" type="xs:string" minOccurs="0"/>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+<xs:element name="contact" type="xs:string" minOccurs="0"/>
+<xs:element name="registerStatus" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="create_accountResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="retrieve_account">
+<xs:sequence>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="retrieve_accountResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="update_account">
+<xs:sequence>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+<xs:element name="contact" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="update_accountResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="update_status">
+<xs:sequence>
+<xs:element name="performerEmail" type="xs:string" minOccurs="0"/>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+<xs:element name="status" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="update_statusResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="retrieve_credit">
+<xs:sequence>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="retrieve_creditResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deactivate_account">
+<xs:sequence>
+<xs:element name="performerEmail" type="xs:string" minOccurs="0"/>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deactivate_accountResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="social_login">
+<xs:sequence>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="social_loginResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

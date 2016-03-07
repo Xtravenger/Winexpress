@@ -11,12 +11,17 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.ws.WebServiceRef;
+import org.accountmanagementws.AccountManagementWS_Service;
 
 /**
  *
  * @author Xtravenger
  */
 public class index extends HttpServlet {
+
+    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/AccountManagementWS/AccountManagementWS.wsdl")
+    private AccountManagementWS_Service service;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,18 +34,21 @@ public class index extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet index</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet index at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+    
+        if(request.getParameter("email")!= null)
+        {
+            int res = this.updateStatus("System", request.getParameter("email"), "A");
+            
+            if (res == 1)
+            {
+                request.setAttribute("activation", "true");
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            }
+            else
+            {
+                request.setAttribute("activation", "false");
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            }
         }
     }
 
@@ -82,5 +90,14 @@ public class index extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private Integer updateStatus(java.lang.String performerEmail, java.lang.String email, java.lang.String status) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        org.accountmanagementws.AccountManagementWS port = service.getAccountManagementWSPort();
+        return port.updateStatus(performerEmail, email, status);
+    }
+
+   
 
 }

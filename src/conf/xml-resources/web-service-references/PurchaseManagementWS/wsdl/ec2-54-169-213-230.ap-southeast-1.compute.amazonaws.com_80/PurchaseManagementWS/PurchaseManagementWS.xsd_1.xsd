@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.1-b419 (branches/2.3.1.x-7937; 2014-08-04T08:11:03+0000) JAXWS-RI/2.2.10-b140803.1500 JAXWS-API/2.2.11 JAXB-RI/2.2.10-b140802.1033 JAXB-API/2.2.12-b140109.1041 svn-revision#unknown. --><xs:schema xmlns:tns="http://purchasemanagement.org/" xmlns:ns1="http://jaxb.dev.java.net/array" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://purchasemanagement.org/">
+
+<xs:import namespace="http://jaxb.dev.java.net/array" schemaLocation="http://ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com:80/PurchaseManagementWS/PurchaseManagementWS?xsd=2"/>
+
+<xs:element name="add_item" type="tns:add_item"/>
+
+<xs:element name="add_itemResponse" type="tns:add_itemResponse"/>
+
+<xs:element name="check_product_quantity" type="tns:check_product_quantity"/>
+
+<xs:element name="check_product_quantityResponse" type="tns:check_product_quantityResponse"/>
+
+<xs:element name="clear_cart" type="tns:clear_cart"/>
+
+<xs:element name="clear_cartResponse" type="tns:clear_cartResponse"/>
+
+<xs:element name="create_order" type="tns:create_order"/>
+
+<xs:element name="create_orderResponse" type="tns:create_orderResponse"/>
+
+<xs:element name="remove_item" type="tns:remove_item"/>
+
+<xs:element name="remove_itemResponse" type="tns:remove_itemResponse"/>
+
+<xs:element name="retrieve_all_orders" type="tns:retrieve_all_orders"/>
+
+<xs:element name="retrieve_all_ordersResponse" type="tns:retrieve_all_ordersResponse"/>
+
+<xs:element name="retrieve_cart" type="tns:retrieve_cart"/>
+
+<xs:element name="retrieve_cartResponse" type="tns:retrieve_cartResponse"/>
+
+<xs:element name="retrieve_order" type="tns:retrieve_order"/>
+
+<xs:element name="retrieve_orderResponse" type="tns:retrieve_orderResponse"/>
+
+<xs:element name="update_cart" type="tns:update_cart"/>
+
+<xs:element name="update_cartResponse" type="tns:update_cartResponse"/>
+
+<xs:element name="update_order_line_item" type="tns:update_order_line_item"/>
+
+<xs:element name="update_order_line_itemResponse" type="tns:update_order_line_itemResponse"/>
+
+<xs:element name="update_stock" type="tns:update_stock"/>
+
+<xs:element name="update_stockResponse" type="tns:update_stockResponse"/>
+
+<xs:complexType name="add_item">
+<xs:sequence>
+<xs:element name="productID" type="xs:string" minOccurs="0"/>
+<xs:element name="quantity" type="xs:string" minOccurs="0"/>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="add_itemResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="retrieve_all_orders">
+<xs:sequence>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="retrieve_all_ordersResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="update_stock">
+<xs:sequence>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="update_stockResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="retrieve_order">
+<xs:sequence>
+<xs:element name="orderID" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="retrieve_orderResponse">
+<xs:sequence>
+<xs:element name="return" type="ns1:stringArray" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="check_product_quantity">
+<xs:sequence>
+<xs:element name="productID" type="xs:string" minOccurs="0"/>
+<xs:element name="quantity" type="xs:string" minOccurs="0"/>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="check_product_quantityResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="update_order_line_item">
+<xs:sequence>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+<xs:element name="orderid" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="update_order_line_itemResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="remove_item">
+<xs:sequence>
+<xs:element name="productID" type="xs:string" minOccurs="0"/>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="remove_itemResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="create_order">
+<xs:sequence>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+<xs:element name="orderBillingAddress" type="xs:string" minOccurs="0"/>
+<xs:element name="orderShippingAddress" type="xs:string" minOccurs="0"/>
+<xs:element name="totalAmount" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="create_orderResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="clear_cart">
+<xs:sequence>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="clear_cartResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="update_cart">
+<xs:sequence>
+<xs:element name="productList" type="ns1:stringArray" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="update_cartResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="retrieve_cart">
+<xs:sequence>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="retrieve_cartResponse">
+<xs:sequence>
+<xs:element name="return" type="ns1:stringArray" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

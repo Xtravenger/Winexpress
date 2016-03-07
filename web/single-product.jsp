@@ -352,9 +352,9 @@
 						</span>
 						<p class="product-description">This wine bottle is a candidate for perfection once it is bottled. It is complete in every way marrying power, elegance, and longevity. It should see its 30th birthday in fine form. I also was able to taste the 2010 Finca Dofi and 2010 L'Ermita at this early stage. Palacios seems very pleased by his material and I see no reason to doubt him.</p>
 
-						<a href="#" class="btn btn-dark btn-md add-to-cart left">Add to Cart</a>
+						<a href="#" onclick="addItem()" class="btn btn-dark btn-md add-to-cart left">Add to Cart</a>
 						<div class="quantity buttons_added">
-							<input type="button" value="-" class="minus" /><input type="number" step="1" min="0" value="1" title="Qty" class="input-text qty text" /><input type="button" value="+" class="plus" />
+							<input type="button" value="-" class="minus" /><input type="number" step="1" min="0" value="1" title="Qty" id="qty" class="input-text qty text" /><input type="button" value="+" class="plus" />
 						</div>
 						<div class="icon-add-to-wishlist">
 							<a href="#"><i class="fa fa-heart"></i></a>
@@ -795,6 +795,24 @@
 	<script type="text/javascript" src="js/rev-slider.js"></script>
 	<script type="text/javascript" src="js/scripts.js"></script>
 	<script type="text/javascript" src="js/styleswitch.js"></script>
+        <script>
+            function addItem()
+            {
+                var id = "2"
+                var qty = document.getElementById("qty").value;
+              
+                var requestUri = "addItem?id=" + id + "&qty=" + qty;
+              
+
+                $.ajax({
+                type: "POST",
+                url: requestUri                
+                }).done(function( msg ) {
+                alert( "Item added to cart");
+                });
+            }
+            
+        </script>
 	  
 </body>
 </html>
