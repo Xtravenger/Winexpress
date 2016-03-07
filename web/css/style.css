@@ -1127,6 +1127,11 @@ p {
     right: 0;
   }
 
+  .forgot{
+    color: #3c3f46;
+    margin-right: 20px;
+  }
+
   .dropdown-menu {
     min-width: 200px;
     margin: 0;
@@ -4295,7 +4300,8 @@ input[type=number] {
   width: 98%;
 }
 
-.woocommerce form #customer_details p {
+.woocommerce form #customer_details p, 
+.woocommerce form #profile_details p{
   display: block;
   width: 98%;
   margin-bottom: 20px;
@@ -4305,7 +4311,8 @@ input[type=number] {
   clear: both;
 }
 
-.woocommerce form #customer_details label {
+.woocommerce form #customer_details label,
+.woocommerce form #profile_details label {
   float: left;
   width: 20%;
   line-height: 46px;
@@ -4325,8 +4332,15 @@ abbr.required {
   float: right;
   width: 80%;
 }
+.woocommerce form #profile_details .form-row input,
+.woocommerce form #profile_details .form-row select,
+.woocommerce form #profile_details .form-row textarea {
+  float: right;
+  width: 80%;
+}
 
-.woocommerce form #customer_details .form-row textarea {
+.woocommerce form #customer_details .form-row textarea,
+.woocommerce form #profile_details .form-row textarea {
   min-height: 80px;
   line-height: 20px;
 }
@@ -4334,6 +4348,12 @@ abbr.required {
 .order-review-wrap {
   border: 2px solid #e6ebed;
   padding: 40px 30px;
+}
+
+.reset-password{
+  border: 2px solid #e6ebed;
+  padding: 40px 30px;
+  width: 400px;
 }
 
 #billing_address_1_field {
@@ -6080,14 +6100,16 @@ ul.recent-works {
 -------------------------------------------------------*/
 
 #mobile-search,
-#mobile-login {
+#mobile-login,
+.hide {
   display: none;
 }
 
 @media (max-width: 991px) {
 
   #mobile-search,
-  #mobile-login {
+  #mobile-login,
+  .hide {
     display: block;
   }
 
