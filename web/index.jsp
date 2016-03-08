@@ -7,6 +7,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <title>Wine Express | The best online wine store for your exquisite taste</title>
@@ -46,15 +47,18 @@
         <script>
             function onSignIn(googleUser) {
                 var profile = googleUser.getBasicProfile();
-                alert('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-                alert('Name: ' + profile.getName());
-                alert('Image URL: ' + profile.getImageUrl());
-                alert('Email: ' + profile.getEmail());
+                var email = profile.getEmail();
+
+            <%
+
+                if (session.getAttribute("email") == null && request.getAttribute("invalid") == null) {%>
+                document.location.href = "login?social=true&LogInEmail=" + email;
+
+            <%}%>
             }
-
-
-
         </script>
+
+
     </head>
 
     <body>
@@ -91,7 +95,7 @@
                                         </li>
 
                                         <li class="dropdown">
-                                            <a href="shop.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shop</a>
+                                            <a href="shop.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shop</a>
                                             <ul class="dropdown-menu megamenu-wide">
                                                 <li>
                                                     <div class="megamenu-wrap">
@@ -134,7 +138,7 @@
                                         </li>
 
                                         <li>
-                                            <a href="contact-us.html">Contact us</a>
+                                            <a href="contact.jsp">Contact us</a>
                                         </li>
 
                                         <li id="mobile-search">
@@ -163,36 +167,26 @@
                             <div class="col-md-4 account-wrap right">
                                 <ul>
                                     <li class="menu-my-acc left hidden-sm hidden-xs">
-
-                                        <%if (session.getAttribute("email") != null) {%> <a href="logout" >Log Out</a> <% } else { %>
-                                        <a href="#" data-toggle="modal" data-target="#LogInModal">Log In</a> <%}%>
+                                        <%if (session.getAttribute("email") == null) {%>  <a href="#" data-toggle="modal" data-target="#LogInModal">Log In</a><%}%>
 
                                         <div class="modal fade" id="LogInModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                             <div class="modal-dialog modal-sm" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-
                                                         <h6 class="modal-title" id="myModalLabel">Log in to your account</h6>
                                                     </div>
-
                                                     <div class="modal-body">
-                                                        <label name =msg" id ="msg"></label>
-                                                        <form action="login" method="post" id="login-form">
-
-                                                            <input type="email" class="form-control" id="LogInEmail" name="LogInEmail" placeholder="Email Address"></input>
+                                                        <form>
+                                                            <input type="email" class="form-control" id="LogInEmail" placeholder="Email Address"></input>
                                                             <br/>
-                                                            <input type="password" class="form-control" id="LogInPassword" name="LogInPassword" placeholder="Password"></input>
-                                                        </form>	
-
+                                                            <input type="password" class="form-control" id="LogInPassword" placeholder="Password"></input>
+                                                        </form>		
                                                     </div>
                                                     <div class="modal-footer">
-
-
-                                                        <a href="#" onclick="document.location.href = 'resetpassword.jsp'" data-dismiss="modal" class="forgot">Forgot Password?</a>
-
-                                                        <button type="button" class="btn btn-primary" onclick="document.getElementById('login-form').submit()" >Log In</button>
-                                                    </div> 
+                                                        <a href="#" data-dismiss="modal" onclick="document.location.href = 'resetpassword.jsp'"  class="forgot">Forgot Password?</a>
+                                                        <button type="button" class="btn btn-primary" onclick="document.getElementById('login-form').submit()">Log In</button>
+                                                    </div>
                                                     <div align="center" class="g-signin2" data-onsuccess="onSignIn"></div>
                                                 </div>
                                             </div>
@@ -227,8 +221,14 @@
                                         </div>
                                     </li>
 
-                                    <li class="menu-my-acc left hidden-sm hidden-xs">
-                                        <%if (session.getAttribute("email") != null) {%><a href="updateAccount">My Account</a> <%}%>
+                                    <li class="menu-my-acc left hidden-sm hidden-xs dropdown">
+                                        <%if (session.getAttribute("email") != null) {%> <a class="dropdown-toggle" data-toggle="dropdown">My Account</a><%}%>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="updateAccount">Edit Profile</a></li>
+                                            <li><a href="history.jsp">Purchase history</a></li>
+                                            <li><a href="enquiry">Send Enquiry</a></li>
+                                            <li><a href="logout">Log out</a></li>
+                                        </ul>
                                     </li>
 
                                     <li class="menu-search hidden-sm hidden-xs">
@@ -251,7 +251,7 @@
                                     <li class="cart-type-1 menu-cart right">
                                         <div class="cart-outer">
                                             <div class="cart-inner">
-                                                <a class="shopping-cart" href="cart.jsp">
+                                                <a class="shopping-cart" href="cart.html">
                                                     <span>0</span>
                                                 </a>
                                             </div>
@@ -293,7 +293,6 @@
 
                                                 %>    
 
-
                                                 <div class="menu-cart-summary">
                                                     <span>Cart Subtotal</span>
                                                     <span class="total-price">$<%=total%></span>
@@ -304,8 +303,8 @@
                                                     <a href="#" class="btn btn-md btn-red mt-10">Proceed to Checkout</a>
                                                 </div>									
                                             </div>
-                                        </div>
                                     </li>
+
                                 </ul>
                             </div>
 
@@ -1024,7 +1023,7 @@
                                 <div class="footer-help">
                                     <h5>Help</h5>
                                     <ul class="footer-links">
-                                        <li><a href="#">Contact us</a></li>
+                                        <li><a href="contact.jsp">Contact us</a></li>
                                         <li><a href="#">Track order</a></li>
                                         <li><a href="#">F.A.Q</a></li>
                                         <li><a href="#">Privacy policy</a></li>
@@ -1195,13 +1194,14 @@
                                                             $(document).ready(function () {
 
             <% if (request.getAttribute("invalid") != null) {
-                     String message = request.getAttribute("invalid").toString();
+                    String message = request.getAttribute("invalid").toString();
 
             %>
                                                                 alert("<%=message%>");
             <%}%>
                                                             });
         </script>
+
 
     </body>
 </html>

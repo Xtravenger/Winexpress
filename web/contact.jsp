@@ -40,20 +40,21 @@
         <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
         <link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
         <link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png">
-         <script src="https://apis.google.com/js/platform.js" async defer></script>
-          <meta name="google-signin-client_id" content="235764268022-1iafbg46etiu1dnllhunakre1729v7nu.apps.googleusercontent.com">
-        <script>  
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <meta name="google-signin-client_id" content="235764268022-1iafbg46etiu1dnllhunakre1729v7nu.apps.googleusercontent.com">
+        <script>
             function onSignIn(googleUser) {
-          var profile = googleUser.getBasicProfile();
-          alert('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-          alert('Name: ' + profile.getName());
-          alert('Image URL: ' + profile.getImageUrl());
-          alert('Email: ' + profile.getEmail());
-        }
-        
-                 
-        
-    </script>
+                var profile = googleUser.getBasicProfile();
+                var email = profile.getEmail();
+
+            <%
+
+                if (session.getAttribute("email") == null && request.getAttribute("invalid") == null) {%>
+                document.location.href = "login?social=true&LogInEmail=" + email;
+
+            <%}%>
+            }
+        </script>
 
     </head>
 
@@ -167,49 +168,81 @@
                             <div class="col-md-4 account-wrap right">
                                 <ul>
                                     <li class="menu-my-acc left hidden-sm hidden-xs">
-									
-                                                                    <%if(session.getAttribute("email")!= null) {%> <a href="logout" >Log Out</a> <% } else { %>
-                                                                        <a href="#" data-toggle="modal" data-target="#LogInModal">Log In</a> <%}%>
-									
-									<div class="modal fade" id="LogInModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  										<div class="modal-dialog modal-sm" role="document">
-   											<div class="modal-content">
-      											<div class="modal-header">
-        											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        											
-                                                                                                <h6 class="modal-title" id="myModalLabel">Log in to your account</h6>
-      											</div>
-                                                                                       
-      											<div class="modal-body">
-                                                                                            <label name =msg" id ="msg"></label>
-        											<form action="login" method="post" id="login-form">
-                                                                                                    
-        												<input type="email" class="form-control" id="LogInEmail" name="LogInEmail" placeholder="Email Address"></input>
-        												<br/>
-        												<input type="password" class="form-control" id="LogInPassword" name="LogInPassword" placeholder="Password"></input>
-        											</form>	
-                                                                                            
-      											</div>
-      											<div class="modal-footer">
-                                                                                             
-                                                                                                    
-                                                                                            <a href="#" onclick="document.location.href='resetpassword.jsp'" data-dismiss="modal" class="forgot">Forgot Password?</a>
-        										   
-                                                                                                <button type="button" class="btn btn-primary" onclick="document.getElementById('login-form').submit()" >Log In</button>
-                                                                                        </div> 
-                                                                                            <div align="center" class="g-signin2" data-onsuccess="onSignIn"></div>
-    										</div>
-  										</div>
-									</div>
-								</li>
 
-								<li class="menu-my-acc left hidden-sm hidden-xs">
-                                                                    
-								</li>
+                                        <%if (session.getAttribute("email") == null) {%> <a href="#" data-toggle="modal" data-target="#LogInModal">Log In</a> <%}%>
 
-                                    
+                                        <div class="modal fade" id="LogInModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                            <div class="modal-dialog modal-sm" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                                                        <h6 class="modal-title" id="myModalLabel">Log in to your account</h6>
+                                                    </div>
+
+                                                    <div class="modal-body">
+                                                        <label name =msg" id ="msg"></label>
+                                                        <form action="login" method="post" id="login-form">
+
+                                                            <input type="email" class="form-control" id="LogInEmail" name="LogInEmail" placeholder="Email Address"></input>
+                                                            <br/>
+                                                            <input type="password" class="form-control" id="LogInPassword" name="LogInPassword" placeholder="Password"></input>
+                                                        </form>	
+
+                                                    </div>
+                                                    <div class="modal-footer">
+
+
+                                                        <a href="#" onclick="document.location.href = 'resetpassword.jsp'" data-dismiss="modal" class="forgot">Forgot Password?</a>
+
+                                                        <button type="button" class="btn btn-primary" onclick="document.getElementById('login-form').submit()" >Log In</button>
+                                                    </div> 
+                                                    <div align="center" class="g-signin2" data-onsuccess="onSignIn"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
                                     <li class="menu-my-acc left hidden-sm hidden-xs">
-                                        <a href="#">My Account</a>
+
+                                        <%if (session.getAttribute("email") == null) {%><a href="#" data-toggle="modal" data-target="#SignUpModal">Sign Up</a><%}%>
+
+                                        <div class="modal fade" id="SignUpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                            <div class="modal-dialog modal-sm" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                        <h6 class="modal-title" id="myModalLabel">Sign up with WineXpress</h6>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="register?signup=true" method="POST" id="signup-form">
+                                                            <label name="message" id="message"></label>
+                                                            <input type="email" name="email" class="form-control" id="SignUpEmail" placeholder="Email Address"></input>
+                                                            <br/>
+                                                            <input type="password" name="password1" class="form-control" id="SignUpPassword1" placeholder="Password"></input>
+                                                            <br/>
+                                                            <input type="password" name="password2" class="form-control" id="SignUpPassword2" placeholder="Confirm Password"></input>
+                                                        </form>		
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary" onclick="validate()">Sign up</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </li>
+
+
+                                  <li class="menu-my-acc left hidden-sm hidden-xs dropdown">
+                                        <%if (session.getAttribute("email") != null) {%> <a class="dropdown-toggle" data-toggle="dropdown">My Account</a><%}%>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="updateAccount">Edit Profile</a></li>
+                                            <li><a href="history.jsp">Purchase history</a></li>
+                                            <li><a href="enquiry">Send Enquiry</a></li>
+                                            <li><a href="logout">Log out</a></li>
+                                        </ul>
                                     </li>
 
                                     <li class="menu-search hidden-sm hidden-xs">
@@ -333,20 +366,28 @@
             <div class="container">			
                 <div class="row">
                     <div class="col-md-7 col-sm-7">
-                          <div id="msg" class="message">
-                                <% if (request.getAttribute("success") != null) {
-                                          out.println("<font color = red>" + request.getAttribute("success") + "</font>");
-                                        
-                                    }%>
-                            </div>
-                            
+                        <div id="msg" class="message">
+                            <% if (request.getAttribute("success") != null) {
+                                    out.println("<font color = red>" + request.getAttribute("success") + "</font>");
+                                }
+
+                                String email = "";
+                                String name = "";
+                                if (request.getAttribute("email") != null && request.getAttribute("name") != null) {
+                                    email = request.getAttribute("email").toString();
+                                    name = request.getAttribute("name").toString();
+                                }
+
+                            %>
+                        </div>
+
                         <form  id="contact-form" action="contact" method="POST"  >
-                            <input name="name" id="name" type="text" class="form-control" placeholder="Name*" />
-                            <input name="mail" id="mail" type="email" class="form-control" placeholder="E-mail*" />	
+                            <input name="name" id="name" type="text" class="form-control" placeholder="Name*" value="<%=name%>" />
+                            <input name="mail" id="mail" type="email" class="form-control" placeholder="E-mail*" value="<%=email%>" />	
                             <input name="subject" id="subject" type="text" class="form-control" placeholder="Subject" />	
                             <textarea name="comment" id="comment" class="form-control" placeholder="Message"></textarea>
                             <input type="submit" onclick="validate()" class="btn btn-lg btn-green" value="Send Message" id="submit-message"/>
-                          
+
                         </form>
                     </div> <!-- end col -->
 
@@ -389,15 +430,15 @@
                 </div>
             </div>
         </section> <!-- end contact -->
-          <div class="col-md-7 col-sm-7">
-              Getting Here:<p></p>
-              <form  id="Getting-Here" action="navigation" method="POST" onsubmit="popup(this)">
-            <table> <tr><td width="150" ><input name="origin" id="origin" type="text" class="form-control" placeholder="Starting Origin*" /></td>
-                    <td width="10"> <input type="submit"  class="btn btn-lg btn-green" value="Show Direction" id="submit-message"/></td>
-                </tr></table>   
-        </form></div>
+        <div class="col-md-7 col-sm-7">
+            Getting Here:<p></p>
+            <form  id="Getting-Here" action="navigation" method="POST" onsubmit="popup(this)">
+                <table> <tr><td width="150" ><input name="origin" id="origin" type="text" class="form-control" placeholder="Starting Origin*" /></td>
+                        <td width="10"> <input type="submit"  class="btn btn-lg btn-green" value="Show Direction" id="submit-message"/></td>
+                    </tr></table>   
+            </form></div>
         <p><p>
-            
+
         </p>        <!-- Google Map -->
         <div class="gmap" data-address="20 lower kent ridge road, Singapore"></div> 	        
 
@@ -545,81 +586,80 @@
     <!-- Google Map -->
     <script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
     <script type="text/javascript">
-                                $(document).ready(function () {
-                                    initGmap();
+                $(document).ready(function () {
+                    initGmap();
 
-                                    function initGmap() {
+                    function initGmap() {
 
-                                        var maplocation = jQuery(".gmap").attr("data-address");
+                        var maplocation = jQuery(".gmap").attr("data-address");
 
-                                        jQuery(".gmap").gmap3({
-                                            marker: {
-                                                address: maplocation,
-                                                options: {
-                                                    icon: "img/map_pin.png"
-                                                }
-                                            },
-                                            map: {
-                                                options: {
-                                                    zoom: 16,
-                                                    zoomControl: true,
-                                                    mapTypeControl: false,
-                                                    scaleControl: false,
-                                                    scrollwheel: false,
-                                                    navigationControl: true,
-                                                    streetViewControl: false,
-                                                    draggable: true,
-                                                    styles: [
-                                                        {
-                                                            "featureType": "all",
-                                                            "elementType": "all",
-                                                            "stylers": [
-                                                                {"saturation": "-20"}
-                                                            ]
-                                                        }]
-                                                }
-                                            }
-                                        });
+                        jQuery(".gmap").gmap3({
+                            marker: {
+                                address: maplocation,
+                                options: {
+                                    icon: "img/map_pin.png"
+                                }
+                            },
+                            map: {
+                                options: {
+                                    zoom: 16,
+                                    zoomControl: true,
+                                    mapTypeControl: false,
+                                    scaleControl: false,
+                                    scrollwheel: false,
+                                    navigationControl: true,
+                                    streetViewControl: false,
+                                    draggable: true,
+                                    styles: [
+                                        {
+                                            "featureType": "all",
+                                            "elementType": "all",
+                                            "stylers": [
+                                                {"saturation": "-20"}
+                                            ]
+                                        }]
+                                }
+                            }
+                        });
 
-                                    }
-                                });
+                    }
+                });
     </script>
-<script>
-    
-     function validate()
+    <script>
+
+        function validate()
+        {
+
+            if ($("#name").val() == "" || $("#mail").val() == "" || $("#comment").val() == "")
             {
-                
-                if ($("#name").val() == "" || $("#mail").val() == "" ||  $("#comment").val() == "")
+                alert("Filled in all required fields");
+                return false;
+
+            } else
+            {
+
+                var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+                var res = emailPattern.test($("#mail").val());
+
+                if (res == false)
                 {
-                    alert("Filled in all required fields");
+                    document.getElementById("mail").value = "";
+                    alert("Invalid Email");
                     return false;
 
                 }
-                else
-                {
-                    
-                    var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-                    var res = emailPattern.test($("#mail").val());
-                    
-                    if (res == false)
-                    {
-                        document.getElementById("mail").value="";
-                        alert("Invalid Email");
-                        return false;
-
-                    }
-          
-                }
-                
-                document.getElementById("contact-form").submit();
 
             }
 
-    
-    function popup(form) {
-    window.open('', 'formpopup', 'width=600,height=600,resizeable,scrollbars=1');
-    form.target = 'formpopup';
-}
-</script>
+            document.getElementById("contact-form").submit();
+
+        }
+
+
+        function popup(form) {
+            window.open('', 'formpopup', 'width=600,height=600,resizeable,scrollbars=1');
+            form.target = 'formpopup';
+        }
+    </script>
 </body>
 </html>
