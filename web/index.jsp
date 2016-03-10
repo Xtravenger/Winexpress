@@ -48,11 +48,12 @@
             function onSignIn(googleUser) {
                 var profile = googleUser.getBasicProfile();
                 var email = profile.getEmail();
+                var name =  profile.getName();
 
             <%
 
                 if (session.getAttribute("email") == null && request.getAttribute("invalid") == null) {%>
-                document.location.href = "login?social=true&LogInEmail=" + email;
+                document.location.href = "login?page=index.jsp&social=true&LogInEmail=" + email + "&name=" + name;
 
             <%}%>
             }
@@ -91,7 +92,7 @@
                                     <ul class="nav navbar-nav">
 
                                         <li class="active">
-                                            <a href="#">Home<span class="sr-only">(current)</span></a>
+                                            <a href="index.jsp">Home<span class="sr-only">(current)</span></a>
                                         </li>
 
                                         <li class="dropdown">
@@ -157,7 +158,7 @@
                             <!-- Logo -->
                             <div class="logo-container">
                                 <div class="logo-wrap text-center">
-                                    <a href="#">
+                                    <a href="index.jsp">
                                         <img class="logo" src="img/logo.png" alt="logo">
                                     </a>
                                 </div>
@@ -167,7 +168,7 @@
                             <div class="col-md-4 account-wrap right">
                                 <ul>
                                     <li class="menu-my-acc left hidden-sm hidden-xs">
-                                        <%if (session.getAttribute("email") == null) {%>  <a href="#" data-toggle="modal" data-target="#LogInModal">Log In</a><%}%>
+                                        <%if (session.getAttribute("email") == null) {%>  <a href="#" data-toggle="modal" data-target="#LogInModal">Log In</a>
 
                                         <div class="modal fade" id="LogInModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                             <div class="modal-dialog modal-sm" role="document">
@@ -177,10 +178,10 @@
                                                         <h6 class="modal-title" id="myModalLabel">Log in to your account</h6>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form>
-                                                            <input type="email" class="form-control" id="LogInEmail" placeholder="Email Address"></input>
+                                                        <form id="login-form" action="login?page=index.jsp" method="post">
+                                                            <input type="email" class="form-control" name="LogInEmail" id="LogInEmail" placeholder="Email Address"></input>
                                                             <br/>
-                                                            <input type="password" class="form-control" id="LogInPassword" placeholder="Password"></input>
+                                                            <input type="password" class="form-control" name="LogInPassword" id="LogInPassword" placeholder="Password"></input>
                                                         </form>		
                                                     </div>
                                                     <div class="modal-footer">
@@ -191,6 +192,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <%}%>
                                     </li>
 
                                     <li class="menu-my-acc left hidden-sm hidden-xs">
@@ -204,7 +206,7 @@
                                                         <h6 class="modal-title" id="myModalLabel">Sign up with WineXpress</h6>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form action="register?signup=true" method="POST" id="signup-form">
+                                                        <form action="registration?signup=true" method="POST" id="signup-form">
                                                             <label name="message" id="message"></label>
                                                             <input type="email" name="email" class="form-control" id="SignUpEmail" placeholder="Email Address"></input>
                                                             <br/>
@@ -214,20 +216,23 @@
                                                         </form>		
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-primary" onclick="validate()">Sign up</button>
+                                                        <a type="button" class="btn btn-primary" onclick="validate()">Sign up </a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </li>
-
+                                    
                                     <li class="menu-my-acc left hidden-sm hidden-xs dropdown">
                                         <%if (session.getAttribute("email") != null) {%> <a class="dropdown-toggle" data-toggle="dropdown">My Account</a><%}%>
                                         <ul class="dropdown-menu">
                                             <li><a href="updateAccount">Edit Profile</a></li>
-                                            <li><a href="history.jsp">Purchase history</a></li>
-                                            <li><a href="enquiry">Send Enquiry</a></li>
-                                            <li><a href="logout">Log out</a></li>
+                                            <li><a href="history">Purchase history</a></li>
+                                                <%if (session.getAttribute("role") != null) { if (session.getAttribute("role").equals("Admin")) {%> <li><a href="users">Edit Users</a></li> <%}}%>
+                                                <%if (session.getAttribute("role") != null) { if (!session.getAttribute("role").equals("Admin")) {%> <li><a href="enquiry">Send Enquiry</a></li> <%}}%>
+                                                <%if (session.getAttribute("role") != null) { if (session.getAttribute("role").equals("Admin")) {%> <li><a href="category.jsp">Edit Category</a></li> <%}}%>
+                                                <%if (session.getAttribute("role") != null) { if (session.getAttribute("role").equals("Admin")) {%> <li><a href="product.jsp">Edit Product</a></li> <%}} %> 
+                                            <li><a href="logout?page=index.jsp">Log out</a></li>
                                         </ul>
                                     </li>
 
@@ -260,8 +265,7 @@
                                             <div class="menu-cart-items">
                                                 <%
                                                     double total = 0.0;
-                                                    ArrayList chargeList = (ArrayList) request.getAttribute("chargelist");
-
+                                                   
                                                     if (session.getAttribute("cartlist") != null) {
                                                         ArrayList list = (ArrayList) session.getAttribute("cartlist");
 
@@ -299,8 +303,8 @@
                                                 </div>
 
                                                 <div class="menu-cart-actions mt-20">
-                                                    <a href="#" class="btn btn-md btn-dark">View Cart</a>
-                                                    <a href="#" class="btn btn-md btn-red mt-10">Proceed to Checkout</a>
+                                                    <a href="cart" class="btn btn-md btn-dark">View Cart</a>
+                                                    <a href="checkout" class="btn btn-md btn-red mt-10">Proceed to Checkout</a>
                                                 </div>									
                                             </div>
                                     </li>

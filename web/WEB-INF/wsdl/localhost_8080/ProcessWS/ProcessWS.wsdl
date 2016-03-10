@@ -10,20 +10,40 @@
 <message name="create_orderResponse">
 <part name="parameters" element="tns:create_orderResponse"/>
 </message>
+<message name="create_admin">
+<part name="parameters" element="tns:create_admin"/>
+</message>
+<message name="create_adminResponse">
+<part name="parameters" element="tns:create_adminResponse"/>
+</message>
 <message name="create_member">
 <part name="parameters" element="tns:create_member"/>
 </message>
 <message name="create_memberResponse">
 <part name="parameters" element="tns:create_memberResponse"/>
 </message>
+<message name="reset_password">
+<part name="parameters" element="tns:reset_password"/>
+</message>
+<message name="reset_passwordResponse">
+<part name="parameters" element="tns:reset_passwordResponse"/>
+</message>
 <portType name="ProcessWS">
 <operation name="create_order">
 <input wsam:Action="http://ProcessWS.org/ProcessWS/create_orderRequest" message="tns:create_order"/>
 <output wsam:Action="http://ProcessWS.org/ProcessWS/create_orderResponse" message="tns:create_orderResponse"/>
 </operation>
+<operation name="create_admin">
+<input wsam:Action="http://ProcessWS.org/ProcessWS/create_adminRequest" message="tns:create_admin"/>
+<output wsam:Action="http://ProcessWS.org/ProcessWS/create_adminResponse" message="tns:create_adminResponse"/>
+</operation>
 <operation name="create_member">
 <input wsam:Action="http://ProcessWS.org/ProcessWS/create_memberRequest" message="tns:create_member"/>
 <output wsam:Action="http://ProcessWS.org/ProcessWS/create_memberResponse" message="tns:create_memberResponse"/>
+</operation>
+<operation name="reset_password">
+<input wsam:Action="http://ProcessWS.org/ProcessWS/reset_passwordRequest" message="tns:reset_password"/>
+<output wsam:Action="http://ProcessWS.org/ProcessWS/reset_passwordResponse" message="tns:reset_passwordResponse"/>
 </operation>
 </portType>
 <binding name="ProcessWSPortBinding" type="tns:ProcessWS">
@@ -37,7 +57,25 @@
 <soap:body use="literal"/>
 </output>
 </operation>
+<operation name="create_admin">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="create_member">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="reset_password">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

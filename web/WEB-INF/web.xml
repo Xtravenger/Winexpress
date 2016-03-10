@@ -25,8 +25,8 @@
         <servlet-class>org.servlets.changepassword</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>register</servlet-name>
-        <servlet-class>org.servlets.register</servlet-class>
+        <servlet-name>registration</servlet-name>
+        <servlet-class>org.servlets.registration</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>updateAccount</servlet-name>
@@ -41,8 +41,20 @@
         <servlet-class>org.servlets.addItem</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>reset</servlet-name>
-        <servlet-class>org.servlets.reset</servlet-class>
+        <servlet-name>resetpassword</servlet-name>
+        <servlet-class>org.servlets.resetpassword</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>logout</servlet-name>
+        <servlet-class>org.servlets.logout</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>enquiry</servlet-name>
+        <servlet-class>org.servlets.enquiry</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>users</servlet-name>
+        <servlet-class>org.servlets.users</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>index</servlet-name>
@@ -69,10 +81,6 @@
         <url-pattern>/changepassword</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>register</servlet-name>
-        <url-pattern>/register</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>updateAccount</servlet-name>
         <url-pattern>/updateAccount</url-pattern>
     </servlet-mapping>
@@ -85,8 +93,24 @@
         <url-pattern>/addItem</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>reset</servlet-name>
-        <url-pattern>/reset</url-pattern>
+        <servlet-name>logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>enquiry</servlet-name>
+        <url-pattern>/enquiry</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>users</servlet-name>
+        <url-pattern>/users</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>registration</servlet-name>
+        <url-pattern>/registration</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>resetpassword</servlet-name>
+        <url-pattern>/resetpassword</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

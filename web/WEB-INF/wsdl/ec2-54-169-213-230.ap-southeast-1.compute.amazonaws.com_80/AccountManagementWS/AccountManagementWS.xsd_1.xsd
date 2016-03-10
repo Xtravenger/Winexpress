@@ -4,9 +4,21 @@
 
 <xs:element name="account_activationResponse" type="tns:account_activationResponse"/>
 
+<xs:element name="admin_account_activation" type="tns:admin_account_activation"/>
+
+<xs:element name="admin_account_activationResponse" type="tns:admin_account_activationResponse"/>
+
+<xs:element name="cancel_account" type="tns:cancel_account"/>
+
+<xs:element name="cancel_accountResponse" type="tns:cancel_accountResponse"/>
+
 <xs:element name="create_account" type="tns:create_account"/>
 
 <xs:element name="create_accountResponse" type="tns:create_accountResponse"/>
+
+<xs:element name="create_admin" type="tns:create_admin"/>
+
+<xs:element name="create_adminResponse" type="tns:create_adminResponse"/>
 
 <xs:element name="deactivate_account" type="tns:deactivate_account"/>
 
@@ -70,12 +82,30 @@
 
 <xs:complexType name="update_shipping">
 <xs:sequence>
-<xs:element name="shippingAddress" type="xs:string" minOccurs="0"/>
+<xs:element name="shippingAddress" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
 <xs:element name="email" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="update_shippingResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="create_account">
+<xs:sequence>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+<xs:element name="password" type="xs:string" minOccurs="0"/>
+<xs:element name="birthday" type="xs:string" minOccurs="0"/>
+<xs:element name="gender" type="xs:string" minOccurs="0"/>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+<xs:element name="contact" type="xs:string" minOccurs="0"/>
+<xs:element name="registerStatus" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="create_accountResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:int" minOccurs="0"/>
 </xs:sequence>
@@ -89,7 +119,7 @@
 
 <xs:complexType name="retrieve_shippingResponse">
 <xs:sequence>
-<xs:element name="return" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -101,7 +131,33 @@
 
 <xs:complexType name="retrieve_billingResponse">
 <xs:sequence>
-<xs:element name="return" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="cancel_account">
+<xs:sequence>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="cancel_accountResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="admin_account_activation">
+<xs:sequence>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+<xs:element name="password" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="admin_account_activationResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -119,7 +175,9 @@
 </xs:complexType>
 
 <xs:complexType name="retrieve_all_account">
-<xs:sequence/>
+<xs:sequence>
+<xs:element name="Email" type="xs:string" minOccurs="0"/>
+</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="retrieve_all_accountResponse">
@@ -144,25 +202,12 @@
 
 <xs:complexType name="update_billing">
 <xs:sequence>
-<xs:element name="billingAddress" type="xs:string" minOccurs="0"/>
+<xs:element name="billingAddress" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
 <xs:element name="email" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="update_billingResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:int" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="account_activation">
-<xs:sequence>
-<xs:element name="email" type="xs:string" minOccurs="0"/>
-<xs:element name="name" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="account_activationResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:int" minOccurs="0"/>
 </xs:sequence>
@@ -181,6 +226,19 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="account_activation">
+<xs:sequence>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="account_activationResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="update_credit_card">
 <xs:sequence>
 <xs:element name="creditCardDetails" type="xs:string" minOccurs="0"/>
@@ -194,19 +252,17 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="create_account">
+<xs:complexType name="create_admin">
 <xs:sequence>
 <xs:element name="email" type="xs:string" minOccurs="0"/>
-<xs:element name="password" type="xs:string" minOccurs="0"/>
 <xs:element name="birthday" type="xs:string" minOccurs="0"/>
 <xs:element name="gender" type="xs:string" minOccurs="0"/>
 <xs:element name="name" type="xs:string" minOccurs="0"/>
 <xs:element name="contact" type="xs:string" minOccurs="0"/>
-<xs:element name="registerStatus" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="create_accountResponse">
+<xs:complexType name="create_adminResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:int" minOccurs="0"/>
 </xs:sequence>
@@ -260,7 +316,7 @@
 
 <xs:complexType name="retrieve_creditResponse">
 <xs:sequence>
-<xs:element name="return" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 

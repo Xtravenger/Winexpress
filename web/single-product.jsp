@@ -163,10 +163,10 @@
                                                         <h6 class="modal-title" id="myModalLabel">Log in to your account</h6>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form>
-                                                            <input type="email" class="form-control" id="LogInEmail" placeholder="Email Address"></input>
+                                                        <form id="login-form" action="login" method="post">
+                                                            <input type="email" class="form-control" name="LogInEmail" id="LogInEmail" placeholder="Email Address"></input>
                                                             <br/>
-                                                            <input type="password" class="form-control" id="LogInPassword" placeholder="Password"></input>
+                                                            <input type="password" class="form-control" name="LogInPassword" id="LogInPassword" placeholder="Password"></input>
                                                         </form>		
                                                     </div>
                                                     <div class="modal-footer">
@@ -211,11 +211,13 @@
                                         <%if (session.getAttribute("email") != null) {%> <a class="dropdown-toggle" data-toggle="dropdown">My Account</a><%}%>
                                         <ul class="dropdown-menu">
                                             <li><a href="updateAccount">Edit Profile</a></li>
-                                            <li><a href="history.jsp">Purchase history</a></li>
-                                            <li><a href="enquiry">Send Enquiry</a></li>
+                                                <%if (session.getAttribute("role") != null) { if (!session.getAttribute("role").equals("Admin")) {%> <li><a href="history.jsp">Purchase history</a></li><%} else {%><li><a href="users.jsp">Edit Users</a></li> <%}}%>
+                                                <%if (session.getAttribute("role") != null) { if (!session.getAttribute("role").equals("Admin")) {%> <li><a href="enquiry">Send Enquiry</a></li> <%} else { %> <li><a href="category.jsp">Edit Category</a></li> <%}}%>
+                                                <%if (session.getAttribute("role") != null) { if (session.getAttribute("role").equals("Admin")) {%> <li><a href="product.jsp">Edit Product</a></li> <%}} %> 
                                             <li><a href="logout">Log out</a></li>
                                         </ul>
                                     </li>
+
 
                                     <li class="menu-search hidden-sm hidden-xs">
                                         <a href="#" id="menu-search">
@@ -233,7 +235,6 @@
                                             </div>
                                         </div>
                                     </li>
-
                                     <li class="cart-type-1 menu-cart right">
                                         <div class="cart-outer">
                                             <div class="cart-inner">

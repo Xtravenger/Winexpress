@@ -125,7 +125,7 @@
                                         </li>
 
                                         <li id="mobile-login">
-                                           
+
 
                                         </li>
 
@@ -154,12 +154,18 @@
                             <!-- Account, Cart, Search -->
                             <div class="col-md-4 account-wrap right">
                                 <ul>
-                                     <li class="menu-my-acc left hidden-sm hidden-xs">
-                                       <a href="logout" >Log Out</a>
-                                    </li>
-                                    
                                     <li class="menu-my-acc left hidden-sm hidden-xs">
-                                        <a href="account.jsp">My Account</a>
+                                           <%if (session.getAttribute("email") != null) {%> <a class="dropdown-toggle" data-toggle="dropdown">My Account</a><%}%>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="updateAccount">Edit Profile</a></li>
+                                            <%if (!session.getAttribute("role").equals("Admin")) {%> <li><a href="history.jsp">Purchase history</a></li><%}
+                                                else {%><li><a href="history.jsp">Purchase history</a></li> <%}%>
+                                             <%if (!session.getAttribute("role").equals("Admin")) {%> <li><a href="enquiry">Send Enquiry</a></li> <%} else { %>
+                                              <li><a href="category.jsp">Edit Category</a></li> <%}%>
+                                              <%if (session.getAttribute("role").equals("Admin")) {%> <li><a href="product.jsp">Edit Product</a></li> <%}%>  
+                                              
+                                             <li><a href="logout">Log out</a></li>
+                                        </ul>
                                     </li>
 
                                     <li class="menu-search hidden-sm hidden-xs">
@@ -192,7 +198,7 @@
                                                 <%
                                                     double total = 0.0;
                                                     ArrayList chargeList = (ArrayList) request.getAttribute("chargelist");
-                                               
+
                                                     if (session.getAttribute("cartlist") != null) {
                                                         ArrayList list = (ArrayList) session.getAttribute("cartlist");
 
@@ -223,7 +229,7 @@
 
 
                                                 %>    
-
+                                            </div>
 
                                                 <div class="menu-cart-summary">
                                                     <span>Cart Subtotal</span>
@@ -231,13 +237,12 @@
                                                 </div>
 
                                                 <div class="menu-cart-actions mt-20">
-                                                    <a href="#" class="btn btn-md btn-dark">View Cart</a>
-                                                    <a href="#" class="btn btn-md btn-red mt-10">Proceed to Checkout</a>
+                                                    <a href="cart" class="btn btn-md btn-dark">View Cart</a>
+                                                    <a href="checkout" class="btn btn-md btn-red mt-10">Proceed to Checkout</a>
                                                 </div>									
-                                            </div>
+                                            
                                         </div>
                                     </li>
-
                                 </ul>
                             </div>
 
@@ -655,42 +660,42 @@
                                         var countryList = [];
                                         var priceList = [];
             <%
-                          
-                                for (int i = 0; i < chargeList.size(); i++) {
-                                    String[] detail = String.valueOf(chargeList.get(i)).split(",");
-                                        
+
+                for (int i = 0; i < chargeList.size(); i++) {
+                    String[] detail = String.valueOf(chargeList.get(i)).split(",");
+
             %>
-                                    
+
                                         countryList.push("<%=detail[0]%>");
                                         priceList.push("<%=detail[1]%>");
-                                     
 
-            <%}%>   
 
-                                         $(document).ready(function () {
-                                                  var subtotal = document.getElementById("subTotal").innerHTML;
-                                                  var shipfee = document.getElementById("shipFee").innerHTML;
-                                                                                                                                            
-                                                  document.getElementById("orderTotal").innerHTML = parseFloat(parseFloat(subtotal)+ parseFloat(shipfee)).toFixed(2);
-                                                });
+            <%}%>
+
+                                        $(document).ready(function () {
+                                            var subtotal = document.getElementById("subTotal").innerHTML;
+                                            var shipfee = document.getElementById("shipFee").innerHTML;
+
+                                            document.getElementById("orderTotal").innerHTML = parseFloat(parseFloat(subtotal) + parseFloat(shipfee)).toFixed(2);
+                                        });
 
 
                                         function calculate(v)
                                         {
-                                         
+
                                             for (var i = 0; i < countryList.length; i++)
                                             {
-                                               
+
                                                 var code = countryList[i];
-                                                
+
                                                 if (code == v)
                                                 {
-                                                    
+
                                                     document.getElementById("shipFee").innerHTML = priceList[i];
-                                            
+
                                                     var subtotal = document.getElementById("subTotal").innerHTML;
                                                     var shipfee = document.getElementById("shipFee").innerHTML;
-                                                    document.getElementById("orderTotal").innerHTML = parseFloat(parseFloat(subtotal)+ parseFloat(shipfee)).toFixed(2);
+                                                    document.getElementById("orderTotal").innerHTML = parseFloat(parseFloat(subtotal) + parseFloat(shipfee)).toFixed(2);
                                                     return;
                                                 }
                                             }

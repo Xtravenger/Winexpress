@@ -11,17 +11,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.ws.WebServiceRef;
-import org.customersupport.CustomerSupportWS_Service;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Xtravenger
  */
-public class reset extends HttpServlet {
-
-    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/CustomerSupportWS/CustomerSupportWS.wsdl")
-    private CustomerSupportWS_Service service;
+public class logout extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,29 +30,12 @@ public class reset extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
-        if(request.getParameter("reset")!= null)
-        {
-            request.getRequestDispatcher("changepassword.jsp?email=" + request.getParameter("reset")).forward(request, response);
-            return;
-        }
-        
-        String email  = request.getParameter("email");
-        
-        int res = this.sendResetEmail(email);
-        
-        if(res == 1)
-        {
-            request.setAttribute("message", "Reset link sent to email");
-            
-        }else
-        {
-            request.setAttribute("message", "Invalid email");
-        }
-        
-        request.getRequestDispatcher("resetpassword.jsp").forward(request, response);
-        
+
+        HttpSession session = request.getSession(false);
+
+        session.invalidate();
+        String page = request.getParameter("page");
+        response.sendRedirect(page);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -97,12 +76,5 @@ public class reset extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    private Integer sendResetEmail(java.lang.String email) {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        org.customersupport.CustomerSupportWS port = service.getCustomerSupportWSPort();
-        return port.sendResetEmail(email);
-    }
 
 }

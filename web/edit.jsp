@@ -76,7 +76,7 @@
                                     <ul class="nav navbar-nav">
 
                                         <li>
-                                            <a href="#">Home<span class="sr-only">(current)</span></a>
+                                            <a href="index.jsp">Home<span class="sr-only">(current)</span></a>
                                         </li>
 
                                         <li class="dropdown active">
@@ -123,7 +123,7 @@
                                         </li>
 
                                         <li>
-                                            <a href="contact-us.html">Contact us</a>
+                                            <a href="contact.jsp">Contact us</a>
                                         </li>
 
                                         <li id="mobile-search">
@@ -142,7 +142,7 @@
                             <!-- Logo -->
                             <div class="logo-container">
                                 <div class="logo-wrap text-center">
-                                    <a href="index.html">
+                                    <a href="index.jsp">
                                         <img class="logo" src="img/logo.png" alt="logo">
                                     </a>
                                 </div>
@@ -151,13 +151,21 @@
                             <!-- Account, Cart, Search -->
                             <div class="col-md-4 account-wrap right">
                                 <ul>
-                                    <li class="menu-my-acc left hidden-sm hidden-xs">
-                                        <a href="logout" >Log Out</a>
-                                    </li>
-
-
-                                    <li class="menu-my-acc left hidden-sm hidden-xs">
-                                        <a href="account.html">My Account</a>
+                                    <li class="menu-my-acc left hidden-sm hidden-xs dropdown">
+                                        <%if (session.getAttribute("email") != null) {%> <a class="dropdown-toggle" data-toggle="dropdown">My Account</a><%}%>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="updateAccount">Edit Profile</a></li>
+                                            <%if (session.getAttribute("role") != null) {
+                                                    if (!session.getAttribute("role").equals("Admin")) {%> <li><a href="history">Purchase history</a></li><%} else {%><li><a href="users">Edit Users</a></li> <%}
+                                                            }%>
+                                                    <%if (session.getAttribute("role") != null) {
+                                                            if (!session.getAttribute("role").equals("Admin")) {%> <li><a href="enquiry">Send Enquiry</a></li> <%} else { %> <li><a href="category.jsp">Edit Category</a></li> <%}
+                                                            }%>
+                                                    <%if (session.getAttribute("role") != null) {
+                                                            if (session.getAttribute("role").equals("Admin")) {%> <li><a href="product.jsp">Edit Product</a></li> <%}
+                                                            } %> 
+                                            <li><a href="logout?page=index.jsp">Log out</a></li>
+                                        </ul>
                                     </li>
 
                                     <li class="menu-search hidden-sm hidden-xs">
@@ -189,13 +197,12 @@
                                             <div class="menu-cart-items">
                                                 <%
                                                     double total = 0.0;
-                                                    ArrayList chargeList = (ArrayList) request.getAttribute("chargelist");
-
-                                                    if (session.getAttribute("cartlist") != null) {
+                                              
+                                                 if (session.getAttribute("cartlist") != null) {
                                                         ArrayList list = (ArrayList) session.getAttribute("cartlist");
 
-          for (int i = 0; i < list.size(); i++) {
-              String[] item = (String[]) list.get(i);%>
+                                                        for (int i = 0; i < list.size(); i++) {
+                                                            String[] item = (String[]) list.get(i);%>
                                                 <div class="menu-cart-item clearfix">
                                                     <div class="menu-cart-img">
                                                         <a href="#">
@@ -221,7 +228,7 @@
 
 
                                                 %>    
-
+                                            </div>
 
                                                 <div class="menu-cart-summary">
                                                     <span>Cart Subtotal</span>
@@ -229,10 +236,11 @@
                                                 </div>
 
                                                 <div class="menu-cart-actions mt-20">
-                                                    <a href="#" class="btn btn-md btn-dark">View Cart</a>
-                                                    <a href="#" class="btn btn-md btn-red mt-10">Proceed to Checkout</a>
+                                                    <a href="cart" class="btn btn-md btn-dark">View Cart</a>
+                                                    <a href="checkout" class="btn btn-md btn-red mt-10">Proceed to Checkout</a>
                                                 </div>									
-                                            </div>
+                                            
+                                        </div>
                                     </li>
 
                                 </ul>
@@ -254,7 +262,11 @@
                         <div class="col-md-12">
                             <h1 class="text-center steps-wrap">
                                 <a href="#" class="step-cart active">Edit Profile</a>
-                                
+                                <i class="fa fa-angle-right"></i>
+                                <a href="history" class="step-checkout">My Purchase History</a>
+                                <i class="fa fa-angle-right"></i>
+                                <a href="enquiry" class="step-order-complete">Enquiry</a>
+
                             </h1>
                         </div>
                     </div>
@@ -264,31 +276,81 @@
                 <div class="container relative">
                     <div class="row">
                         <div class="col-md-8 woocommerce">
-                            <form name="edit_profile" class="checkout woocommerce-checkout row">
+                            <div align="right">  <a href="#" data-toggle="modal" data-target="#cancelAccModal">Cancel Account</a> 
+                                <div class="modal fade" id="cancelAccModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog modal-sm" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                                                <h6 class="modal-title" id="myModalLabel">Verify Account</h6>
+                                            </div>
+
+                                            <div class="modal-body">
+                                                <label name =msg" id ="msg"></label>
+                                                <form action="updateAccount?page=index.jsp&cancel=<%=session.getAttribute("email")%>" method="post" id="cancel-form">
+                                                    <br/>
+                                                    <input type="password" class="form-control" id="LogInPassword" name="LogInPassword" placeholder="Password"></input>
+                                                </form>	
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary" onclick="document.getElementById('cancel-form').submit()" >Cancel Account</button>
+                                            </div> 
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>                             
+                            <form name="edit_profile" action="updateAccount" id="edit_profile" class="checkout woocommerce-checkout row">
 
                                 <%
+
                                     ArrayList list = (ArrayList) request.getAttribute("account");
                                     String email = list.get(0).toString();
                                     String name = list.get(3).toString();
                                     String birthday = list.get(1).toString();
                                     String gender = list.get(2).toString();
-                                    if(gender.equals("M"))
-                                    {
+                                    if (gender.equals("M")) {
                                         gender = "Male";
-                                    }else
-                                    {
+                                    } else {
                                         gender = "Female";
                                     }
-                                    
+
                                     String contact = list.get(4).toString();
-                                    
+
                                     String[] billing = null;
-                                    if (!list.get(5).equals("empty_billing")) {
-                                        billing = list.get(5).toString().split(",");
+                                    if (!list.get(6).equals("empty billing")) {
+                                        billing = list.get(6).toString().split(",");
+
+                                        for (int i = 0; i < billing.length; i++) {
+                                            if (billing[i].equals("-")) {
+                                                billing[i] = "";
+                                            }
+                                        }
+
                                     }
                                     String[] shipping = null;
-                                    if (!list.get(6).equals("empty_shipping")) {
-                                        shipping = list.get(6).toString().split(",");
+                                    if (!list.get(7).equals("empty shipping")) {
+                                        shipping = list.get(7).toString().split(",");
+
+                                        for (int i = 0; i < shipping.length; i++) {
+                                            if (shipping[i].equals("-")) {
+                                                shipping[i] = "";
+                                            }
+                                        }
+                                    }
+                                    
+                                    String[] credit = null;
+                                    if (!list.get(8).equals("empty card")) {
+                                        credit = list.get(8).toString().split(",");
+
+                                        for (int i = 0; i < credit.length; i++) {
+                                            if (credit[i].equals("-")) {
+                                                credit[i] = "";
+                                            }
+                                        }
                                     }
                                 %>
 
@@ -297,10 +359,10 @@
                                     <h2 class="heading-underline">basics</h2>
                                     <p class="form-row form-row-first validate-required woocommerce-invalid woocommerce-invalid-required-field" id="first_name_field">
                                         <label for="name">Name </label>
-                                        <input type="text" class="input-text form-control" placeholder value name="name" id="name" name="name">
+                                        <input type="text" class="input-text form-control" placeholder="Name" value name="name" id="name" name="name">
                                     </p>
 
-                                  
+
                                     <p class="form-row form-row-last validate-required woocommerce-invalid woocommerce-invalid-required-field" id="dob_field">
                                         <label for="dob">D.O.B
                                             <abbr class="required" title="required">*</abbr>
@@ -312,30 +374,83 @@
                                         <label for="gender">Gender
                                             <abbr class="required" title="required">*</abbr>
                                         </label>
-                                         <input type="text" class="input-text form-control" placeholder="Gender" name="gender" id="gender" disabled>
+                                        <input type="text" class="input-text form-control" placeholder="Gender" name="gender" id="gender" disabled>
                                     </p>
 
                                     <p class="form-row form-row-last validate-required woocommerce-invalid woocommerce-invalid-required-field" id="email_field">
                                         <label for="email">Email
                                             <abbr class="required" title="required">*</abbr>
                                         </label>
-                                        <input type="text" class="input-text form-control" placeholder value name="email" id="email" disabled>
+                                        <input type="text" class="input-text form-control" placeholder=Email" value name="email" id="email" disabled>
                                     </p>
 
                                     <p class="form-row form-row-last validate-required validate-phone" id="edit_phone_field">
                                         <label for="phone">Phone
                                             <abbr class="required" title="required">*</abbr>
                                         </label>
-                                        <input type="text" class="input-text form-control" placeholder value name="phone" id="phone">
+                                        <input type="text" class="input-text form-control" placeholder="Phone" value name="phone" id="phone">
                                     </p>
-                                    <a href="changepassword.jsp">Change Password</a>
 
+                                    <% if (!session.getAttribute("role").equals("Social")) {%> <a href="changepassword.jsp">Change Password</a> <%}%> 
+
+                                    <br/><br/><br/>                                    
+                                    <h2 class="heading-underline">credit card detail</h2>
+                                    <p class="form-row form-row-wide" id="card_number_field">
+                                        <label for="card_number">Card Number</label>
+                                        <input type="text" class="input-text form-control" placeholder="Card Number" value name="card_number" id="card_number">
+                                    </p>
+
+                                    <p class="form-row form-row-wide address-field validate-required" id="holder_name_field" >
+                                        <label for="holder_name">Name on Card </label>
+                                        <input  width="20" type="text" class="input-text form-control" placeholder="Name on Card" value name="holder_name" id="holder_name">
+                                    </p>
+
+                                    <p class="form-row form-row-wide address-field validate-required" id="card_type_field" >
+                                        <label for="card_type">Type</label>
+                                        <select name="card_type" id="card_type" class="country_to_state" rel="card_type">
+                                            <option value="visa">Visa</option>
+                                            <option value="Master">Master Card</option>
+                                        </select>
+                                    </p>
+
+                                    <p class="form-row form-row-wide address-field validate-required woocommerce-invalid woocommerce-invalid-required-field" id="card_date_field">
+                                        <label for="card_date">Expiry Date </label>
+                                        <select name="card_year" id="card_year" name="card_year" class="country_to_state" rel="card_year" style="width: 300px;">
+                                            <option value="2016">2016</option>
+                                            <option value="2017">2017</option>
+                                            <option value="2018">2018</option>
+                                            <option value="2019">2019</option>
+                                            <option value="2020">2020</option>
+
+                                        </select>
+                                        
+                                        <select name="card_month" name="card_month" id="card_month" class="country_to_state" rel="card_month" style="width: 310px;" >
+                                            <option value="1">01</option>
+                                            <option value="2">02</option>
+                                            <option value="3">03</option>
+                                            <option value="4">04</option>
+                                            <option value="5">05</option>
+                                            <option value="6">06</option>
+                                            <option value="7">07</option>
+                                            <option value="8">08</option>
+                                            <option value="9">09</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                        </select>
+
+                                       
+                                    </p><br/><br/><br/>
+                                    <p class="form-row form-row-last address-field validate-required validate-postcode woocommerce-invalid woocommerce-invalid-required-field" id="shipping_checkbox_field">
+                                        <input type="checkbox" id="credit-checkbox" class="input-checkbox" name="credit_checkbox" value="1">
+                                        <label for="credit-checkbox" class="checkbox">Saved Credit Card Details</label>
+                                    </p>
                                     <br/><br/><br/>
 
                                     <h2 class="heading-underline">shipping address</h2>
                                     <p class="form-row form-row-wide" id="shipping_company_field">
                                         <label for="shipping_company">Company</label>
-                                        <input type="text" class="input-text form-control" placeholder value name="shipping_company" id="shipping_company">
+                                        <input type="text" class="input-text form-control" placeholder="Company" value name="shipping_company" id="shipping_company">
                                     </p>
 
                                     <p class="form-row form-row-wide address-field validate-required" id="shipping_block_field" data-o_class="form-row form-row-wide address-field validate-required">
@@ -360,11 +475,11 @@
                                     <p class="form-row form-row-wide address-field" id="shipping_address_2_field">
                                         <input type="text" class="input-text form-control" placeholder="Apartment, suite, unit etc. (optional)" value name="shipping_address_2" id="shipping_address_2">
                                     </p>
-                                    
-                                    
+
+
                                     <p class="form-row form-row-wide address-field validate-required" id="billing_city_field" data-o_class="form-row form-row-wide address-field validate-required">
                                         <label for="shipping_city">Town / City
-                                        
+                                            <abbr class="required" title="required">*</abbr>
                                         </label>
                                         <input type="text" class="input-text form-control" placeholder="Town / City" value name="shipping_city" id="shipping_city">
                                     </p>
@@ -500,10 +615,10 @@
                                         <input type="text" class="input-text form-control" placeholder="Postcode" value name="shipping_postcode" id="shipping_postcode">
                                     </p>
 
-                                    <div class="woocommerce-shipping-fields">
+                                    <p class="form-row form-row-last address-field validate-required validate-postcode woocommerce-invalid woocommerce-invalid-required-field" id="shipping_checkbox_field">
                                         <input type="checkbox" id="shipping-checkbox" class="input-checkbox" name="shipping_checkbox" value="1">
                                         <label for="shipping-checkbox" class="checkbox">Saved Edited Shipping address</label>
-                                    </div> 
+                                    </p>
 
                                     <br/><br/><br/>
 
@@ -511,7 +626,7 @@
                                     <h2 class="heading-underline">billing address</h2>
                                     <p class="form-row form-row-wide" id="billing_company_field">
                                         <label for="billing_company">Company</label>
-                                        <input type="text" class="input-text form-control" placeholder value name="billing_company" id="billing_company">
+                                        <input type="text" class="input-text form-control" placeholder="Company" value name="billing_company" id="billing_company">
                                     </p>
                                     <p class="form-row form-row-wide address-field validate-required" id="billing_block_field" data-o_class="form-row form-row-wide address-field validate-required">
                                         <label for="billing_block">Block
@@ -538,11 +653,11 @@
                                     <p class="form-row form-row-wide address-field" id="billing_address_2_field">
                                         <input type="text" class="input-text form-control" placeholder="Apartment, suite, unit etc. (optional)" value name="billing_address_2" id="billing_address_2">
                                     </p>
-                                    
-                                    
+
+
                                     <p class="form-row form-row-wide address-field validate-required" id="billing_city_field" data-o_class="form-row form-row-wide address-field validate-required">
                                         <label for="billing_city">Town / City
-                                        
+                                            <abbr class="required" title="required">*</abbr>
                                         </label>
                                         <input type="text" class="input-text form-control" placeholder="Town / City" value name="billing_city" id="billing_city">
                                     </p>
@@ -676,13 +791,13 @@
                                         <input type="text" class="input-text form-control" placeholder="Postal Code" value name="billing_postcode" id="billing_postcode">
                                     </p>
 
-                                    <div class="woocommerce-shipping-fields">
+                                    <p class="form-row form-row-last address-field validate-required validate-postcode woocommerce-invalid woocommerce-invalid-required-field" id="billing_postcode_field" data-o_class="form-row form-row-last address-field validate-required validate-postcode">
                                         <input type="checkbox" id="billing-checkbox" class="input-checkbox" name="billing_checkbox" value="1">
                                         <label for="billing-checkbox" class="checkbox">Saved Edited Billing Address</label>
-                                    </div>
+                                    </p>
 
                                 </div>
-                                <input type="submit"  class="btn btn-lg btn-green" value="Update" id="submit-message"/>
+                                <input type="submit"  class="btn btn-lg btn-green" onclick="return validate()" value="Update" id="update_acc" name="update_acc" />
                             </form>
                         </div>	
 
@@ -831,41 +946,103 @@
         <script type="text/javascript" src="js/scripts.js"></script>
         <script type="text/javascript" src="js/styleswitch.js"></script>
         <script>
-               $(document).ready(function () {
-                  
-                   document.getElementById("email").value = "<%=email%>";
-                   document.getElementById("name").value = "<%=name%>";
-                   document.getElementById("dob").value = "<%=birthday%>";
-                   document.getElementById("gender").value = "<%=gender%>";
-                   document.getElementById("phone").value = "<%=contact%>";
-                   
-                   <%if (shipping != null){%> 
-                      
-                      document.getElementById("shipping_company").value = "<%=shipping[6]%>";
-                      document.getElementById("shipping_block").value = "<%=shipping[0]%>";
-                      document.getElementById("shipping_country").value = "<%=shipping[1]%>";
-                      document.getElementById("shipping_postcode").value = "<%=shipping[2]%>";
-                      document.getElementById("shipping_address_1").value ="<%=shipping[3]%>";
-                      document.getElementById("shipping_address_2").value ="<%=shipping[4]%>";
-                       document.getElementById("shipping_city").value ="<%=shipping[5]%>";
-                      
-                   
-                   <%}%>
-                   
-                    <%if (billing != null){%> 
-                      
-                      document.getElementById("billing_company").value = "<%=billing[6]%>";
-                      document.getElementById("billing_block").value = "<%=billing[0]%>";
-                      document.getElementById("billing_country").value = "<%=billing[1]%>";
-                      document.getElementById("billing_postcode").value = "<%=billing[2]%>";
-                      document.getElementById("billing_address_1").value ="<%=billing[3]%>";
-                      document.getElementById("billing_address_2").value ="<%=billing[4]%>";
-                       document.getElementById("billing_city").value ="<%=billing[5]%>";
-                      
-                   
-                   <%}%>
-               });
-            
+                                    $(document).ready(function () {
+
+                                        document.getElementById("email").value = "<%=email%>";
+                                        document.getElementById("name").value = "<%=name%>";
+                                        document.getElementById("dob").value = "<%=birthday%>";
+                                        document.getElementById("gender").value = "<%=gender%>";
+                                        document.getElementById("phone").value = "<%=contact%>";
+
+            <%if (shipping != null) {%>
+
+                                        document.getElementById("shipping_company").value = "<%=shipping[7]%>";
+                                        document.getElementById("shipping_unit").value = "<%=shipping[5]%>";
+                                        document.getElementById("shipping_block").value = "<%=shipping[0]%>";
+                                        document.getElementById("shipping_country").value = "<%=shipping[1]%>";
+                                        document.getElementById("shipping_postcode").value = "<%=shipping[2]%>";
+                                        document.getElementById("shipping_address_1").value = "<%=shipping[3]%>";
+                                        document.getElementById("shipping_address_2").value = "<%=shipping[4]%>";
+                                        document.getElementById("shipping_city").value = "<%=shipping[6]%>";
+
+
+            <%}%>
+
+                                    <%if (billing != null) {%>
+
+                                        document.getElementById("billing_company").value = "<%=billing[7]%>";
+                                        document.getElementById("billing_unit").value = "<%=billing[5]%>";
+                                        document.getElementById("billing_block").value = "<%=billing[0]%>";
+                                        document.getElementById("billing_country").value = "<%=billing[1]%>";
+                                        document.getElementById("billing_postcode").value = "<%=billing[2]%>";
+                                        document.getElementById("billing_address_1").value = "<%=billing[3]%>";
+                                        document.getElementById("billing_address_2").value = "<%=billing[4]%>";
+                                        document.getElementById("billing_city").value = "<%=billing[6]%>";
+
+
+                                      <%}%>
+                
+                                       <%if (credit != null) {%>
+
+                                        document.getElementById("card_number").value = "<%=credit[4]%>";
+                                        document.getElementById("card_type").value = "<%=credit[0]%>";
+                                        document.getElementById("holder_name").value = "<%=credit[1]%>";
+                                        document.getElementById("card_month").value = "<%=credit[2]%>";
+                                        document.getElementById("card_year").value = "<%=credit[3]%>";
+                                        <%}%>
+                
+                
+                                    });
+
+
+                                    function validate()
+                                    {
+
+                                        if ($("#name").val() == "" || $("#phone").val() == "")
+                                        {
+
+                                            alert("Filled in all required fields");
+                                            return false;
+
+                                        } else
+                                        {
+
+                                            var contactPattern = /^\d{1,20}$/;
+                                            var res = contactPattern.test($("#phone").val());
+
+                                            if (res == false)
+                                            {
+                                                alert("Invalid Phone Number");
+                                                return false;
+
+                                            }
+                                        }
+
+
+                                        if ($("#shipping_company").val() != "" || $("#shipping_block").val() != "" || $("#shipping_address_1").val() != "" || $("#shipping_unit").val() != "" || $("#shipping_address_2").val() != "" || $("#shipping_city").val() != "" || $("#shipping_postcode").val() != "")
+                                        {
+                                            if ($("#shipping_unit").val() == "" || $("#shipping_address_1").val() == "" || $("#shipping_city").val() == "" || $("#shipping_postcode").val() == "")
+                                            {
+                                                alert("Filled in all required fields for shipping or leave all blanks");
+
+                                                return false;
+                                            }
+                                        }
+
+                                        if ($("#billing_company").val() != "" || $("#billing_block").val() != "" || $("#billing_address_1").val() != "" || $("#billing_unit").val() != "" || $("#billing_address_2").val() != "" || $("#billing_city").val() != "" || $("#billing_postcode").val() != "")
+                                        {
+                                            if ($("#billing_unit").val() == "" || $("#billing_address_1").val() == "" || $("#billing_city").val() == "" || $("#billing_postcode").val() == "")
+                                            {
+                                                alert("Filled in all required fields for billing or leave all blanks");
+
+                                                return false;
+                                            }
+                                        }
+
+                                        document.getElementById("edit-profile").submit();
+
+                                    }
+
         </script>
 
     </body>

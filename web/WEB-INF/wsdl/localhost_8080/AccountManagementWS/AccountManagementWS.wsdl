@@ -4,23 +4,11 @@
 <xsd:import namespace="http://accountmanagementws.org/" schemaLocation="http://localhost:8080/AccountManagementWS/AccountManagementWS?xsd=1"/>
 </xsd:schema>
 </types>
-<message name="deactivate_account">
-<part name="parameters" element="tns:deactivate_account"/>
+<message name="updateMemberAddress">
+<part name="parameters" element="tns:updateMemberAddress"/>
 </message>
-<message name="deactivate_accountResponse">
-<part name="parameters" element="tns:deactivate_accountResponse"/>
-</message>
-<message name="account_activation">
-<part name="parameters" element="tns:account_activation"/>
-</message>
-<message name="account_activationResponse">
-<part name="parameters" element="tns:account_activationResponse"/>
-</message>
-<message name="retrieve_all_account">
-<part name="parameters" element="tns:retrieve_all_account"/>
-</message>
-<message name="retrieve_all_accountResponse">
-<part name="parameters" element="tns:retrieve_all_accountResponse"/>
+<message name="updateMemberAddressResponse">
+<part name="parameters" element="tns:updateMemberAddressResponse"/>
 </message>
 <message name="update_credit_card">
 <part name="parameters" element="tns:update_credit_card"/>
@@ -28,59 +16,35 @@
 <message name="update_credit_cardResponse">
 <part name="parameters" element="tns:update_credit_cardResponse"/>
 </message>
+<message name="admin_account_activation">
+<part name="parameters" element="tns:admin_account_activation"/>
+</message>
+<message name="admin_account_activationResponse">
+<part name="parameters" element="tns:admin_account_activationResponse"/>
+</message>
+<message name="retrieve_all_account">
+<part name="parameters" element="tns:retrieve_all_account"/>
+</message>
+<message name="retrieve_all_accountResponse">
+<part name="parameters" element="tns:retrieve_all_accountResponse"/>
+</message>
+<message name="account_activation">
+<part name="parameters" element="tns:account_activation"/>
+</message>
+<message name="account_activationResponse">
+<part name="parameters" element="tns:account_activationResponse"/>
+</message>
 <message name="retrieve_shipping">
 <part name="parameters" element="tns:retrieve_shipping"/>
 </message>
 <message name="retrieve_shippingResponse">
 <part name="parameters" element="tns:retrieve_shippingResponse"/>
 </message>
-<message name="updateMemberAddress">
-<part name="parameters" element="tns:updateMemberAddress"/>
+<message name="deactivate_account">
+<part name="parameters" element="tns:deactivate_account"/>
 </message>
-<message name="updateMemberAddressResponse">
-<part name="parameters" element="tns:updateMemberAddressResponse"/>
-</message>
-<message name="update_billing">
-<part name="parameters" element="tns:update_billing"/>
-</message>
-<message name="update_billingResponse">
-<part name="parameters" element="tns:update_billingResponse"/>
-</message>
-<message name="social_login">
-<part name="parameters" element="tns:social_login"/>
-</message>
-<message name="social_loginResponse">
-<part name="parameters" element="tns:social_loginResponse"/>
-</message>
-<message name="update_account">
-<part name="parameters" element="tns:update_account"/>
-</message>
-<message name="update_accountResponse">
-<part name="parameters" element="tns:update_accountResponse"/>
-</message>
-<message name="update_shipping">
-<part name="parameters" element="tns:update_shipping"/>
-</message>
-<message name="update_shippingResponse">
-<part name="parameters" element="tns:update_shippingResponse"/>
-</message>
-<message name="create_account">
-<part name="parameters" element="tns:create_account"/>
-</message>
-<message name="create_accountResponse">
-<part name="parameters" element="tns:create_accountResponse"/>
-</message>
-<message name="verify_password">
-<part name="parameters" element="tns:verify_password"/>
-</message>
-<message name="verify_passwordResponse">
-<part name="parameters" element="tns:verify_passwordResponse"/>
-</message>
-<message name="update_status">
-<part name="parameters" element="tns:update_status"/>
-</message>
-<message name="update_statusResponse">
-<part name="parameters" element="tns:update_statusResponse"/>
+<message name="deactivate_accountResponse">
+<part name="parameters" element="tns:deactivate_accountResponse"/>
 </message>
 <message name="retrieve_account">
 <part name="parameters" element="tns:retrieve_account"/>
@@ -88,11 +52,65 @@
 <message name="retrieve_accountResponse">
 <part name="parameters" element="tns:retrieve_accountResponse"/>
 </message>
+<message name="update_status">
+<part name="parameters" element="tns:update_status"/>
+</message>
+<message name="update_statusResponse">
+<part name="parameters" element="tns:update_statusResponse"/>
+</message>
+<message name="cancel_account">
+<part name="parameters" element="tns:cancel_account"/>
+</message>
+<message name="cancel_accountResponse">
+<part name="parameters" element="tns:cancel_accountResponse"/>
+</message>
 <message name="retrieve_billing">
 <part name="parameters" element="tns:retrieve_billing"/>
 </message>
 <message name="retrieve_billingResponse">
 <part name="parameters" element="tns:retrieve_billingResponse"/>
+</message>
+<message name="create_admin">
+<part name="parameters" element="tns:create_admin"/>
+</message>
+<message name="create_adminResponse">
+<part name="parameters" element="tns:create_adminResponse"/>
+</message>
+<message name="social_login">
+<part name="parameters" element="tns:social_login"/>
+</message>
+<message name="social_loginResponse">
+<part name="parameters" element="tns:social_loginResponse"/>
+</message>
+<message name="verify_password">
+<part name="parameters" element="tns:verify_password"/>
+</message>
+<message name="verify_passwordResponse">
+<part name="parameters" element="tns:verify_passwordResponse"/>
+</message>
+<message name="create_account">
+<part name="parameters" element="tns:create_account"/>
+</message>
+<message name="create_accountResponse">
+<part name="parameters" element="tns:create_accountResponse"/>
+</message>
+<message name="update_account">
+<part name="parameters" element="tns:update_account"/>
+</message>
+<message name="update_accountResponse">
+<part name="parameters" element="tns:update_accountResponse"/>
+</message>
+<message name="update_billing">
+<part name="parameters" element="tns:update_billing"/>
+</message>
+<message name="update_billingResponse">
+<part name="parameters" element="tns:update_billingResponse"/>
+</message>
+<message name="update_shipping">
+<part name="parameters" element="tns:update_shipping"/>
+</message>
+<message name="update_shippingResponse">
+<part name="parameters" element="tns:update_shippingResponse"/>
 </message>
 <message name="retrieve_credit">
 <part name="parameters" element="tns:retrieve_credit"/>
@@ -107,65 +125,77 @@
 <part name="parameters" element="tns:update_passwordResponse"/>
 </message>
 <portType name="AccountManagementWS">
-<operation name="deactivate_account">
-<input wsam:Action="http://accountmanagementws.org/AccountManagementWS/deactivate_accountRequest" message="tns:deactivate_account"/>
-<output wsam:Action="http://accountmanagementws.org/AccountManagementWS/deactivate_accountResponse" message="tns:deactivate_accountResponse"/>
-</operation>
-<operation name="account_activation">
-<input wsam:Action="http://accountmanagementws.org/AccountManagementWS/account_activationRequest" message="tns:account_activation"/>
-<output wsam:Action="http://accountmanagementws.org/AccountManagementWS/account_activationResponse" message="tns:account_activationResponse"/>
-</operation>
-<operation name="retrieve_all_account">
-<input wsam:Action="http://accountmanagementws.org/AccountManagementWS/retrieve_all_accountRequest" message="tns:retrieve_all_account"/>
-<output wsam:Action="http://accountmanagementws.org/AccountManagementWS/retrieve_all_accountResponse" message="tns:retrieve_all_accountResponse"/>
+<operation name="updateMemberAddress">
+<input wsam:Action="http://accountmanagementws.org/AccountManagementWS/updateMemberAddressRequest" message="tns:updateMemberAddress"/>
+<output wsam:Action="http://accountmanagementws.org/AccountManagementWS/updateMemberAddressResponse" message="tns:updateMemberAddressResponse"/>
 </operation>
 <operation name="update_credit_card">
 <input wsam:Action="http://accountmanagementws.org/AccountManagementWS/update_credit_cardRequest" message="tns:update_credit_card"/>
 <output wsam:Action="http://accountmanagementws.org/AccountManagementWS/update_credit_cardResponse" message="tns:update_credit_cardResponse"/>
 </operation>
+<operation name="admin_account_activation">
+<input wsam:Action="http://accountmanagementws.org/AccountManagementWS/admin_account_activationRequest" message="tns:admin_account_activation"/>
+<output wsam:Action="http://accountmanagementws.org/AccountManagementWS/admin_account_activationResponse" message="tns:admin_account_activationResponse"/>
+</operation>
+<operation name="retrieve_all_account">
+<input wsam:Action="http://accountmanagementws.org/AccountManagementWS/retrieve_all_accountRequest" message="tns:retrieve_all_account"/>
+<output wsam:Action="http://accountmanagementws.org/AccountManagementWS/retrieve_all_accountResponse" message="tns:retrieve_all_accountResponse"/>
+</operation>
+<operation name="account_activation">
+<input wsam:Action="http://accountmanagementws.org/AccountManagementWS/account_activationRequest" message="tns:account_activation"/>
+<output wsam:Action="http://accountmanagementws.org/AccountManagementWS/account_activationResponse" message="tns:account_activationResponse"/>
+</operation>
 <operation name="retrieve_shipping">
 <input wsam:Action="http://accountmanagementws.org/AccountManagementWS/retrieve_shippingRequest" message="tns:retrieve_shipping"/>
 <output wsam:Action="http://accountmanagementws.org/AccountManagementWS/retrieve_shippingResponse" message="tns:retrieve_shippingResponse"/>
 </operation>
-<operation name="updateMemberAddress">
-<input wsam:Action="http://accountmanagementws.org/AccountManagementWS/updateMemberAddressRequest" message="tns:updateMemberAddress"/>
-<output wsam:Action="http://accountmanagementws.org/AccountManagementWS/updateMemberAddressResponse" message="tns:updateMemberAddressResponse"/>
-</operation>
-<operation name="update_billing">
-<input wsam:Action="http://accountmanagementws.org/AccountManagementWS/update_billingRequest" message="tns:update_billing"/>
-<output wsam:Action="http://accountmanagementws.org/AccountManagementWS/update_billingResponse" message="tns:update_billingResponse"/>
-</operation>
-<operation name="social_login">
-<input wsam:Action="http://accountmanagementws.org/AccountManagementWS/social_loginRequest" message="tns:social_login"/>
-<output wsam:Action="http://accountmanagementws.org/AccountManagementWS/social_loginResponse" message="tns:social_loginResponse"/>
-</operation>
-<operation name="update_account">
-<input wsam:Action="http://accountmanagementws.org/AccountManagementWS/update_accountRequest" message="tns:update_account"/>
-<output wsam:Action="http://accountmanagementws.org/AccountManagementWS/update_accountResponse" message="tns:update_accountResponse"/>
-</operation>
-<operation name="update_shipping">
-<input wsam:Action="http://accountmanagementws.org/AccountManagementWS/update_shippingRequest" message="tns:update_shipping"/>
-<output wsam:Action="http://accountmanagementws.org/AccountManagementWS/update_shippingResponse" message="tns:update_shippingResponse"/>
-</operation>
-<operation name="create_account">
-<input wsam:Action="http://accountmanagementws.org/AccountManagementWS/create_accountRequest" message="tns:create_account"/>
-<output wsam:Action="http://accountmanagementws.org/AccountManagementWS/create_accountResponse" message="tns:create_accountResponse"/>
-</operation>
-<operation name="verify_password">
-<input wsam:Action="http://accountmanagementws.org/AccountManagementWS/verify_passwordRequest" message="tns:verify_password"/>
-<output wsam:Action="http://accountmanagementws.org/AccountManagementWS/verify_passwordResponse" message="tns:verify_passwordResponse"/>
-</operation>
-<operation name="update_status">
-<input wsam:Action="http://accountmanagementws.org/AccountManagementWS/update_statusRequest" message="tns:update_status"/>
-<output wsam:Action="http://accountmanagementws.org/AccountManagementWS/update_statusResponse" message="tns:update_statusResponse"/>
+<operation name="deactivate_account">
+<input wsam:Action="http://accountmanagementws.org/AccountManagementWS/deactivate_accountRequest" message="tns:deactivate_account"/>
+<output wsam:Action="http://accountmanagementws.org/AccountManagementWS/deactivate_accountResponse" message="tns:deactivate_accountResponse"/>
 </operation>
 <operation name="retrieve_account">
 <input wsam:Action="http://accountmanagementws.org/AccountManagementWS/retrieve_accountRequest" message="tns:retrieve_account"/>
 <output wsam:Action="http://accountmanagementws.org/AccountManagementWS/retrieve_accountResponse" message="tns:retrieve_accountResponse"/>
 </operation>
+<operation name="update_status">
+<input wsam:Action="http://accountmanagementws.org/AccountManagementWS/update_statusRequest" message="tns:update_status"/>
+<output wsam:Action="http://accountmanagementws.org/AccountManagementWS/update_statusResponse" message="tns:update_statusResponse"/>
+</operation>
+<operation name="cancel_account">
+<input wsam:Action="http://accountmanagementws.org/AccountManagementWS/cancel_accountRequest" message="tns:cancel_account"/>
+<output wsam:Action="http://accountmanagementws.org/AccountManagementWS/cancel_accountResponse" message="tns:cancel_accountResponse"/>
+</operation>
 <operation name="retrieve_billing">
 <input wsam:Action="http://accountmanagementws.org/AccountManagementWS/retrieve_billingRequest" message="tns:retrieve_billing"/>
 <output wsam:Action="http://accountmanagementws.org/AccountManagementWS/retrieve_billingResponse" message="tns:retrieve_billingResponse"/>
+</operation>
+<operation name="create_admin">
+<input wsam:Action="http://accountmanagementws.org/AccountManagementWS/create_adminRequest" message="tns:create_admin"/>
+<output wsam:Action="http://accountmanagementws.org/AccountManagementWS/create_adminResponse" message="tns:create_adminResponse"/>
+</operation>
+<operation name="social_login">
+<input wsam:Action="http://accountmanagementws.org/AccountManagementWS/social_loginRequest" message="tns:social_login"/>
+<output wsam:Action="http://accountmanagementws.org/AccountManagementWS/social_loginResponse" message="tns:social_loginResponse"/>
+</operation>
+<operation name="verify_password">
+<input wsam:Action="http://accountmanagementws.org/AccountManagementWS/verify_passwordRequest" message="tns:verify_password"/>
+<output wsam:Action="http://accountmanagementws.org/AccountManagementWS/verify_passwordResponse" message="tns:verify_passwordResponse"/>
+</operation>
+<operation name="create_account">
+<input wsam:Action="http://accountmanagementws.org/AccountManagementWS/create_accountRequest" message="tns:create_account"/>
+<output wsam:Action="http://accountmanagementws.org/AccountManagementWS/create_accountResponse" message="tns:create_accountResponse"/>
+</operation>
+<operation name="update_account">
+<input wsam:Action="http://accountmanagementws.org/AccountManagementWS/update_accountRequest" message="tns:update_account"/>
+<output wsam:Action="http://accountmanagementws.org/AccountManagementWS/update_accountResponse" message="tns:update_accountResponse"/>
+</operation>
+<operation name="update_billing">
+<input wsam:Action="http://accountmanagementws.org/AccountManagementWS/update_billingRequest" message="tns:update_billing"/>
+<output wsam:Action="http://accountmanagementws.org/AccountManagementWS/update_billingResponse" message="tns:update_billingResponse"/>
+</operation>
+<operation name="update_shipping">
+<input wsam:Action="http://accountmanagementws.org/AccountManagementWS/update_shippingRequest" message="tns:update_shipping"/>
+<output wsam:Action="http://accountmanagementws.org/AccountManagementWS/update_shippingResponse" message="tns:update_shippingResponse"/>
 </operation>
 <operation name="retrieve_credit">
 <input wsam:Action="http://accountmanagementws.org/AccountManagementWS/retrieve_creditRequest" message="tns:retrieve_credit"/>
@@ -178,25 +208,7 @@
 </portType>
 <binding name="AccountManagementWSPortBinding" type="tns:AccountManagementWS">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="deactivate_account">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="account_activation">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="retrieve_all_account">
+<operation name="updateMemberAddress">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -214,6 +226,33 @@
 <soap:body use="literal"/>
 </output>
 </operation>
+<operation name="admin_account_activation">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="retrieve_all_account">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="account_activation">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="retrieve_shipping">
 <soap:operation soapAction=""/>
 <input>
@@ -223,70 +262,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="updateMemberAddress">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="update_billing">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="social_login">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="update_account">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="update_shipping">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="create_account">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="verify_password">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="update_status">
+<operation name="deactivate_account">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -304,7 +280,88 @@
 <soap:body use="literal"/>
 </output>
 </operation>
+<operation name="update_status">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="cancel_account">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="retrieve_billing">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="create_admin">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="social_login">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="verify_password">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="create_account">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="update_account">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="update_billing">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="update_shipping">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

@@ -211,12 +211,14 @@
                                         <%if (session.getAttribute("email") != null) {%> <a class="dropdown-toggle" data-toggle="dropdown">My Account</a><%}%>
                                         <ul class="dropdown-menu">
                                             <li><a href="updateAccount">Edit Profile</a></li>
-                                            <li><a href="history.jsp">Purchase history</a></li>
-                                            <li><a href="enquiry">Send Enquiry</a></li>
+                                                <%if (session.getAttribute("role") != null) { if (!session.getAttribute("role").equals("Admin")) {%> <li><a href="history.jsp">Purchase history</a></li><%} else {%><li><a href="users.jsp">Edit Users</a></li> <%}}%>
+                                                <%if (session.getAttribute("role") != null) { if (!session.getAttribute("role").equals("Admin")) {%> <li><a href="enquiry">Send Enquiry</a></li> <%} else { %> <li><a href="category.jsp">Edit Category</a></li> <%}}%>
+                                                <%if (session.getAttribute("role") != null) { if (session.getAttribute("role").equals("Admin")) {%> <li><a href="product.jsp">Edit Product</a></li> <%}} %> 
                                             <li><a href="logout">Log out</a></li>
                                         </ul>
                                     </li>
-                                    
+
+
                                     <li class="menu-search hidden-sm hidden-xs">
                                         <a href="#" id="menu-search">
                                             <i class="fa fa-search search-trigger"></i>

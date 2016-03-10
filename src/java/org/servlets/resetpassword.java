@@ -6,26 +6,25 @@
 package org.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.WebServiceRef;
-import org.accountmanagementws.AccountManagementWS_Service;
+import org.processws.ProcessWS_Service;
 
 /**
  *
  * @author Xtravenger
  */
-@WebServlet(name = "changepassword", urlPatterns = {"/changepassword"})
-public class changepassword extends HttpServlet {
+public class resetpassword extends HttpServlet {
 
-    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/AccountManagementWS/AccountManagementWS.wsdl")
-    private AccountManagementWS_Service service;
+    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/ProcessWS/ProcessWS.wsdl")
+    private ProcessWS_Service service;
 
-    
+ 
+
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,28 +37,22 @@ public class changepassword extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String old = request.getParameter("oldpassword");
-        String newPass = request.getParameter("newpassword1");
-        String email = request.getParameter("email");
-        int res = this.verifyPassword(email, old);
     
-        if(res >= 1)
+        String email  = request.getParameter("email");
+        
+        int res = this.resetPassword(email);
+        
+        if(res == 1)
         {
-            res = this.updatePassword(email, newPass);
+            request.setAttribute("message", "Reset link sent to email");
             
-            if(res == 1)
-            {
-                request.setAttribute("update", "Password update sucessfully");
-            }else
-            {
-                 request.setAttribute("update", "Unable to update password");
-            }
-        }else 
+        }else
         {
-            request.setAttribute("update", "Old password does not match with record");
+            request.setAttribute("message", "Invalid email");
         }
         
-        request.getRequestDispatcher("changepassword.jsp").forward(request, response);
+        request.getRequestDispatcher("resetpassword.jsp").forward(request, response);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -101,21 +94,15 @@ public class changepassword extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private Integer verifyPassword(java.lang.String email, java.lang.String password) {
+    private Integer resetPassword(java.lang.String email) {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
-        org.accountmanagementws.AccountManagementWS port = service.getAccountManagementWSPort();
-        return port.verifyPassword(email, password);
-    }
-
-    private Integer updatePassword(java.lang.String email, java.lang.String password) {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        org.accountmanagementws.AccountManagementWS port = service.getAccountManagementWSPort();
-        return port.updatePassword(email, password);
+        org.processws.ProcessWS port = service.getProcessWSPort();
+        return port.resetPassword(email);
     }
 
 
- 
-   
+
+  
+
 }

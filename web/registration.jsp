@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Wine Express | Edit Profile</title>
+        <title>Wine Express | Register</title>
 
         <meta charset="utf-8">
         <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
@@ -40,20 +40,7 @@
         <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
         <link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
         <link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png">
-        <script src="https://apis.google.com/js/platform.js" async defer></script>
-        <meta name="google-signin-client_id" content="235764268022-1iafbg46etiu1dnllhunakre1729v7nu.apps.googleusercontent.com">
-        <script>
-            function onSignIn(googleUser) {
-                var profile = googleUser.getBasicProfile();
-                alert('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-                alert('Name: ' + profile.getName());
-                alert('Image URL: ' + profile.getImageUrl());
-                alert('Email: ' + profile.getEmail());
-            }
 
-
-
-        </script>
 
     </head>
 
@@ -177,7 +164,7 @@
 
                                                     <div class="modal-body">
                                                         <label name =msg" id ="msg"></label>
-                                                        <form action="login" method="post" id="login-form">
+                                                        <form action="login?page=index.jsp" method="post" id="login-form">
 
                                                             <input type="email" class="form-control" id="LogInEmail" name="LogInEmail" placeholder="Email Address"></input>
                                                             <br/>
@@ -192,12 +179,40 @@
 
                                                         <button type="button" class="btn btn-primary" onclick="document.getElementById('login-form').submit()" >Log In</button>
                                                     </div> 
-                                                    <div align="center" class="g-signin2" data-onsuccess="onSignIn"></div>
+
                                                 </div>
                                             </div>
                                         </div>
                                     </li>
 
+
+                                    <li class="menu-my-acc left hidden-sm hidden-xs">
+                                        <%if (session.getAttribute("email") == null) {%><a href="#" data-toggle="modal" data-target="#SignUpModal">Sign Up</a><%}%>
+
+                                        <div class="modal fade" id="SignUpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                            <div class="modal-dialog modal-sm" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                        <h6 class="modal-title" id="myModalLabel">Sign up with WineXpress</h6>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="registration?signup=true" method="POST" id="signup-form">
+                                                            <label name="message" id="message"></label>
+                                                            <input type="email" name="email" class="form-control" id="SignUpEmail" placeholder="Email Address"></input>
+                                                            <br/>
+                                                            <input type="password" name="password1" class="form-control" id="SignUpPassword1" placeholder="Password"></input>
+                                                            <br/>
+                                                            <input type="password" name="password2" class="form-control" id="SignUpPassword2" placeholder="Confirm Password"></input>
+                                                        </form>		
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary" onclick="validate()">Sign up</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
 
 
                                     <li class="menu-search hidden-sm hidden-xs">
@@ -301,7 +316,6 @@
                         <div class="col-md-12">
                             <h1 class="text-center steps-wrap">
                                 <a href="#" class="step-cart active">Registration</a>
-                                <i class="fa fa-angle-right"></i>
                             </h1>
                         </div>
                     </div>
@@ -311,31 +325,36 @@
                 <div class="container relative">
                     <div class="row">
                         <div class="col-md-8 woocommerce">
-                            <form name="registration" id="registration-form" method="post" action="register" class="checkout woocommerce-checkout row">
+                            <form name="registration-form" id="registration-form" method="post" action="registration" class="checkout woocommerce-checkout row">
                                 <div id="profile_details">
                                     <% String email = request.getAttribute("email").toString();
                                         String pass = "";
+                                        String name = "";
+                                        if (request.getAttribute("name") != null) {
+                                            name = request.getAttribute("name").toString();
+                                        }
+
                                         if (request.getAttribute("password") != null) {
                                             pass = request.getAttribute("password").toString();
-                                        };
+                                        }
                                         String social = "";
-                                        if (request.getAttribute("social") != null) {
-                                            pass = request.getAttribute("social").toString();
-                                        };
+                                        if (request.getParameter("social") != null) {
+                                            social = "social";
+                                        }
                                     %>
                                     <label name="message" id="message"></label>
                                     <h2 class="heading-underline">basics</h2>
                                     <input type="hidden" name="password" id="password" value="<%=pass%>"/> <input type="hidden" name="social" id="social" value="<%=social%>"/>
                                     <p class="form-row form-row-first validate-required woocommerce-invalid woocommerce-invalid-required-field" id="name_field">
                                         <label for="name">Name
-                                         
+
                                         </label>
-                                        <input type="text" class="input-text form-control" placeholder="Name" name="name" id="name">
+                                        <input type="text" class="input-text form-control" placeholder="Name" name="name" value="<%=name%>" id="name">
                                     </p>
 
                                     <p class="form-row form-row-last validate-required woocommerce-invalid woocommerce-invalid-required-field" id="dob_field">
                                         <label for="dob">D.O.B
-                                           
+
                                         </label>
                                         <input type="text" class="input-text form-control" placeholder="dd-mm-yyyy" name="dob" id="dob">
                                     </p>
@@ -343,7 +362,7 @@
 
                                     <p class="form-row form-row-last validate-required woocommerce-invalid woocommerce-invalid-required-field" id="email_field">
                                         <label for="gender">Gender
-                                           
+
                                         </label>
                                         <select name="gender" id="gender" class="country_to_state" rel="gender">
                                             <option value="M">Male</option>
@@ -353,14 +372,15 @@
 
                                     <p class="form-row form-row-last validate-required woocommerce-invalid woocommerce-invalid-required-field" id="email_field">
                                         <label for="email">Email
-                                       
+
                                         </label>
-                                        <input type="text" placeholder="Email" value="<%=email%>" name="email" id="email"/>
+                                        <input type="hidden" placeholder="Email" value="<%=email%>" name="email" id="email"/>
+                                        <input type="text" placeholder="Email" value="<%=email%>" name="display_email" id="display_email" disabled/>
                                     </p>
 
                                     <p class="form-row form-row-last validate-required validate-phone" id="edit_phone_field">
                                         <label for="phone">Phone
-                                         
+
                                         </label>
                                         <input type="text" class="input-text form-control" placeholder="Phone" name="phone" id="phone">
                                     </p>
@@ -369,7 +389,7 @@
                                     <h2 class="heading-underline">shipping address (Optional)</h2>
                                     <p class="form-row form-row-wide" id="shipping_company_field">
                                         <label for="shipping_company">Company</label>
-                                        <input type="text" class="input-text form-control" placeholder="Shipping Company" name="shipping_company" id="shipping_company">
+                                        <input type="text" class="input-text form-control" placeholder="Company" name="shipping_company" id="shipping_company">
                                     </p>
 
                                     <p class="form-row form-row-wide address-field validate-required" id="shipping_block_field" data-o_class="form-row form-row-wide address-field validate-required">
@@ -378,7 +398,7 @@
                                     </p>
                                     <p class="form-row form-row-wide address-field validate-required" id="shipping_unit_field" data-o_class="form-row form-row-wide address-field validate-required">
                                         <label for="shipping_unit">Unit #
-                                          
+                                            <abbr class="required" title="required">*</abbr>
                                         </label>
 
                                         <input type="text" class="input-text form-control" placeholder="Unit Number" name="shipping_unit" id="shipping_unit">
@@ -386,7 +406,7 @@
 
                                     <p class="form-row form-row-wide address-field validate-required woocommerce-invalid woocommerce-invalid-required-field" id="shipping_address_1_field">
                                         <label for="shipping_address_1">Address
-                                        
+                                            <abbr class="required" title="required">*</abbr>
                                         </label>
                                         <input type="text" class="input-text form-control" placeholder="Street address" name="shipping_address_1" id="shipping_address_1">
                                     </p>
@@ -395,9 +415,9 @@
                                         <input type="text" class="input-text form-control" placeholder="Apartment, suite, unit etc. (optional)" name="shipping_address_2" id="shipping_address_2">
                                     </p>
 
-                                    <p class="form-row form-row-wide address-field validate-required" id="billing_city_field" data-o_class="form-row form-row-wide address-field validate-required">
+                                    <p class="form-row form-row-wide address-field validate-required" id="shipping_city_field" data-o_class="form-row form-row-wide address-field validate-required">
                                         <label for="shipping_city">Town / City
-                                        
+                                            <abbr class="required" title="required">*</abbr>
                                         </label>
                                         <input type="text" class="input-text form-control" placeholder="Town / City" value name="shipping_city" id="shipping_city">
                                     </p>
@@ -527,16 +547,19 @@
 
                                     <p class="form-row form-row-last address-field validate-required validate-postcode woocommerce-invalid woocommerce-invalid-required-field" id="shipping_postcode_field" data-o_class="form-row form-row-last address-field validate-required validate-postcode">
                                         <label for="shipping_postcode">Postal Code
-                                          
+                                            <abbr class="required" title="required">*</abbr>
                                         </label>
                                         <input type="text" class="input-text form-control" placeholder="Postcode" value name="shipping_postcode" id="shipping_postcode">
                                     </p>
-
+                                    <p class="form-row form-row-last address-field validate-required validate-postcode woocommerce-invalid woocommerce-invalid-required-field" id="shipping_checkbox_field">
+                                        <input type="checkbox" onclick="copyshipping(this)" id="copyshipping-checkbox" class="input-checkbox" name="copyshipping_checkbox" value="1">
+                                        <label for="copyshipping-checkbox" class="checkbox">Billing Address Same as Shipping Address</label>
+                                    </p>
                                     <br/><br/><br/>
                                     <h2 class="heading-underline">billing address (Optional)</h2>
                                     <p class="form-row form-row-wide" id="billing_company_field">
                                         <label for="billing_company">Company</label>
-                                        <input type="text" class="input-text form-control" placeholder value name="billing_company" id="billing_company">
+                                        <input type="text" class="input-text form-control" placeholder="Company" value name="billing_company" id="billing_company">
                                     </p>
                                     <p class="form-row form-row-wide address-field validate-required" id="billing_block_field" data-o_class="form-row form-row-wide address-field validate-required">
                                         <label for="billing_block">Block
@@ -546,7 +569,7 @@
                                     </p>
                                     <p class="form-row form-row-wide address-field validate-required" id="billing_unit_field" data-o_class="form-row form-row-wide address-field validate-required">
                                         <label for="billing_unit">Unit #
-                                         
+                                            <abbr class="required" title="required">*</abbr>
                                         </label>
 
                                         <input type="text" class="input-text form-control" placeholder="Unit Number" value name="billing_unit" id="billing_unit">
@@ -555,7 +578,7 @@
 
                                     <p class="form-row form-row-wide address-field validate-required woocommerce-invalid woocommerce-invalid-required-field" id="billing_address_1_field">
                                         <label for="billing_address_1">Address
-                                       
+                                            <abbr class="required" title="required">*</abbr>
                                         </label>
                                         <input type="text" class="input-text form-control" placeholder="Street address" value name="billing_address_1" id="billing_address_1">
                                     </p>
@@ -566,7 +589,7 @@
 
                                     <p class="form-row form-row-wide address-field validate-required" id="billing_city_field" data-o_class="form-row form-row-wide address-field validate-required">
                                         <label for="billing_city">Town / City
-                                        
+                                            <abbr class="required" title="required">*</abbr>
                                         </label>
                                         <input type="text" class="input-text form-control" placeholder="Town / City" value name="billing_city" id="billing_city">
                                     </p>
@@ -695,13 +718,13 @@
 
                                     <p class="form-row form-row-last address-field validate-required validate-postcode woocommerce-invalid woocommerce-invalid-required-field" id="billing_postcode_field" data-o_class="form-row form-row-last address-field validate-required validate-postcode">
                                         <label for="billing_postcode">Postal Code
-                                           
+                                            <abbr class="required" title="required">*</abbr>
                                         </label>
                                         <input type="text" class="input-text form-control" placeholder="Postal Code" value name="billing_postcode" id="billing_postcode">
                                     </p>
 
                                 </div>
-                                <input type="submit" onclick="validate()" class="btn btn-lg btn-green" value="Register" id="submit-message"/>
+                                <input type="submit" onclick="return validate()" class="btn btn-lg btn-green" value="Register" id="submit-message"/>
                             </form>
                         </div>	
 
@@ -854,7 +877,7 @@
                                     function validate()
                                     {
 
-                                        if ($("#first_name").val() == "" || $("#last_name").val() == "" || $("#dob").val() == "" || $("#email").val() == "" || $("#phone").val() == "")
+                                        if ($("#name").val() == "" || $("#dob").val() == "" || $("#email").val() == "" || $("#phone").val() == "")
                                         {
 
                                             alert("Filled in all required fields");
@@ -889,9 +912,58 @@
 
                                         }
 
+
+                                        if ($("#shipping_company").val() != "" || $("#shipping_block").val() != "" || $("#shipping_address_1").val() != "" || $("#shipping_unit").val() != "" || $("#shipping_address_2").val() != "" || $("#shipping_city").val() != "" || $("#shipping_postcode").val() != "")
+                                        {
+                                            if ($("#shipping_unit").val() == "" || $("#shipping_address_1").val() == "" || $("#shipping_city").val() == "" || $("#shipping_postcode").val() == "")
+                                            {
+                                                alert("Filled in all required fields for shipping or leave all blanks");
+
+                                                return false;
+                                            }
+                                        }
+
+                                        if ($("#billing_company").val() != "" || $("#billing_block").val() != "" || $("#billing_address_1").val() != "" || $("#billing_unit").val() != "" || $("#billing_address_2").val() != "" || $("#billing_city").val() != "" || $("#billing_postcode").val() != "")
+                                        {
+                                            if ($("#billing_unit").val() == "" || $("#billing_address_1").val() == "" || $("#billing_city").val() == "" || $("#billing_postcode").val() == "")
+                                            {
+                                                alert("Filled in all required fields for billing or leave all blanks");
+
+                                                return false;
+                                            }
+                                        }
+
                                         document.getElementById("registration-form").submit();
 
                                     }
+
+                                    function copyshipping(t)
+                                    {
+                                        if ($(t).is(':checked'))
+                                        {
+                                            document.getElementById("billing_company").value = document.getElementById("shipping_company").value;
+                                            document.getElementById("billing_block").value = document.getElementById("shipping_block").value;
+                                            document.getElementById("billing_unit").value = document.getElementById("shipping_unit").value;
+                                            document.getElementById("billing_address_1").value = document.getElementById("shipping_address_1").value;
+                                            document.getElementById("billing_address_2").value = document.getElementById("shipping_address_2").value;
+                                            document.getElementById("billing_city").value = document.getElementById("shipping_city").value;
+                                            document.getElementById("billing_country").value = document.getElementById("shipping_country").value;
+                                            document.getElementById("billing_postcode").value = document.getElementById("shipping_postcode").value;
+
+                                        }
+                                    }
+
+                                    $(document).ready(function () {
+                                     
+            <% if (request.getAttribute("invalid") != null) {
+                    String message = request.getAttribute("invalid").toString();
+
+            %>
+
+                                        alert("<%=message%>");
+            <%}%>
+                                    });
+
         </script>
 
 

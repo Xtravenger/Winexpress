@@ -4,6 +4,7 @@
     Author     : Xtravenger
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -158,7 +159,7 @@
                             <!-- Logo -->
                             <div class="logo-container">
                                 <div class="logo-wrap text-center">
-                                    <a href="index.html">
+                                    <a href="index.jsp">
                                         <img class="logo" src="img/logo.png" alt="logo">
                                     </a>
                                 </div>
@@ -182,7 +183,7 @@
 
                                                     <div class="modal-body">
                                                         <label name =msg" id ="msg"></label>
-                                                        <form action="login" method="post" id="login-form">
+                                                        <form action="login?page=contact.jsp" method="post" id="login-form">
 
                                                             <input type="email" class="form-control" id="LogInEmail" name="LogInEmail" placeholder="Email Address"></input>
                                                             <br/>
@@ -215,7 +216,7 @@
                                                         <h6 class="modal-title" id="myModalLabel">Sign up with WineXpress</h6>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form action="register?signup=true" method="POST" id="signup-form">
+                                                        <form action="registration?signup=true" method="POST" id="signup-form">
                                                             <label name="message" id="message"></label>
                                                             <input type="email" name="email" class="form-control" id="SignUpEmail" placeholder="Email Address"></input>
                                                             <br/>
@@ -235,15 +236,27 @@
                                     </li>
 
 
-                                  <li class="menu-my-acc left hidden-sm hidden-xs dropdown">
+                                    <li class="menu-my-acc left hidden-sm hidden-xs dropdown">
                                         <%if (session.getAttribute("email") != null) {%> <a class="dropdown-toggle" data-toggle="dropdown">My Account</a><%}%>
                                         <ul class="dropdown-menu">
                                             <li><a href="updateAccount">Edit Profile</a></li>
                                             <li><a href="history.jsp">Purchase history</a></li>
-                                            <li><a href="enquiry">Send Enquiry</a></li>
-                                            <li><a href="logout">Log out</a></li>
+                                            <%if (session.getAttribute("role") != null) {
+                                                        if (session.getAttribute("role").equals("Admin")) {%> <li><a href="users">Edit Users</a></li> <%}
+                                                    }%>
+                                                <%if (session.getAttribute("role") != null) {
+                                                        if (!session.getAttribute("role").equals("Admin")) {%> <li><a href="enquiry">Send Enquiry</a></li> <%}
+                                                    }%>
+                                                <%if (session.getAttribute("role") != null) {
+                                                        if (session.getAttribute("role").equals("Admin")) {%> <li><a href="category.jsp">Edit Category</a></li> <%}
+                                                    }%>
+                                                <%if (session.getAttribute("role") != null) {
+                                                        if (session.getAttribute("role").equals("Admin")) {%> <li><a href="product.jsp">Edit Product</a></li> <%}
+                                                    } %> 
+                                            <li><a href="logout?page=contact.jsp">Log out</a></li>
                                         </ul>
                                     </li>
+
 
                                     <li class="menu-search hidden-sm hidden-xs">
                                         <a href="#" id="menu-search">
@@ -272,59 +285,52 @@
                                         </div>
                                         <div class="menu-cart-container">
                                             <div class="menu-cart-items">
+                                                <%
+                                                    double total = 0.0;
 
+                                                    if (session.getAttribute("cartlist") != null) {
+                                                        ArrayList list = (ArrayList) session.getAttribute("cartlist");
+
+                                                        for (int i = 0; i < list.size(); i++) {
+                                                            String[] item = (String[]) list.get(i);%>
                                                 <div class="menu-cart-item clearfix">
                                                     <div class="menu-cart-img">
                                                         <a href="#">
-                                                            <img src="img/cart_small_1.jpg" alt="">
+                                                            <img src="" alt="">
                                                         </a>
                                                     </div>
                                                     <div class="menu-cart-title">
                                                         <a href="#">
-                                                            Red Wine
+                                                            <%=item[1]%>
                                                         </a>
                                                         <div class="menu-cart-price">
-                                                            <span>1 x</span>
-                                                            <span>50.00</span>
+                                                            <span><%=item[2]%> x</span>
+                                                            <span><% out.println(Integer.parseInt(item[2]) * Double.parseDouble(item[3])); %></span>
+                                                            <% total = Integer.parseInt(item[2]) * Double.parseDouble(item[3]);%>
                                                         </div>
                                                     </div>
                                                     <div class="menu-cart-remove">
-                                                        <a href="#"></a>
+                                                        <a href="cart?remove="<%=item[0]%>></a>
                                                     </div>
                                                 </div>
+                                                <%}
+                                                    }
 
-                                                <div class="menu-cart-item clearfix">
-                                                    <div class="menu-cart-img">
-                                                        <a href="#">
-                                                            <img src="img/cart_small_2.jpg" alt="">
-                                                        </a>
-                                                    </div>
-                                                    <div class="menu-cart-title">
-                                                        <a href="#">
-                                                            Spartkling Wine
-                                                        </a>
-                                                        <div class="menu-cart-price">
-                                                            <span>1 x</span>
-                                                            <span>150.00</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="menu-cart-remove">
-                                                        <a href="#"></a>
-                                                    </div>
-                                                </div>
 
+                                                %>    
                                             </div>
 
                                             <div class="menu-cart-summary">
                                                 <span>Cart Subtotal</span>
-                                                <span class="total-price">$200.00</span>
+                                                <span class="total-price">$<%=total%></span>
                                             </div>
 
                                             <div class="menu-cart-actions mt-20">
-                                                <a href="#" class="btn btn-md btn-dark">View Cart</a>
-                                                <a href="#" class="btn btn-md btn-red mt-10">Proceed to Checkout</a>
+                                                <a href="cart" class="btn btn-md btn-dark">View Cart</a>
+                                                <a href="checkout" class="btn btn-md btn-red mt-10">Proceed to Checkout</a>
                                             </div>									
-                                        </div>
+
+                                        </div>                                        
                                     </li>
 
                                 </ul>
@@ -430,236 +436,238 @@
                 </div>
             </div>
         </section> <!-- end contact -->
-        <div class="col-md-7 col-sm-7">
-            Getting Here:<p></p>
-            <form  id="Getting-Here" action="navigation" method="POST" onsubmit="popup(this)">
-                <table> <tr><td width="150" ><input name="origin" id="origin" type="text" class="form-control" placeholder="Starting Origin*" /></td>
-                        <td width="10"> <input type="submit"  class="btn btn-lg btn-green" value="Show Direction" id="submit-message"/></td>
-                    </tr></table>   
-            </form></div>
-        <p><p>
 
-        </p>        <!-- Google Map -->
-        <div class="gmap" data-address="20 lower kent ridge road, Singapore"></div> 	        
+    </p>        <!-- Google Map -->
+    <div class="gmap" data-address="20 lower kent ridge road, Singapore"></div> 	        
 
 
-        <!-- Footer Type-1 -->
-        <footer class="footer footer-type-1">
+    <!-- Footer Type-1 -->
+    <footer class="footer footer-type-1">
+        <div class="container">
+            <div class="footer-widgets">
+                <div class="row">
+
+                    <div class="col-md-2 col-sm-4 col-xs-12">
+                        <div class="footer-information">
+                            <h5>Information</h5>
+                            <ul class="footer-links">
+                                <li><a href="#">Our stores</a></li>
+                                <li><a href="#">About us</a></li>
+                                <li><a href="#">Business with us</a></li>
+                                <li><a href="#">Delivery information</a></li>
+                                <li><a href="#">Terms &amp; Conditions</a></li>
+                            </ul>
+                        </div>
+                    </div> <!-- end information -->
+
+                    <div class="col-md-2 col-sm-4 col-xs-12">
+                        <div class="footer-help">
+                            <h5>Help</h5>
+                            <ul class="footer-links">
+                                <li><a href="#">Contact us</a></li>
+                                <li><a href="#">Track order</a></li>
+                                <li><a href="#">F.A.Q</a></li>
+                                <li><a href="#">Privacy policy</a></li>
+                                <li><a href="#">Returns</a></li>
+                            </ul>
+                        </div>
+                    </div> <!-- end help -->
+
+                    <div class="col-md-2 col-sm-4 col-xs-12">
+                        <div class="footer-account">
+                            <h5>Account</h5>
+                            <ul class="footer-links">
+                                <li><a href="#">My account</a></li>
+                                <li><a href="#">Wishlist</a></li>
+                                <li><a href="#">Order history</a></li>
+                                <li><a href="#">Specials</a></li>
+                                <li><a href="#">Gift Vouchers</a></li>
+                            </ul>
+                        </div>
+                    </div> <!-- end account -->
+
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="footer-about-us">
+                            <h5>About US</h5>
+                            <p>
+                                Company Profile <br/>
+                                Partnership<br/>
+                            </p>
+                        </div>
+                    </div> <!-- end about us -->
+
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="footer-stay-tuned">
+                            <h5>Stay Tuned</h5>
+                            <div class="social-icons mt-30 clearfix">
+                                <a href="#" class="facebook">
+                                    <i class="fa fa-facebook"></i>
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+                                <a href="#" class="twitter">
+                                    <i class="fa fa-twitter"></i>
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+                                <a href="#" class="google-plus">
+                                    <i class="fa fa-google-plus"></i>
+                                    <i class="fa fa-google-plus"></i>
+                                </a>
+                                <a href="#" class="linkedin">
+                                    <i class="fa fa-linkedin"></i>
+                                    <i class="fa fa-linkedin"></i>
+                                </a>
+                                <a href="#" class="pinterest">
+                                    <i class="fa fa-pinterest-p"></i>
+                                    <i class="fa fa-pinterest-p"></i>
+                                </a>
+                                <a href="#" class="instagram">
+                                    <i class="fa fa-instagram"></i>
+                                    <i class="fa fa-instagram"></i>
+                                </a>
+                            </div>
+                            <div class="footer-newsletter mt-40">
+                                <form role="form">
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" placeholder="Enter your email">
+                                    </div>
+                                    <button type="submit" class="newsletter-submit"><i class="fa fa-angle-right"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div> <!-- end stay tuned -->
+
+                </div> <!-- end row -->
+            </div> <!-- end footer widgets -->			
+        </div> <!-- end container -->
+
+        <div class="bottom-footer">
             <div class="container">
-                <div class="footer-widgets">
-                    <div class="row">
+                <div class="row">
 
-                        <div class="col-md-2 col-sm-4 col-xs-12">
-                            <div class="footer-information">
-                                <h5>Information</h5>
-                                <ul class="footer-links">
-                                    <li><a href="#">Our stores</a></li>
-                                    <li><a href="#">About us</a></li>
-                                    <li><a href="#">Business with us</a></li>
-                                    <li><a href="#">Delivery information</a></li>
-                                    <li><a href="#">Terms &amp; Conditions</a></li>
-                                </ul>
-                            </div>
-                        </div> <!-- end information -->
-
-                        <div class="col-md-2 col-sm-4 col-xs-12">
-                            <div class="footer-help">
-                                <h5>Help</h5>
-                                <ul class="footer-links">
-                                    <li><a href="#">Contact us</a></li>
-                                    <li><a href="#">Track order</a></li>
-                                    <li><a href="#">F.A.Q</a></li>
-                                    <li><a href="#">Privacy policy</a></li>
-                                    <li><a href="#">Returns</a></li>
-                                </ul>
-                            </div>
-                        </div> <!-- end help -->
-
-                        <div class="col-md-2 col-sm-4 col-xs-12">
-                            <div class="footer-account">
-                                <h5>Account</h5>
-                                <ul class="footer-links">
-                                    <li><a href="#">My account</a></li>
-                                    <li><a href="#">Wishlist</a></li>
-                                    <li><a href="#">Order history</a></li>
-                                    <li><a href="#">Specials</a></li>
-                                    <li><a href="#">Gift Vouchers</a></li>
-                                </ul>
-                            </div>
-                        </div> <!-- end account -->
-
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                            <div class="footer-about-us">
-                                <h5>About US</h5>
-                                <p>
-                                    Company Profile <br/>
-                                    Partnership<br/>
-                                </p>
-                            </div>
-                        </div> <!-- end about us -->
-
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                            <div class="footer-stay-tuned">
-                                <h5>Stay Tuned</h5>
-                                <div class="social-icons mt-30 clearfix">
-                                    <a href="#" class="facebook">
-                                        <i class="fa fa-facebook"></i>
-                                        <i class="fa fa-facebook"></i>
-                                    </a>
-                                    <a href="#" class="twitter">
-                                        <i class="fa fa-twitter"></i>
-                                        <i class="fa fa-twitter"></i>
-                                    </a>
-                                    <a href="#" class="google-plus">
-                                        <i class="fa fa-google-plus"></i>
-                                        <i class="fa fa-google-plus"></i>
-                                    </a>
-                                    <a href="#" class="linkedin">
-                                        <i class="fa fa-linkedin"></i>
-                                        <i class="fa fa-linkedin"></i>
-                                    </a>
-                                    <a href="#" class="pinterest">
-                                        <i class="fa fa-pinterest-p"></i>
-                                        <i class="fa fa-pinterest-p"></i>
-                                    </a>
-                                    <a href="#" class="instagram">
-                                        <i class="fa fa-instagram"></i>
-                                        <i class="fa fa-instagram"></i>
-                                    </a>
-                                </div>
-                                <div class="footer-newsletter mt-40">
-                                    <form role="form">
-                                        <div class="form-group">
-                                            <input type="email" class="form-control" placeholder="Enter your email">
-                                        </div>
-                                        <button type="submit" class="newsletter-submit"><i class="fa fa-angle-right"></i></button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div> <!-- end stay tuned -->
-
-                    </div> <!-- end row -->
-                </div> <!-- end footer widgets -->			
-            </div> <!-- end container -->
-
-            <div class="bottom-footer">
-                <div class="container">
-                    <div class="row">
-
-                        <div class="col-sm-6 copyright">
-                            <span>
-                                © 2016 Wine Express  |  Designed by Jin Wenqian
-                            </span>
-                        </div>
-
-                        <div class="col-sm-4 col-sm-offset-2 footer-payment-systems text-right mt-sml-10">
-                            <i class="fa fa-cc-paypal"></i>
-                            <i class="fa fa-cc-visa"></i>
-                            <i class="fa fa-cc-mastercard"></i>
-                            <i class="fa fa-cc-discover"></i>
-                            <i class="fa fa-cc-amex"></i>
-                        </div>
-
+                    <div class="col-sm-6 copyright">
+                        <span>
+                            © 2016 Wine Express  |  Designed by Jin Wenqian
+                        </span>
                     </div>
+
+                    <div class="col-sm-4 col-sm-offset-2 footer-payment-systems text-right mt-sml-10">
+                        <i class="fa fa-cc-paypal"></i>
+                        <i class="fa fa-cc-visa"></i>
+                        <i class="fa fa-cc-mastercard"></i>
+                        <i class="fa fa-cc-discover"></i>
+                        <i class="fa fa-cc-amex"></i>
+                    </div>
+
                 </div>
-            </div> <!-- end bottom footer -->
-        </footer> <!-- end footer -->
+            </div>
+        </div> <!-- end bottom footer -->
+    </footer> <!-- end footer -->
 
-        <div id="back-to-top">
-            <a href="#top"><i class="fa fa-angle-up"></i></a>
-        </div>
+    <div id="back-to-top">
+        <a href="#top"><i class="fa fa-angle-up"></i></a>
+    </div>
 
 
 
-    </div> <!-- end main-wrapper -->
+</div> <!-- end main-wrapper -->
 
-    <!-- jQuery Scripts -->
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/plugins.js"></script>
-    <script type="text/javascript" src="revolution/js/jquery.themepunch.tools.min.js"></script>
-    <script type="text/javascript" src="revolution/js/jquery.themepunch.revolution.min.js"></script>
-    <script type="text/javascript" src="js/rev-slider.js"></script>
-    <script type="text/javascript" src="js/scripts.js"></script>
-    <script type="text/javascript" src="js/styleswitch.js"></script>
+<!-- jQuery Scripts -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/plugins.js"></script>
+<script type="text/javascript" src="revolution/js/jquery.themepunch.tools.min.js"></script>
+<script type="text/javascript" src="revolution/js/jquery.themepunch.revolution.min.js"></script>
+<script type="text/javascript" src="js/rev-slider.js"></script>
+<script type="text/javascript" src="js/scripts.js"></script>
+<script type="text/javascript" src="js/styleswitch.js"></script>
 
-    <!-- Google Map -->
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
-    <script type="text/javascript">
-                $(document).ready(function () {
-                    initGmap();
+<!-- Google Map -->
+<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
+<script type="text/javascript">
+                                $(document).ready(function () {
+                                    initGmap();
 
-                    function initGmap() {
+                                    function initGmap() {
 
-                        var maplocation = jQuery(".gmap").attr("data-address");
+                                        var maplocation = jQuery(".gmap").attr("data-address");
 
-                        jQuery(".gmap").gmap3({
-                            marker: {
-                                address: maplocation,
-                                options: {
-                                    icon: "img/map_pin.png"
-                                }
-                            },
-                            map: {
-                                options: {
-                                    zoom: 16,
-                                    zoomControl: true,
-                                    mapTypeControl: false,
-                                    scaleControl: false,
-                                    scrollwheel: false,
-                                    navigationControl: true,
-                                    streetViewControl: false,
-                                    draggable: true,
-                                    styles: [
-                                        {
-                                            "featureType": "all",
-                                            "elementType": "all",
-                                            "stylers": [
-                                                {"saturation": "-20"}
-                                            ]
-                                        }]
-                                }
-                            }
-                        });
+                                        jQuery(".gmap").gmap3({
+                                            marker: {
+                                                address: maplocation,
+                                                options: {
+                                                    icon: "img/map_pin.png"
+                                                }
+                                            },
+                                            map: {
+                                                options: {
+                                                    zoom: 16,
+                                                    zoomControl: true,
+                                                    mapTypeControl: false,
+                                                    scaleControl: false,
+                                                    scrollwheel: false,
+                                                    navigationControl: true,
+                                                    streetViewControl: false,
+                                                    draggable: true,
+                                                    styles: [
+                                                        {
+                                                            "featureType": "all",
+                                                            "elementType": "all",
+                                                            "stylers": [
+                                                                {"saturation": "-20"}
+                                                            ]
+                                                        }]
+                                                }
+                                            }
+                                        });
 
-                    }
-                });
-    </script>
-    <script>
+                                    }
+                                });
+</script>
+<script>
 
-        function validate()
+    function validate()
+    {
+
+        if ($("#name").val() == "" || $("#mail").val() == "" || $("#comment").val() == "")
+        {
+            alert("Filled in all required fields");
+            return false;
+
+        } else
         {
 
-            if ($("#name").val() == "" || $("#mail").val() == "" || $("#comment").val() == "")
+            var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            var res = emailPattern.test($("#mail").val());
+
+            if (res == false)
             {
-                alert("Filled in all required fields");
+                document.getElementById("mail").value = "";
+                alert("Invalid Email");
                 return false;
-
-            } else
-            {
-
-                var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-                var res = emailPattern.test($("#mail").val());
-
-                if (res == false)
-                {
-                    document.getElementById("mail").value = "";
-                    alert("Invalid Email");
-                    return false;
-
-                }
 
             }
 
-            document.getElementById("contact-form").submit();
-
         }
 
+        document.getElementById("contact-form").submit();
 
-        function popup(form) {
-            window.open('', 'formpopup', 'width=600,height=600,resizeable,scrollbars=1');
-            form.target = 'formpopup';
-        }
-    </script>
+    }
+
+    $(document).ready(function () {
+
+    <% if (request.getAttribute("invalid") != null) {
+                String message = request.getAttribute("invalid").toString();
+
+    %>
+
+        alert("<%=message%>");
+    <%}%>
+    });
+
+    function popup(form) {
+        window.open('', 'formpopup', 'width=600,height=600,resizeable,scrollbars=1');
+        form.target = 'formpopup';
+    }
+</script>
 </body>
 </html>

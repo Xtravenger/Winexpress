@@ -90,26 +90,10 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/org/shippingchargews"/>
         <delete dir="${build.generated.dir}/jax-wsCache/ShippingChargeWS"/>
     </target>
-    <target name="wsimport-client-AccountManagementWS" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/AccountManagementWS"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/AccountManagementWS" destdir="${build.generated.dir}/jax-wsCache/AccountManagementWS" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/AccountManagementWS/wsdl/localhost_8080/AccountManagementWS/AccountManagementWS.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/AccountManagementWS/AccountManagementWS?wsdl" xnocompile="true" xendorsed="true">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/AccountManagementWS/wsdl/localhost_8080/AccountManagementWS/AccountManagementWS.wsdl"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/AccountManagementWS"/>
-        </wsimport>
-        <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/AccountManagementWS">
-                <include name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
-    <target name="wsimport-client-clean-AccountManagementWS" depends="-init-project">
-        <delete dir="${build.generated.sources.dir}/jax-ws/org/accountmanagementws"/>
-        <delete dir="${build.generated.dir}/jax-wsCache/AccountManagementWS"/>
-    </target>
     <target name="wsimport-client-ProcessWS" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/ProcessWS"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/ProcessWS" destdir="${build.generated.dir}/jax-wsCache/ProcessWS" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/ProcessWS/wsdl/localhost_8080/ProcessWS/ProcessWS.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/ProcessWS/ProcessWS?wsdl" xnocompile="true" xendorsed="true">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/ProcessWS/wsdl/localhost_8080/ProcessWS/ProcessWS.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/ProcessWS" destdir="${build.generated.dir}/jax-wsCache/ProcessWS" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/ProcessWS/wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/ProcessWS/ProcessWS.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/ProcessWS/ProcessWS?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/ProcessWS/wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/ProcessWS/ProcessWS.wsdl"/>
             <produces dir="${build.generated.dir}/jax-wsCache/ProcessWS"/>
         </wsimport>
         <copy todir="${build.generated.sources.dir}/jax-ws">
@@ -122,5 +106,21 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/org/processws"/>
         <delete dir="${build.generated.dir}/jax-wsCache/ProcessWS"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-CustomerSupportWS, wsimport-client-geocode, wsimport-client-PurchaseManagementWS, wsimport-client-ShippingChargeWS, wsimport-client-AccountManagementWS, wsimport-client-ProcessWS"/>
+    <target name="wsimport-client-AccountManagementWS" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/AccountManagementWS"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/AccountManagementWS" destdir="${build.generated.dir}/jax-wsCache/AccountManagementWS" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/AccountManagementWS/wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/AccountManagementWS/AccountManagementWS.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/AccountManagementWS/AccountManagementWS?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/AccountManagementWS/wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/AccountManagementWS/AccountManagementWS.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/AccountManagementWS"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/AccountManagementWS">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-AccountManagementWS" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/org/accountmanagementws"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/AccountManagementWS"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-CustomerSupportWS, wsimport-client-geocode, wsimport-client-PurchaseManagementWS, wsimport-client-ShippingChargeWS, wsimport-client-ProcessWS, wsimport-client-AccountManagementWS"/>
 </project>

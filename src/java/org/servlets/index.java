@@ -20,8 +20,10 @@ import org.accountmanagementws.AccountManagementWS_Service;
  */
 public class index extends HttpServlet {
 
-    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/AccountManagementWS/AccountManagementWS.wsdl")
+    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/AccountManagementWS/AccountManagementWS.wsdl")
     private AccountManagementWS_Service service;
+
+
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -97,6 +99,8 @@ public class index extends HttpServlet {
         org.accountmanagementws.AccountManagementWS port = service.getAccountManagementWSPort();
         return port.updateStatus(performerEmail, email, status);
     }
+
+
 
    
 

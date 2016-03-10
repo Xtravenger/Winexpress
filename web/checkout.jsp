@@ -485,10 +485,10 @@
 
                                     </div>
 
-                                    <p class="form-row form-row-wide create-account">
+                                  <div class="woocommerce-shipping-fields">
                                         <input type="checkbox" class="input-checkbox" id="createaccount" name="savebilling" value="1">
                                         <label for="savebilling" class="checkbox">Save Billing Address</label>
-                                    </p>
+                                  </div>
 
                                     <div class="clear"></div>
 

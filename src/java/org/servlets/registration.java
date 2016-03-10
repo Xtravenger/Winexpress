@@ -16,19 +16,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.WebServiceRef;
+import org.accountmanagementws.AccountManagementWS_Service;
 import org.processws.ProcessWS_Service;
 
 /**
  *
  * @author Xtravenger
  */
-@WebServlet(name = "register", urlPatterns = {"/register"})
-public class register extends HttpServlet {
+@WebServlet(name = "registration", urlPatterns = {"/registration"})
+public class registration extends HttpServlet {
 
-    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/ProcessWS/ProcessWS.wsdl")
+    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/AccountManagementWS/AccountManagementWS.wsdl")
+    private AccountManagementWS_Service service_1;
+
+    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/ProcessWS/ProcessWS.wsdl")
     private ProcessWS_Service service;
 
-  
+
+
+
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,21 +47,32 @@ public class register extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-       if(request.getParameter("signup")!= null)
-       {
-          request.setAttribute("email",request.getParameter("email"));
-          request.setAttribute("password", request.getParameter("password2"));
-          request.getRequestDispatcher("registration.jsp").forward(request, response);
-          return;
-       }
-        
+
+        if (request.getParameter("signup") != null) {
+          
+            request.setAttribute("email", request.getParameter("email"));
+            request.setAttribute("password", request.getParameter("password2"));
+            if(this.socialLogin(request.getParameter("email")) == 1)
+            {
+                request.setAttribute("invalid", "Email had already registered");
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+                return;
+            }
+           
+           
+            request.getRequestDispatcher("registration.jsp").forward(request, response);
+            return;
+        }
+
+        List<String> shipping = new ArrayList();
+        List<String> billing = new ArrayList();
+
         String email = request.getParameter("email");
         String birthday = request.getParameter("dob");
         String gender = request.getParameter("gender");
         String name = request.getParameter("name");
         String contact = request.getParameter("phone");
-        
+
         String shippingCompany = request.getParameter("shipping_company");
         String shippingBlock = request.getParameter("shipping_block");
         String shippingUnit = request.getParameter("shipping_unit");
@@ -64,7 +81,7 @@ public class register extends HttpServlet {
         String shippingCity = request.getParameter("shipping_city");
         String shippingCountry = request.getParameter("shipping_country");
         String shippingPostal = request.getParameter("shipping_postcode");
-        
+
         String billingCompany = request.getParameter("billing_company");
         String billingBlock = request.getParameter("billing_block");
         String billingUnit = request.getParameter("billing_unit");
@@ -73,27 +90,47 @@ public class register extends HttpServlet {
         String billingCity = request.getParameter("billing_city");
         String billingCountry = request.getParameter("billing_country");
         String billingPostal = request.getParameter("billing_postcode");
-       
-        List<String> shipping = Arrays.asList(shippingBlock ,shippingCountry ,shippingPostal,shippingAdd1,shippingAdd2,shippingUnit,shippingCity,shippingCompany);
-       
-        List<String> billing = Arrays.asList(billingBlock,billingCountry,billingPostal ,billingAdd1 , billingAdd2 , billingUnit , billingCity , billingCompany );
-            
+
+        if (!(shippingUnit.equals("") && shippingAdd1.equals("") && shippingCity.equals("") && shippingPostal.equals(""))) {
+            if (shippingBlock.equals("")) {
+                shippingBlock = "-";
+            }
+            if (shippingCompany.equals("")) {
+                shippingCompany = "-";
+            }
+            if (shippingAdd2.equals("")) {
+                shippingAdd2 = "-";
+            }
+            shipping = Arrays.asList(shippingBlock, shippingCountry, shippingPostal, shippingAdd1, shippingAdd2, shippingUnit, shippingCity, shippingCompany);
+        }
+
+        if (!(billingUnit.equals("") && billingAdd1.equals("") && billingCity.equals("") && billingPostal.equals(""))) {
+            if (billingBlock.equals("")) {
+                billingBlock = "-";
+            }
+            if (billingCompany.equals("")) {
+                billingCompany = "-";
+            }
+            if (billingAdd2.equals("")) {
+                billingAdd2 = "-";
+            }
+            billing = Arrays.asList(billingBlock, billingCountry, billingPostal, billingAdd1, billingAdd2, billingUnit, billingCity, billingCompany);
+
+        }
+
         String status = request.getParameter("social");
         String password = request.getParameter("password");
-    
-       int res = this.createMember(email, password,birthday, gender, name, contact, billing, shipping, status);
         
-        if (res == 1)
-        {
+        int res = this.createMember(email, password, birthday, gender, name, contact, billing, shipping, status);
+
+        if (res == 1) {
             request.setAttribute("success", "true");
             request.getRequestDispatcher("index.jsp").forward(request, response);
-        }else
-        {
+        } else {
             request.setAttribute("success", "false");
             request.getRequestDispatcher("registration.jsp").forward(request, response);
         }
-        
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -142,11 +179,15 @@ public class register extends HttpServlet {
         return port.createMember(email, password, birthday, gender, name, contact, billingAddress, shippingAddress, status);
     }
 
-   
-   
+    private Integer socialLogin(java.lang.String email) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        org.accountmanagementws.AccountManagementWS port = service_1.getAccountManagementWSPort();
+        return port.socialLogin(email);
+    }
 
 
-  
-  
+
+   
 
 }
