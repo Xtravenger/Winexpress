@@ -338,26 +338,37 @@
                                                 </h4>
                                             </div>
                                             <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                                                <div class="panel-body">
-                                                    <div class="cart-table-wrap">
+                                                <div class="panel-body">                                                    
 
-                                                        <table id="myTable" class="admin_table cart table">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th class="product-name">Id</th>
-                                                                    <th class="product-name">Name</th>
-                                                                    <th class="product-name">Brand</th>
-                                                                    <th class="product-name">Price</th>
-                                                                    <th class="product-name">Stock</th>
-                                                                    <th class="product-name">Action</th>                                                                    
-                                                                </tr>
-                                                            </thead>     
-                                                            <tbody></tbody>
-                                                            
-                                                        </table>
+                                                    <div id="myForm">
 
-                                                        
-                                                    </div>	<!-- End of collapse 1 content-->
+                                                        <div class="form-group">
+                                                            <label for="Name">Name</label>
+                                                            <input class="form-control" id="Name" name="Name">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="Brand">Brand</label>
+                                                            <input class="form-control" id="Brand" name="Brand">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="Size">Size</label>
+                                                            <input class="form-control" id="Size" name="Size">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="price">Price</label>
+                                                            <input class="form-control" id="price" name="price">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="Stock">Stock</label>
+                                                            <input class="form-control" id="Stock" name="Stock">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="Description">Description</label>
+                                                            <textarea class="form-control" id="Description" name="Description"></textarea>
+                                                        </div>
+                                                        <div class="btn btn-default" onclick="submitForm()">Submit</div>
+                                                    </div>      
+
                                                 </div>
                                             </div>
                                         </div>
@@ -513,40 +524,57 @@
         <script type="text/javascript" src="js/styleswitch.js"></script>
 
         <script>
-            var url = "http://localhost:8080/IS4227_WS/webresources/entities.product";
+    var url = "http://localhost:8080/IS4227_WS/webresources/entities.product";    
+    
+    $(document).ready(function () {        
+        var productID = GetQueryStringParams("productID");
+        $.get(url + "/" + productID, function (data) {
+            $("#Name").val(data.productName);
+            $("#Brand").val(data.brand);
+            $("#Size").val(data.size);
+            $("#price").val(data.price);
+            $("#Stock").val(data.stock);
+            $("#Description").val(data.productDescription);
+        }, "json");
+    });
 
-            $(document).ready(function () {                
-                $.get(url, function (data) {
-                    for (var p in data) {
-                        if (data.hasOwnProperty(p)) {
-                            $('#myTable tbody').append("<tr><td>" + data[p].productID + "</td><td>" + data[p].productName + "</td><td>" + data[p].brand + "</td><td>" + data[p].price + "</td><td>" +
-                                    data[p].stock + "</td><td><a class='btn btn-default' href='product_edit.jsp?productID=" + data[p].productID + "'>edit</a> <div class='btn btn-red' onclick='deleteRecord(this)'>delete</div></td></tr>");                            
-                        }
-                    }
-                }, "json");
-                                
-            });
-        </script>
-
-        <script>
-            var url = "http://localhost:8080/IS4227_WS/webresources/entities.product";
-            function deleteRecord(e) {
-                var id = $(e).closest("tr").children('td:first').text();
-                var r = confirm("One record will be deleted");
-                if (r == true) {
-                    $.ajax({
-                        dataType: "json",
-                        url: url + "/" + id,
-                        type: "DELETE",
-                        success: function () {
-                            $(e).closest("tr").remove();
-                            alert("One record is deleted.");
-                        }
-                    });
-                }
+    function submitForm() {
+        var productID = GetQueryStringParams("productID");
+        var name = $("#Name").val();
+        var brand = $("#Brand").val();
+        var size = $("#Size").val();
+        var price = $("#price").val();
+        var stock = $("#Stock").val();
+        var description = $("#Description").val();                
+        
+        $.ajax({
+            dataType: "json",
+            url: url+"/"+productID+"/"+name+"/"+brand+"/"+size+"/"+price+"/"+stock+"/"+description,            
+            type: "PUT",            
+            success: function(){
+                alert("product edited");
             }
+        });
+    }
 
-        </script>
+
+    function GetQueryStringParams(sParam)
+    {
+        var sPageURL = window.location.search.substring(1);
+        var sURLVariables = sPageURL.split('&');
+        for (var i = 0; i < sURLVariables.length; i++)
+        {
+            var sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] === sParam)
+            {
+                return sParameterName[1];
+            }
+        }
+    }
+
+</script>
+
+
 
     </body>
 

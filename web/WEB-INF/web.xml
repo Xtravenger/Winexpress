@@ -56,6 +56,10 @@
         <servlet-name>users</servlet-name>
         <servlet-class>org.servlets.users</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>product_create</servlet-name>
+        <servlet-class>org.servlets.product_create</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>index</servlet-name>
         <url-pattern>/index</url-pattern>
@@ -111,6 +115,10 @@
     <servlet-mapping>
         <servlet-name>resetpassword</servlet-name>
         <url-pattern>/resetpassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>product_create</servlet-name>
+        <url-pattern>/product_create</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

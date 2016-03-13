@@ -23,4 +23,11 @@
     <system systemId="http://ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com:80/ProcessWS/ProcessWS?xsd=1" uri="src/conf/xml-resources/web-service-references/ProcessWS/wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com_80/ProcessWS/ProcessWS.xsd_1.xsd"/>
     <system systemId="http://ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/AccountManagementWS/AccountManagementWS?wsdl" uri="src/conf/xml-resources/web-service-references/AccountManagementWS/wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/AccountManagementWS/AccountManagementWS.wsdl"/>
     <system systemId="http://ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com:80/AccountManagementWS/AccountManagementWS?xsd=1" uri="src/conf/xml-resources/web-service-references/AccountManagementWS/wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com_80/AccountManagementWS/AccountManagementWS.xsd_1.xsd"/>
+    <system systemId="http://ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/AmazonWS/AmazonWS?wsdl" uri="src/conf/xml-resources/web-service-references/AmazonWS/wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/AmazonWS/AmazonWS.wsdl"/>
+    <system systemId="http://ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com:80/AmazonWS/AmazonWS?xsd=1" uri="src/conf/xml-resources/web-service-references/AmazonWS/wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com_80/AmazonWS/AmazonWS.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/IS4227_WS/Product?wsdl" uri="src/conf/xml-resources/web-service-references/Product/wsdl/localhost_8080/IS4227_WS/Product.wsdl"/>
+    <system systemId="http://localhost:8080/IS4227_WS/Product?xsd=1" uri="src/conf/xml-resources/web-service-references/Product/wsdl/localhost_8080/IS4227_WS/Product.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/Product_WS/Product_WS?wsdl" uri="src/conf/xml-resources/web-service-references/Product_WS/wsdl/localhost_8080/Product_WS/Product_WS.wsdl"/>
+    <system systemId="http://localhost:8080/Product_WS/Product_WS?WSDL" uri="src/conf/xml-resources/web-service-references/Product_WS/wsdl/localhost_8080/Product_WS/Product_WS.wsdl"/>
+    <system systemId="http://localhost:8080/Product_WS/Product_WS?xsd=1" uri="src/conf/xml-resources/web-service-references/Product_WS/wsdl/localhost_8080/Product_WS/Product_WS.xsd_1.xsd"/>
 </catalog>

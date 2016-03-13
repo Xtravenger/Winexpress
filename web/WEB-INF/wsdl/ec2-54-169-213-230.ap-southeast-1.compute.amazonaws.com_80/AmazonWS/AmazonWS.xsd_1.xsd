@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.1-b419 (branches/2.3.1.x-7937; 2014-08-04T08:11:03+0000) JAXWS-RI/2.2.10-b140803.1500 JAXWS-API/2.2.11 JAXB-RI/2.2.10-b140802.1033 JAXB-API/2.2.12-b140109.1041 svn-revision#unknown. --><xs:schema xmlns:tns="http://AmazonWS.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://AmazonWS.org/">
+
+<xs:element name="delete_config" type="tns:delete_config"/>
+
+<xs:element name="delete_configResponse" type="tns:delete_configResponse"/>
+
+<xs:element name="delete_log" type="tns:delete_log"/>
+
+<xs:element name="delete_logResponse" type="tns:delete_logResponse"/>
+
+<xs:element name="logger" type="tns:logger"/>
+
+<xs:element name="loggerResponse" type="tns:loggerResponse"/>
+
+<xs:element name="put_config" type="tns:put_config"/>
+
+<xs:element name="put_configResponse" type="tns:put_configResponse"/>
+
+<xs:element name="put_log" type="tns:put_log"/>
+
+<xs:element name="put_logResponse" type="tns:put_logResponse"/>
+
+<xs:element name="read_config" type="tns:read_config"/>
+
+<xs:element name="read_configResponse" type="tns:read_configResponse"/>
+
+<xs:element name="retrieve_config" type="tns:retrieve_config"/>
+
+<xs:element name="retrieve_configResponse" type="tns:retrieve_configResponse"/>
+
+<xs:element name="retrieve_image" type="tns:retrieve_image"/>
+
+<xs:element name="retrieve_imageResponse" type="tns:retrieve_imageResponse"/>
+
+<xs:element name="upload_image" type="tns:upload_image"/>
+
+<xs:element name="upload_imageResponse" type="tns:upload_imageResponse"/>
+
+<xs:complexType name="retrieve_config">
+<xs:sequence>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="retrieve_configResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="read_config">
+<xs:sequence>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+<xs:element name="detail" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="read_configResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="retrieve_image">
+<xs:sequence>
+<xs:element name="productID" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="retrieve_imageResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="delete_config">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="delete_configResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="put_log">
+<xs:sequence>
+<xs:element name="date" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="put_logResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="logger">
+<xs:sequence>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+<xs:element name="activity" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="loggerResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="delete_log">
+<xs:sequence>
+<xs:element name="date" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="delete_logResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="put_config">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="put_configResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="upload_image">
+<xs:sequence>
+<xs:element name="productID" type="xs:string" minOccurs="0"/>
+<xs:element name="imageByte" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="upload_imageResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

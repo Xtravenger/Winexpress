@@ -178,8 +178,8 @@
                                             </div>
                                         </div>
                                     </li>
-                                    
-                                     <li class="menu-my-acc left hidden-sm hidden-xs">
+
+                                    <li class="menu-my-acc left hidden-sm hidden-xs">
                                         <%if (session.getAttribute("email") == null) {%><a href="#" data-toggle="modal" data-target="#SignUpModal">Sign Up</a><%}%>
 
                                         <div class="modal fade" id="SignUpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -211,9 +211,15 @@
                                         <%if (session.getAttribute("email") != null) {%> <a class="dropdown-toggle" data-toggle="dropdown">My Account</a><%}%>
                                         <ul class="dropdown-menu">
                                             <li><a href="updateAccount">Edit Profile</a></li>
-                                                <%if (session.getAttribute("role") != null) { if (!session.getAttribute("role").equals("Admin")) {%> <li><a href="history.jsp">Purchase history</a></li><%} else {%><li><a href="users.jsp">Edit Users</a></li> <%}}%>
-                                                <%if (session.getAttribute("role") != null) { if (!session.getAttribute("role").equals("Admin")) {%> <li><a href="enquiry">Send Enquiry</a></li> <%} else { %> <li><a href="category.jsp">Edit Category</a></li> <%}}%>
-                                                <%if (session.getAttribute("role") != null) { if (session.getAttribute("role").equals("Admin")) {%> <li><a href="product.jsp">Edit Product</a></li> <%}} %> 
+                                            <%if (session.getAttribute("role") != null) {
+                                                        if (!session.getAttribute("role").equals("Admin")) {%> <li><a href="history.jsp">Purchase history</a></li><%} else {%><li><a href="users.jsp">Edit Users</a></li> <%}
+                                                    }%>
+                                                    <%if (session.getAttribute("role") != null) {
+                                                        if (!session.getAttribute("role").equals("Admin")) {%> <li><a href="enquiry">Send Enquiry</a></li> <%} else { %> <li><a href="category.jsp">Edit Category</a></li> <%}
+                                                    }%>
+                                                    <%if (session.getAttribute("role") != null) {
+                                                        if (session.getAttribute("role").equals("Admin")) {%> <li><a href="product.jsp">Edit Product</a></li> <%}
+                                                    }%> 
                                             <li><a href="logout">Log out</a></li>
                                         </ul>
                                     </li>
@@ -507,31 +513,13 @@
 
                                         <div class="reviews">
                                             <ul class="reviews-list">
-                                                <li>
-                                                    <div class="review-body">
-                                                        <div class="review-content">
-                                                            <p class="review-author"><strong>Alexander Samokhin</strong> - May 6, 2014 at 12:48 pm</p>
-                                                            <div class="rating">
-                                                                <a href="#"></a>
-                                                            </div>
-                                                            <p>This wine is so awesome. I didn’t expect so good of a service as well as the wine quality. I will rate 5 stars.</p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-
-                                                <li>
-                                                    <div class="review-body">
-                                                        <div class="review-content">
-                                                            <p class="review-author"><strong>Christopher Robins</strong> - May 6, 2014 at 12:48 pm</p>
-                                                            <div class="rating">
-                                                                <a href="#"></a>
-                                                            </div>
-                                                            <p>This wine is so awesome. I didn’t expect so good of a service as well as the wine quality. I will rate 5 stars..</p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-
-                                            </ul>					
+                                            </ul>	
+                                            <hr/>
+                                            <div id="comment_form">
+                                                <textarea id="comment_text" class="form-control"></textarea>
+                                                <br/> 
+                                                <div class="btn btn-primary pull-right" onclick="addComment()">Add Comment</div>
+                                            </div>
                                         </div> <!--  end reviews -->
                                     </div>
 
@@ -873,6 +861,47 @@
                                                             alert("Item added to cart");
                                                         });
                                                     }
+
+        </script>
+
+        <script>
+            var url = "http://localhost:8080/IS4227_WS/webresources/entities.review";
+
+            $(document).ready(function () {
+                $.get(url, function (data) {
+                    for (var review in data) {
+                        if (data.hasOwnProperty(review)) {
+
+                            $('#tab-three ul').append("<li><div class='review-body'><div class='review-content'>" +
+                                    "<p class='review-author'><strong>" + data[review].member1.name + "</strong> - on " + data[review].reviewDate.substring(0, 10) + "</p>" +
+                                    "<div class='rating'><a href='#'>" + data[review].productRating + "</a></div>" +
+                                    "<p>" + data[review].comment + "</p>" +
+                                    "</div></div></li>");
+
+                        }
+                    }
+                }, "json");
+
+            });
+        </script>       
+
+        <script>
+            var url = "http://localhost:8080/IS4227_WS/webresources/entities.review";
+
+            function addComment() {
+                var email = session.getAttribute("email");
+                var productId = ;
+
+                $.ajax({
+                    dataType: "json",
+                    url: url + "/" + name + "/" + type,
+                    type: "POST",
+                    success: function () {
+                        alert("categ created");
+                    }
+                });
+
+            }
 
         </script>
 

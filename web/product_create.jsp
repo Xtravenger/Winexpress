@@ -323,52 +323,70 @@
                 <!-- Edit Profile -->
                 <div class="container relative">
                     <div class="row">
-                        <div class="col-md-10 woocommerce">
-                            <form name="edit_profile" class="checkout woocommerce-checkout row">
-                                <div id="profile_details">
+                        <div class="col-md-10 woocommerce">                            
+                            <div id="profile_details">
 
-                                    <h6 class="heading-underline">Products</h6>
-                                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                <h4 class="panel-title">
-                                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                        Category 1
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                                                <div class="panel-body">
-                                                    <div class="cart-table-wrap">
+                                <h6 class="heading-underline">Products</h6>
+                                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingOne">
+                                            <h4 class="panel-title">
+                                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                    Create Product
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                            <div class="panel-body">                                                    
 
-                                                        <table id="myTable" class="admin_table cart table">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th class="product-name">Id</th>
-                                                                    <th class="product-name">Name</th>
-                                                                    <th class="product-name">Brand</th>
-                                                                    <th class="product-name">Price</th>
-                                                                    <th class="product-name">Stock</th>
-                                                                    <th class="product-name">Action</th>                                                                    
-                                                                </tr>
-                                                            </thead>     
-                                                            <tbody></tbody>
-                                                            
-                                                        </table>
+                                                <form id="myForm" action="product_create" method="post" enctype="multipart/form-data">
+                                                    <div class="form-group">                                                            
+                                                        <input name="product_image" accept="image/x-png, image/jpeg" id="product_image" type="file" size="50" /><br/>
+                                                        <input type="hidden" id="product_id" name="product_id" >
+                                                    </div>                 
+                                                    <div class="form-group">
+                                                        <label for="Name">Category</label>
+                                                        <select id="select_categ" name="select_categ" class="form-control">                                                                                                                        
+                                                        </select>
+                                                    </div>                                                        
+                                                    <div class="form-group">
+                                                        <label for="Name">Name</label>
+                                                        <input class="form-control" id="Name" name="Name">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="Brand">Brand</label>
+                                                        <input class="form-control" id="Brand" name="Brand">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="Size">Size</label>
+                                                        <input class="form-control" id="Size" name="Size">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="price">Price</label>
+                                                        <input class="form-control" id="price" name="price">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="Stock">Stock</label>
+                                                        <input class="form-control" id="Stock" name="Stock">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="Description">Description</label>
+                                                        <textarea class="form-control" id="Description" name="Description"></textarea>
+                                                    </div>
+                                                    <input type="submit" class="btn btn-default" value="Submit">
+                                                </form>                                                                                                                                                                      
 
-                                                        
-                                                    </div>	<!-- End of collapse 1 content-->
-                                                </div>
                                             </div>
                                         </div>
-
                                     </div>
-                                    <br/>		
-                            </form>
-                        </div>	
 
-                    </div> <!-- end row -->
-                </div> <!-- end container -->
+                                </div>
+                                <br/>		
+                                </form>
+                            </div>	
+
+                        </div> <!-- end row -->
+                    </div> <!-- end container -->
             </section> <!-- end edit profile -->
 
 
@@ -512,41 +530,55 @@
         <script type="text/javascript" src="js/scripts.js"></script>
         <script type="text/javascript" src="js/styleswitch.js"></script>
 
-        <script>
-            var url = "http://localhost:8080/IS4227_WS/webresources/entities.product";
+        <script>            
+            function submitForm() {                    
+                var url = "http://localhost:8080/IS4227_WS/webresources/entities.product";
+                var name = $("#Name").val();
+                var brand = $("#Brand").val();
+                var size = $("#Size").val();
+                var price = $("#price").val();
+                var stock = $("#Stock").val();
+                var description = $("#Description").val();
+                var categ_Id = $("#select_categ").val();                  
+                url = url + "/" + name + "/" + brand + "/" + size + "/" + price + "/" + stock + "/" + description + "/" + categ_Id;
+                
+                console.log(url);
+        
+                $.ajax({
+                    dataType: "json",
+                    url: url,
+                    type: "GET",
+                    success: function (data) {                                                                            
+                        $("#product_id").val(data.productId);     
+                        return true;
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert(xhr.status);
+                        alert(thrownError);
+                        return false;
+                    }
+                });                                
+            }
+        </script>
 
+        <script>            
             $(document).ready(function () {                
-                $.get(url, function (data) {
-                    for (var p in data) {
-                        if (data.hasOwnProperty(p)) {
-                            $('#myTable tbody').append("<tr><td>" + data[p].productID + "</td><td>" + data[p].productName + "</td><td>" + data[p].brand + "</td><td>" + data[p].price + "</td><td>" +
-                                    data[p].stock + "</td><td><a class='btn btn-default' href='product_edit.jsp?productID=" + data[p].productID + "'>edit</a> <div class='btn btn-red' onclick='deleteRecord(this)'>delete</div></td></tr>");                            
+                var url = "http://localhost:8080/IS4227_WS/webresources/entities.category";
+                $.get(url, function (data) {                    
+                    for (var categ in data) {                        
+                        if (data.hasOwnProperty(categ)) {
+                            var x = document.getElementById("select_categ");
+                            var option = document.createElement("option");  
+                            option.innerHTML = data[categ].categoryName;
+                            option.value = data[categ].categoryID;                                 
+                            x.add(option);
                         }
                     }
                 }, "json");
-                                
+
             });
         </script>
 
-        <script>
-            var url = "http://localhost:8080/IS4227_WS/webresources/entities.product";
-            function deleteRecord(e) {
-                var id = $(e).closest("tr").children('td:first').text();
-                var r = confirm("One record will be deleted");
-                if (r == true) {
-                    $.ajax({
-                        dataType: "json",
-                        url: url + "/" + id,
-                        type: "DELETE",
-                        success: function () {
-                            $(e).closest("tr").remove();
-                            alert("One record is deleted.");
-                        }
-                    });
-                }
-            }
-
-        </script>
 
     </body>
 

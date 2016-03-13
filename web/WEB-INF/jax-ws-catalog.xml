@@ -23,4 +23,11 @@
     <system systemId="http://localhost:8080/ProcessWS/ProcessWS?wsdl" uri="wsdl/localhost_8080/ProcessWS/ProcessWS.wsdl"/>
     <system systemId="http://localhost:8080/ProcessWS/ProcessWS?xsd=1" uri="wsdl/localhost_8080/ProcessWS/ProcessWS.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/AccountManagementWS/AccountManagementWS?Tester" uri="wsdl/localhost_8080/AccountManagementWS/AccountManagementWS.tester"/>
+    <system systemId="http://ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/AmazonWS/AmazonWS?wsdl" uri="wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com/AmazonWS/AmazonWS.wsdl"/>
+    <system systemId="http://ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com:80/AmazonWS/AmazonWS?xsd=1" uri="wsdl/ec2-54-169-213-230.ap-southeast-1.compute.amazonaws.com_80/AmazonWS/AmazonWS.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/IS4227_WS/Product?wsdl" uri="wsdl/localhost_8080/IS4227_WS/Product.wsdl"/>
+    <system systemId="http://localhost:8080/IS4227_WS/Product?xsd=1" uri="wsdl/localhost_8080/IS4227_WS/Product.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/Product_WS/Product_WS?wsdl" uri="wsdl/localhost_8080/Product_WS/Product_WS.wsdl"/>
+    <system systemId="http://localhost:8080/Product_WS/Product_WS?xsd=1" uri="wsdl/localhost_8080/Product_WS/Product_WS.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/Product_WS/Product_WS?WSDL" uri="wsdl/localhost_8080/Product_WS/Product_WS.wsdl"/>
 </catalog>
