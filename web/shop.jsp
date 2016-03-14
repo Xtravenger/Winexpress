@@ -128,8 +128,8 @@
                                         </li>
 
                                         <li id="mobile-search">
-                                            <form method="get" class="mobile-search">
-                                                <input type="search" class="form-control" placeholder="Search...">
+                                            <form method="get" class="mobile-search" action="search">
+                                                <input type="search" name="searchTerm" class="form-control" placeholder="Search...">
                                                 <button type="submit" class="search-button">
                                                     <i class="fa fa-search"></i>
                                                 </button>
@@ -226,9 +226,9 @@
 
                                         <div class="search-bar">
                                             <div class="search-wrap">
-                                                <form role="form">
+                                                <form role="form" action="search">
                                                     <div class="form-group">
-                                                        <input type="search" class="form-control searchbox" placeholder="Search">
+                                                        <input type="search" name="searchTerm" class="form-control searchbox" placeholder="Search">
                                                     </div>
                                                     <button type="submit" class="search-button"><i class="fa fa-search"></i></button>
                                                 </form>

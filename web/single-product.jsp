@@ -23,7 +23,7 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/magnific-popup.css" />
         <link rel="stylesheet" href="css/elegant-icons.css" />
-        <link rel="stylesheet" href="css/font-awesome.min.css" />
+        <link rel="stylesheet" href="css/font-awesome.min.css" />        
         <link rel="stylesheet" href="css/themify-icons.css" />
         <link rel="stylesheet" href="revolution/css/settings.css" />
         <link rel="stylesheet" href="css/rev-slider.css" />
@@ -211,15 +211,15 @@
                                         <%if (session.getAttribute("email") != null) {%> <a class="dropdown-toggle" data-toggle="dropdown">My Account</a><%}%>
                                         <ul class="dropdown-menu">
                                             <li><a href="updateAccount">Edit Profile</a></li>
-                                            <%if (session.getAttribute("role") != null) {
-                                                        if (!session.getAttribute("role").equals("Admin")) {%> <li><a href="history.jsp">Purchase history</a></li><%} else {%><li><a href="users.jsp">Edit Users</a></li> <%}
-                                                    }%>
-                                                    <%if (session.getAttribute("role") != null) {
-                                                        if (!session.getAttribute("role").equals("Admin")) {%> <li><a href="enquiry">Send Enquiry</a></li> <%} else { %> <li><a href="category.jsp">Edit Category</a></li> <%}
-                                                    }%>
-                                                    <%if (session.getAttribute("role") != null) {
-                                                        if (session.getAttribute("role").equals("Admin")) {%> <li><a href="product.jsp">Edit Product</a></li> <%}
-                                                    }%> 
+                                                <%if (session.getAttribute("role") != null) {
+                                                    if (!session.getAttribute("role").equals("Admin")) {%> <li><a href="history.jsp">Purchase history</a></li><%} else {%><li><a href="users.jsp">Edit Users</a></li> <%}
+                                                        }%>
+                                                <%if (session.getAttribute("role") != null) {
+                                                            if (!session.getAttribute("role").equals("Admin")) {%> <li><a href="enquiry">Send Enquiry</a></li> <%} else { %> <li><a href="category.jsp">Edit Category</a></li> <%}
+                                                                }%>
+                                                <%if (session.getAttribute("role") != null) {
+                                                            if (session.getAttribute("role").equals("Admin")) {%> <li><a href="product.jsp">Edit Product</a></li> <%}
+                                                                }%> 
                                             <li><a href="logout">Log out</a></li>
                                         </ul>
                                     </li>
@@ -343,7 +343,7 @@
                                 <ul class="slides clearfix">
                                     <li>
                                         <a href="img/product_large_1.jpg" data-lightbox="true">
-                                            <img src="img/product_large_1.jpg" alt="" />
+                                            <img id="img_main" src="img/product_large_1.jpg" alt="" />
                                             <i class="arrow_expand"></i>
                                         </a>
                                     </li>
@@ -383,7 +383,7 @@
                             <div id="thumbs" class="flexslider">
                                 <ul class="slides">
                                     <li>
-                                        <img src="img/thumb_1.jpg" alt="" />
+                                        <img src="img/thumb_1.jpg" alt="#" />
                                     </li>
                                     <li>
                                         <img src="img/thumb_2.jpg" alt="" />
@@ -406,16 +406,16 @@
                         </div> <!-- end col -->
 
                         <div class="col-md-6 product-description-wrap">
-                            <h1 class="product-title">Wine Name</h1>
+                            <h1 class="product-title" id="product_name">Wine Name</h1>
                             <div class="rating">
-                                <a href="#">3 Reviews</a>
+                                <a href="#a_tab_three" id="numberOfreview">3 Reviews</a>
                             </div>
                             <span class="price">
                                 <del>
                                     <span>$122</span>
                                 </del>
                                 <ins>
-                                    <span class="ammount">$99.99</span>
+                                    <span class="ammount" id="product_price">$99.99</span>
                                 </ins>
                             </span>
                             <p class="product-description">This wine bottle is a candidate for perfection once it is bottled. It is complete in every way marrying power, elegance, and longevity. It should see its 30th birthday in fine form. I also was able to taste the 2010 Finca Dofi and 2010 L'Ermita at this early stage. Palacios seems very pleased by his material and I see no reason to doubt him.</p>
@@ -430,7 +430,7 @@
 
                             <div class="product_meta">
                                 <span class="sku">SKU: <a href="#">111763</a></span>
-                                <span class="posted_in">Category: <a href="#">Wine Type</a></span>
+                                <span class="posted_in">Brand: <a href="#" id="product_brand">Wine Type</a></span>
                                 <span class="tagged_as">Extra information: <a href="#">Elegant</a>, <a href="#">More information</a></span>
                             </div>
 
@@ -465,7 +465,7 @@
                             </div>
                         </div> <!-- end product description -->
 
-                        <div class="col-md-12 mt-70">
+                        <div class="col-md-12 mt-70" id="a_tab_three">
                             <div class="tabs">
                                 <ul class="nav nav-tabs">	                                
                                     <li class="active">
@@ -483,7 +483,7 @@
                                 <div class="tab-content pb-0">
 
                                     <div class="tab-pane fade in active" id="tab-one">
-                                        <p>
+                                        <p id="description">
                                             We possess within us two minds. So far I have written only of the conscious mind. I would now like to introduce you to your second mind, the hidden and mysterious subconscious. Our subconscious mind contains such power and complexity that it literally staggers the imagination.And finally the subconscious is the mechanism through which thought impulses which are repeated regularly with feeling and emotion are quickened, charged. Our subconscious mind contains such power and complexity that it literally staggers the imagination.And finally the subconscious is the mechanism through which thought impulses.
                                         </p>
                                     </div>
@@ -515,11 +515,16 @@
                                             <ul class="reviews-list">
                                             </ul>	
                                             <hr/>
-                                            <div id="comment_form">
+                                            <form id="comment_form" action="#" onsubmit="addComment()">
                                                 <textarea id="comment_text" class="form-control"></textarea>
                                                 <br/> 
-                                                <div class="btn btn-primary pull-right" onclick="addComment()">Add Comment</div>
-                                            </div>
+                                                <h5>Click to rate:</h5>
+                                                <div class='starrr' id='star1'></div>
+                                                <div class='your-choice-was' style='display: none;'>
+                                                    Your rating was <span id="input_rating" class='choice'></span>.</div>
+
+                                                    <input type="submit" value="Add Comment" class="btn btn-primary pull-right">
+                                            </form>
                                         </div> <!--  end reviews -->
                                     </div>
 
@@ -845,30 +850,71 @@
         <script type="text/javascript" src="js/rev-slider.js"></script>
         <script type="text/javascript" src="js/scripts.js"></script>
         <script type="text/javascript" src="js/styleswitch.js"></script>
+
+        <script type="text/javascript" src="js/bootstrap-rating-input.min.js"></script>
+        <script type="text/javascript" src="js/starrr.js"></script>
+
         <script>
-                                                    function addItem()
-                                                    {
-                                                        var id = "2"
-                                                        var qty = document.getElementById("qty").value;
+                                                            function addItem()
+                                                            {
+                                                                var id = "2"
+                                                                var qty = document.getElementById("qty").value;
 
-                                                        var requestUri = "addItem?id=" + id + "&qty=" + qty;
+                                                                var requestUri = "addItem?id=" + id + "&qty=" + qty;
 
 
-                                                        $.ajax({
-                                                            type: "POST",
-                                                            url: requestUri
-                                                        }).done(function (msg) {
-                                                            alert("Item added to cart");
-                                                        });
-                                                    }
+                                                                $.ajax({
+                                                                    type: "POST",
+                                                                    url: requestUri
+                                                                }).done(function (msg) {
+                                                                    alert("Item added to cart");
+                                                                });
+                                                            }
 
         </script>
 
         <script>
-            var url = "http://localhost:8080/IS4227_WS/webresources/entities.review";
+            var url = "http://localhost:8080/IS4227_WS/webresources/entities.product";
 
             $(document).ready(function () {
+                var productID = GetQueryStringParams("productID");
+                document.getElementById("img_main").src = "https://s3-ap-southeast-1.amazonaws.com/winexpressphoto/" + productID;
+                $.get(url + "/" + productID, function (data) {
+                    document.getElementById("product_name").innerHTML = data.productName;
+                    document.getElementById("product_brand").innerHTML = data.brand;
+                    document.getElementById("product_price").innerHTML = "$" + data.price;
+                    document.getElementById("description").innerHTML = data.productDescription;
+                }, "json");
+            });
+            // $("#product_name").text(data.productName);                    
+            // $("#Brand").val(data.brand);
+            // $("#Size").val(data.size);                    
+            // $("#price").val(data.price);
+            // $("#Stock").val(data.stock);
+            // $("#description").val(data.productDescription);
+        </script>
+
+        <script>
+            function GetQueryStringParams(sParam)
+            {
+                var sPageURL = window.location.search.substring(1);
+                var sURLVariables = sPageURL.split('&');
+                for (var i = 0; i < sURLVariables.length; i++)
+                {
+                    var sParameterName = sURLVariables[i].split('=');
+                    if (sParameterName[0] === sParam)
+                    {
+                        return sParameterName[1];
+                    }
+                }
+            }
+        </script>
+
+        <script>
+            $(document).ready(function () {
+                var url = "http://localhost:8080/IS4227_WS/webresources/entities.review";
                 $.get(url, function (data) {
+                    document.getElementById("numberOfreview").innerHTML = data.length + " reviews";
                     for (var review in data) {
                         if (data.hasOwnProperty(review)) {
 
@@ -883,18 +929,19 @@
                 }, "json");
 
             });
-        </script>       
+        </script>      
 
         <script>
-            var url = "http://localhost:8080/IS4227_WS/webresources/entities.review";
-
             function addComment() {
-                var email = session.getAttribute("email");
-                var productId = ;
+                var url = "http://localhost:8080/IS4227_WS/webresources/entities.review";
+                var productID = GetQueryStringParams("productID");
+                var comment = document.getElementById('comment_text').value;
+                var rating = document.getElementById("input_rating").innerHTML;
+                var email = "<%= session.getAttribute("email")%>";
 
                 $.ajax({
                     dataType: "json",
-                    url: url + "/" + name + "/" + type,
+                    url: url + "/" + productID + "/" + comment + "/" + rating + "/" + email,
                     type: "POST",
                     success: function () {
                         alert("categ created");
@@ -902,7 +949,44 @@
                 });
 
             }
+        </script>
 
+        <script>
+            $('#star1').starrr({
+                change: function (e, value) {
+                    if (value) {
+                        $('.your-choice-was').show();
+                        $('.choice').text(value);
+                    } else {
+                        $('.your-choice-was').hide();
+                    }
+                }
+            });
+
+            var $s2input = $('#star2_input');
+            $('#star2').starrr({
+                max: 10,
+                rating: $s2input.val(),
+                change: function (e, value) {
+                    $s2input.val(value).trigger('input');
+                }
+            });
+        </script>
+        <script type="text/javascript">
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-39205841-5', 'dobtco.github.io');
+            ga('send', 'pageview');
         </script>
 
     </body>

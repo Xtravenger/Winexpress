@@ -4,6 +4,36 @@
 
 <xs:element name="createProductResponse" type="tns:createProductResponse"/>
 
+<xs:element name="product" type="tns:product"/>
+
+<xs:element name="searchProducts" type="tns:searchProducts"/>
+
+<xs:element name="searchProductsResponse" type="tns:searchProductsResponse"/>
+
+<xs:complexType name="searchProducts">
+<xs:sequence>
+<xs:element name="searchTerm" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="searchProductsResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:product" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="product">
+<xs:sequence>
+<xs:element name="brand" type="xs:string" minOccurs="0"/>
+<xs:element name="price" type="xs:long"/>
+<xs:element name="productDescription" type="xs:string" minOccurs="0"/>
+<xs:element name="productID" type="xs:int" minOccurs="0"/>
+<xs:element name="productName" type="xs:string" minOccurs="0"/>
+<xs:element name="size" type="xs:string" minOccurs="0"/>
+<xs:element name="stock" type="xs:short"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="createProduct">
 <xs:sequence>
 <xs:element name="name" type="xs:string" minOccurs="0"/>

@@ -1,15 +1,14 @@
 <%-- 
-    Document   : product
-    Created on : Mar 8, 2016, 7:25:09 AM
+    Document   : shop
+    Created on : Feb 28, 2016, 4:40:56 PM
     Author     : Xtravenger
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
     <head>
-        <title>Wine Express | Product </title>
+        <title>Wine Express | Shop Catalogue</title>
 
         <meta charset="utf-8">
         <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
@@ -124,6 +123,10 @@
                                             <a href="contact-us.html">Contact us</a>
                                         </li>
 
+                                        <li id="mobile-login">
+                                            <a href="#">Login</a>
+                                        </li>
+
                                         <li id="mobile-search">
                                             <form method="get" class="mobile-search">
                                                 <input type="search" class="form-control" placeholder="Search...">
@@ -148,10 +151,9 @@
 
                             <!-- Account, Cart, Search -->
                             <div class="col-md-4 account-wrap right">
-
                                 <ul>
                                     <li class="menu-my-acc left hidden-sm hidden-xs">
-                                        <a href="#" data-toggle="modal" data-target="#LogInModal">Log In</a>
+                                        <%if (session.getAttribute("email") == null) {%>  <a href="#" data-toggle="modal" data-target="#LogInModal">Log In</a><%}%>
 
                                         <div class="modal fade" id="LogInModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                             <div class="modal-dialog modal-sm" role="document">
@@ -168,16 +170,17 @@
                                                         </form>		
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <a href="#" data-dismiss="modal" class="forgot">Forgot Password?</a>
-                                                        <button type="button" class="btn btn-primary">Log In</button>
+                                                        <a href="#" data-dismiss="modal" onclick="document.location.href = 'resetpassword.jsp'"  class="forgot">Forgot Password?</a>
+                                                        <button type="button" class="btn btn-primary" onclick="document.getElementById('login-form').submit()">Log In</button>
                                                     </div>
+                                                    <div align="center" class="g-signin2" data-onsuccess="onSignIn"></div>
                                                 </div>
                                             </div>
                                         </div>
                                     </li>
 
                                     <li class="menu-my-acc left hidden-sm hidden-xs">
-                                        <a href="#" data-toggle="modal" data-target="#SignUpModal">Sign Up</a>
+                                        <%if (session.getAttribute("email") == null) {%><a href="#" data-toggle="modal" data-target="#SignUpModal">Sign Up</a><%}%>
 
                                         <div class="modal fade" id="SignUpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                             <div class="modal-dialog modal-sm" role="document">
@@ -187,13 +190,17 @@
                                                         <h6 class="modal-title" id="myModalLabel">Sign up with WineXpress</h6>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form>
-                                                            <input type="email" class="form-control" id="SignUpEmail" placeholder="Email Address"></input>
+                                                        <form action="register?signup=true" method="POST" id="signup-form">
+                                                            <label name="message" id="message"></label>
+                                                            <input type="email" name="email" class="form-control" id="SignUpEmail" placeholder="Email Address"></input>
                                                             <br/>
+                                                            <input type="password" name="password1" class="form-control" id="SignUpPassword1" placeholder="Password"></input>
+                                                            <br/>
+                                                            <input type="password" name="password2" class="form-control" id="SignUpPassword2" placeholder="Confirm Password"></input>
                                                         </form>		
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-primary">Sign up</button>
+                                                        <button type="button" class="btn btn-primary" onclick="validate()">Sign up</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -201,14 +208,16 @@
                                     </li>
 
                                     <li class="menu-my-acc left hidden-sm hidden-xs dropdown">
-                                        <a class="dropdown-toggle" data-toggle="dropdown">My Account</a>
+                                        <%if (session.getAttribute("email") != null) {%> <a class="dropdown-toggle" data-toggle="dropdown">My Account</a><%}%>
                                         <ul class="dropdown-menu">
-                                            <li><a href="account.html">Edit Profile</a></li>
-                                            <li><a href="history.html">Purchase history</a></li>
-                                            <li><a href="enquiry.html">Send Enquiry</a></li>
-                                            <li><a href="#">Log out</a></li>
+                                            <li><a href="updateAccount">Edit Profile</a></li>
+                                                <%if (session.getAttribute("role") != null) { if (!session.getAttribute("role").equals("Admin")) {%> <li><a href="history.jsp">Purchase history</a></li><%} else {%><li><a href="users.jsp">Edit Users</a></li> <%}}%>
+                                                <%if (session.getAttribute("role") != null) { if (!session.getAttribute("role").equals("Admin")) {%> <li><a href="enquiry">Send Enquiry</a></li> <%} else { %> <li><a href="category.jsp">Edit Category</a></li> <%}}%>
+                                                <%if (session.getAttribute("role") != null) { if (session.getAttribute("role").equals("Admin")) {%> <li><a href="product.jsp">Edit Product</a></li> <%}} %> 
+                                            <li><a href="logout">Log out</a></li>
                                         </ul>
                                     </li>
+
 
                                     <li class="menu-search hidden-sm hidden-xs">
                                         <a href="#" id="menu-search">
@@ -286,8 +295,8 @@
                                             </div>
 
                                             <div class="menu-cart-actions mt-20">
-                                                <a href="cart.html" class="btn btn-md btn-dark">View Cart</a>
-                                                <a href="checkout.html" class="btn btn-md btn-red mt-10">Proceed to Checkout</a>
+                                                <a href="#" class="btn btn-md btn-dark">View Cart</a>
+                                                <a href="#" class="btn btn-md btn-red mt-10">Proceed to Checkout</a>
                                             </div>									
                                         </div>
                                     </li>
@@ -301,86 +310,278 @@
             </nav> <!-- end navbar -->
         </header> <!-- end navigation -->
 
-
         <div class="main-wrapper oh">
 
-            <section class="section-wrap checkout pt-70">
+            <!-- Breadcrumbs -->			
+            <div class="container relative clearfix text-center">
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="shop.html">Shop</a>
+                    </li>
+                    <li class="active">
+                        Catalogue
+                    </li>
+                </ol>
+            </div>
+
+            <!-- Catalogue -->
+            <section class="section-wrap pt-70 catalogue">
                 <div class="container relative">
                     <div class="row">
 
-                        <div class="col-md-12">
-                            <h1 class="text-center steps-wrap">
-                                <a href="admin-user.html" class="step-cart">Edit User</a>
-                                <i class="fa fa-angle-right"></i>
-                                <a href="admin-category.html" class="step-checkout">Edit Category</a>
-                                <i class="fa fa-angle-right"></i>
-                                <a href="#" class="step-order-complete active">Edit Product</a>
-                            </h1>
-                        </div>
-                    </div>
-                </div>		
+                        <div class="col-md-9 right">
 
-                <!-- Edit Profile -->
-                <div class="container relative">
-                    <div class="row">
-                        <div class="col-md-10 woocommerce">
-                            <form name="edit_profile" class="checkout woocommerce-checkout row">
-                                <div id="profile_details">
+                            <div class="category-banner oh">
+                                <img src="img/catalogue_banner.jpg" alt="">
+                                <div class="heading-wrap">
+                                    <h2 class="hidden-xs">luxury quality</h2>
+                                    <h1>Italian Wine</h1>
+                                    <span class="hidden-xs">Unparalleled taste</span>						
+                                </div>
+                            </div>
 
-                                    <h6 class="heading-underline">Products</h6>
-                                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading" role="tab" id="headingOne">
-                                                <h4 class="panel-title">
-                                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                        Category 1
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                                                <div class="panel-body">                                                    
+                            <div class="filter-wrap">
+                                <div class="view-mode hidden-xs">
+                                    <span>View:</span>
+                                    <a class="grid grid-active" id="grid"></a>
+                                    <a class="list" id="list"></a>
+                                </div>
+                                <div class="filter-show hidden-xs">
+                                    <span>Show:</span>
+                                    <a href="#" class="active">12</a>
+                                    <a href="#">24</a>
+                                    <a href="#">36</a>
+                                </div>
+                                <form class="woocommerce-ordering">
+                                    <select>
+                                        <option value="default-sorting">Default Sorting</option>
+                                        <option value="price-low-to-high">Price: high to low</option>
+                                        <option value="price-high-to-low">Price: low to high</option>
+                                        <option value="date">By Newness</option>
+                                        <option value="rating">By Rating</option>
+                                    </select>
+                                </form>
+                            </div>
 
-                                                    <div id="myForm">
+                            <div class="row shop-catalogue grid-view left">
 
-                                                        <div class="form-group">
-                                                            <label for="Name">Name</label>
-                                                            <input class="form-control" id="Name" name="Name">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="Brand">Brand</label>
-                                                            <input class="form-control" id="Brand" name="Brand">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="Size">Size</label>
-                                                            <input class="form-control" id="Size" name="Size">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="price">Price</label>
-                                                            <input class="form-control" id="price" name="price">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="Stock">Stock</label>
-                                                            <input class="form-control" id="Stock" name="Stock">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="Description">Description</label>
-                                                            <textarea class="form-control" id="Description" name="Description"></textarea>
-                                                        </div>
-                                                        <div class="btn btn-default" onclick="submitForm()">Submit</div>
-                                                    </div>      
-
+                                <% java.util.List<webservice.Product> productList = (java.util.List<webservice.Product>)request.getAttribute("productList"); %>
+                                
+                                <% for(webservice.Product p: productList){ %>
+                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 product product-grid">
+                                        <div class="product-item">
+                                            <div class="product-img hover-1">
+                                                <a href="#">
+                                                    <img src="https://s3-ap-southeast-1.amazonaws.com/winexpressphoto/<%= p.getProductID() %>" alt="">
+                                                    <img src="img/shop_item_1_back.jpg" alt="" class="back-img">
+                                                </a>
+                                                <div class="product-label">
+                                                    <span class="onsale">sale</span>
+                                                </div>
+                                                <div class="hover-overlay"></div>
+                                                <div class="product-add-to-cart">
+                                                    <a href="cart?add=productID" class="btn btn-dark btn-md">Add to Cart</a>
+                                                </div>
+                                                <div class="product-add-to-wishlist">
+                                                    <a href="#"><i class="fa fa-heart"></i></a>
                                                 </div>
                                             </div>
+                                            <div class="product-details">
+                                                <h3>
+                                                    <a class="product-title" href="single-product.html"><%= p.getProductName() %></a>
+                                                </h3>
+                                                <h5 class="category">
+                                                    <a href="catalogue-grid.html">Wine Category</a>
+                                                </h5>
+                                            </div>
+                                            <span class="price">                                                
+                                                <ins>
+                                                    <span class="ammount"><%= p.getPrice() %></span>
+                                                </ins>
+                                                <span class="rating">
+                                                    <a href="#">3 Reviews</a>
+                                                </span>
+                                            </span>
+                                            <a href="cart?add=productID" class="btn btn-dark btn-md">Add to Cart</a>
+                                            <div class="icon-add-to-wishlist">
+                                                <a href="#"><i class="fa fa-heart"></i></a>
+                                            </div>
                                         </div>
+                                    </div>                                
+                                <%} %>
+                                
 
+
+                              
+
+                            </div> <!-- end grid mode -->
+
+                            <!-- Pagination -->
+                            <nav class="pagination woocommerce-pagination clear">
+                                <p class="woocommerce-result-count">Showing: 1-12 of 80 results</p>
+                                <a href="#"><i class="fa fa-angle-left"></i></a>
+                                <span class="page-numbers current">1</span>
+                                <a href="#">2</a>
+                                <a href="#">3</a>
+                                <a href="#">4</a>
+                                <a href="#"><i class="fa fa-angle-right"></i></a>
+                            </nav>
+
+                        </div> <!-- end col -->
+
+                        <div class="col-md-3">
+                            <div class="sidebar left-sidebar">
+
+                                <!-- Wine Types -->
+                                <div class="widget categories">
+                                    <div class="title-box text-center">
+                                        <h3 class="heading-double-line">Wine Types</h3>
                                     </div>
-                                    <br/>		
-                            </form>
-                        </div>	
+                                    <ul>
+                                        <li>
+                                            <a href="#">Red Wine</a>
+                                            <span class="count">(11)</span>
+                                        </li>
+                                        <li class="active-cat">
+                                            <a href="#">White Wine</a>
+                                            <span class="count">(7)</span>
+                                        </li>
+                                        <li>
+                                            <a href="#">Rose Wine</a>
+                                            <span class="count">(26)</span>
+                                        </li>
+                                        <li>
+                                            <a href="#">Sparkling Wine</a>
+                                            <span class="count">(17)</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!-- Filter by Price -->
+                                <div class="widget filter-by-price clearfix">
+                                    <div class="title-box text-center">
+                                        <h3 class="heading-double-line">filter by Price</h3>
+                                    </div>
+
+                                    <div id="slider-range"></div>
+                                    <p>
+                                        <label for="amount">Price:</label>
+                                        <input type="text" id="amount" readonly style="border:0;">
+                                        <a href="#" class="btn btn-sm btn-stroke">Filter</a>
+                                    </p>
+                                </div>
+
+                                <!-- Origin -->
+                                <div class="widget filter-by-origin">
+                                    <div class="title-box text-center">
+                                        <h3 class="heading-double-line">Color</h3>
+                                    </div>
+                                    <ul class="origin-select">
+                                        <li>
+                                            <input type="checkbox" class="input-checkbox" id="argentina-origin" name="argentina-origin">
+                                            <label for="gargentina-origin" class="checkbox-label">Argentina</label>
+                                            <span class="count">(10)</span>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" class="input-checkbox" id="australia-origin" name="australia-origin">
+                                            <label for="australia-origin" class="checkbox-label">Australia</label>
+                                            <span class="count">(5)</span>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" class="input-checkbox" id="france-origin" name="france-origin">
+                                            <label for="france-origin" class="checkbox-label">France</label>
+                                            <span class="count">(7)</span>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" class="input-checkbox" id="italy-origin" name="italy-origin">
+                                            <label for="italy-origin" class="checkbox-label">Italy</label>
+                                            <span class="count">(3)</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!-- Size -->
+                                <div class="widget filter-by-vintage">
+                                    <div class="title-box text-center">
+                                        <h3 class="heading-double-line">Size</h3>
+                                    </div>
+                                    <ul class="size-select">
+                                        <li>
+                                            <input type="checkbox" class="input-checkbox" id="0-5years" name="0-5years">
+                                            <label for="0-5years" class="checkbox-label">0-5 Years</label>
+                                            <span class="count">(10)</span>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" class="input-checkbox" id="5-10years" name="5-10years">
+                                            <label for="5-10years" class="checkbox-label">5-10 Years</label>
+                                            <span class="count">(5)</span>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" class="input-checkbox" id="10-20years" name="10-20years">
+                                            <label for="10-20years" class="checkbox-label">10-20 Years</label>
+                                            <span class="count">(7)</span>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" class="input-checkbox" id="above20years" name="above20years">
+                                            <label for="above20years" class="checkbox-label">Above 20 Years</label>
+                                            <span class="count">(3)</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!-- Bestsellers -->
+                                <div class="widget bestsellers">
+                                    <div class="title-box text-center">
+                                        <h3 class="heading-double-line">Bestsellers</h3>
+                                    </div>
+                                    <ul class="product-list-widget">
+                                        <li class="clearfix">
+                                            <a href="single-product.html">
+                                                <img src="img/shop_item_12.jpg" alt="">
+                                                <span class="product-title">Wine Name</span>
+                                            </a>
+                                            <span class="price">
+                                                <ins>
+                                                    <span class="ammount">$99.00</span>
+                                                </ins>
+                                            </span>
+                                        </li>
+                                        <li class="clearfix">
+                                            <a href="single-product.html">
+                                                <img src="img/shop_item_7.jpg" alt="">
+                                                <span class="product-title">Wine Name</span>
+                                            </a>
+                                            <span class="price">
+                                                <del>
+                                                    <span>$250.00</span>
+                                                </del>
+                                                <ins>
+                                                    <span class="ammount">$189.00</span>
+                                                </ins>
+                                            </span>
+                                        </li>
+                                        <li class="clearfix">
+                                            <a href="single-product.html">
+                                                <img src="img/shop_item_8.jpg" alt="">
+                                                <span class="product-title">Wine Name</span>
+                                            </a>
+                                            <span class="price">
+                                                <ins>
+                                                    <span class="ammount">$112.00</span>
+                                                </ins>
+                                            </span>
+                                        </li>								
+                                    </ul>
+                                </div>
+                            </div>
+                        </div> <!-- end sidebar -->
 
                     </div> <!-- end row -->
                 </div> <!-- end container -->
-            </section> <!-- end edit profile -->
+            </section> <!-- end catalogue -->
 
 
             <!-- Footer Type-1 -->
@@ -394,7 +595,7 @@
                                     <h5>Information</h5>
                                     <ul class="footer-links">
                                         <li><a href="#">Our stores</a></li>
-                                        <li><a href="#">About us</a></li>
+                                        <li><a href="about.jsp">About us</a></li>
                                         <li><a href="#">Business with us</a></li>
                                         <li><a href="#">Delivery information</a></li>
                                         <li><a href="#">Terms &amp; Conditions</a></li>
@@ -406,7 +607,7 @@
                                 <div class="footer-help">
                                     <h5>Help</h5>
                                     <ul class="footer-links">
-                                        <li><a href="#">Contact us</a></li>
+                                        <li><a href="contact.jsp">Contact us</a></li>
                                         <li><a href="#">Track order</a></li>
                                         <li><a href="#">F.A.Q</a></li>
                                         <li><a href="#">Privacy policy</a></li>
@@ -431,8 +632,8 @@
                             <div class="col-md-3 col-sm-6 col-xs-12">
                                 <div class="footer-about-us">
                                     <h5>About US</h5>
-                                    <p>
-                                        Amadea Shop is a very slick and clean e-commerce template with endless possibilities. Creating an awesome clothes store with this Theme is easy than you can imagine.
+                                    <p>Company Profile <br/>
+                                        Partnership<br/>
                                     </p>
                                 </div>
                             </div> <!-- end about us -->
@@ -487,7 +688,7 @@
 
                             <div class="col-sm-6 copyright">
                                 <span>
-                                    © 2015 Amadea Theme  |  Designed by <a href="http://deothemes.com">DeoThemes</a>
+                                    © 2016 Wine Express  |  Designed by Jin Wenqian
                                 </span>
                             </div>
 
@@ -521,61 +722,7 @@
         <script type="text/javascript" src="revolution/js/jquery.themepunch.revolution.min.js"></script>
         <script type="text/javascript" src="js/rev-slider.js"></script>
         <script type="text/javascript" src="js/scripts.js"></script>
-        <script type="text/javascript" src="js/styleswitch.js"></script>
-
-        <script>
-            var url = "http://localhost:8080/IS4227_WS/webresources/entities.product";    
-
-            $(document).ready(function () {        
-                var productID = GetQueryStringParams("productID");
-                $.get(url + "/" + productID, function (data) {
-                    $("#Name").val(data.productName);
-                    $("#Brand").val(data.brand);
-                    $("#Size").val(data.size);
-                    $("#price").val(data.price);
-                    $("#Stock").val(data.stock);
-                    $("#Description").val(data.productDescription);
-                }, "json");
-            });
-
-            function submitForm() {
-                var productID = GetQueryStringParams("productID");
-                var name = $("#Name").val();
-                var brand = $("#Brand").val();
-                var size = $("#Size").val();
-                var price = $("#price").val();
-                var stock = $("#Stock").val();
-                var description = $("#Description").val();                
-
-                $.ajax({
-                    dataType: "json",
-                    url: url+"/"+productID+"/"+name+"/"+brand+"/"+size+"/"+price+"/"+stock+"/"+description,            
-                    type: "PUT",            
-                    success: function(){
-                        alert("product edited");
-                    }
-                });
-            }
-
-
-            function GetQueryStringParams(sParam)
-            {
-                var sPageURL = window.location.search.substring(1);
-                var sURLVariables = sPageURL.split('&');
-                for (var i = 0; i < sURLVariables.length; i++)
-                {
-                    var sParameterName = sURLVariables[i].split('=');
-                    if (sParameterName[0] === sParam)
-                    {
-                        return sParameterName[1];
-                    }
-                }
-            }
-
-        </script>
-
-
+        <script type="text/javascript" src="js/styleswitch.js"></script>         
 
     </body>
-
 </html>

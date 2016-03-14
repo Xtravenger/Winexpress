@@ -335,6 +335,7 @@ x<%--
                                                 <thead>
                                                     <tr>
                                                         <th class="product-name">Name</th>
+                                                        <th class="product-name">Type</th>
                                                         <th class="product-price">Action</th>
                                                     </tr>
                                                 </thead>
@@ -342,10 +343,12 @@ x<%--
 
                                                     <tr class="cart_item">
                                                         <td class="product-name">
-                                                            <input type="text" class="form-control" id="Categ_name" name="Categ_name" placeholder="name">
+                                                            <input type="text" class="form-control" id="Categ_name" name="Categ_name" placeholder="name">                                                            
+                                                        </td>
+                                                        <td>
                                                             <input type="text" class="form-control" id="Categ_type" name="Categ_type" placeholder="type">
                                                         </td>
-                                                        <td><div class="btn btn-yellow" onclick="create()">Create</button></div>
+                                                        <td><input type="submit" class="btn btn-yellow" value="Create" onclick="create()"></div>
                                                     </tr>
 
                                                 </tbody>
@@ -528,7 +531,8 @@ x<%--
                         for (var categ in data) {
                             if (data.hasOwnProperty(categ)) {
                                 $('#myTable tbody').append("<tr class='cart_item'><td class='product-name'><input class='form-control' value='" + data[categ].categoryName + "'></td>"
-                                        + "<td><input hidden value='" + data[categ].categoryID + "'><div class='btn btn-default' onclick='update(this)'>Update</div> <div class='btn btn-red' onclick='deleteRecord(this)'>Delete</div></td></tr>");
+                                       +"<td class='product-name'><input class='form-control' value='" + data[categ].categoryType + "'></td>" + "<td><input hidden value='" + 
+                                       data[categ].categoryID + "'><div class='btn btn-default' onclick='update(this)'>Update</div> <div class='btn btn-red' onclick='deleteRecord(this)'>Delete</div></td></tr>");
                             }
                         }
                     }, "json");
@@ -561,8 +565,9 @@ x<%--
                 var url = "http://localhost:8080/IS4227_WS/webresources/entities.category";
                 function update(e) {
                     var name = $(e).closest("tr").children('td:first').find("input").val();
+                    var type = $(e).closest("tr").children('td:first').next().find("input").val();
                     var id = $(e).closest("td").find("input").val();                    
-                    var type = "type";
+                    
 
                     $.ajax({
                         dataType: "json",
